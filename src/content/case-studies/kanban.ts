@@ -1,0 +1,115 @@
+import { CaseStudyContent } from '../types'
+
+export const kanbanCaseStudy: CaseStudyContent = {
+  id: 'kanban',
+  title: 'TaskBoardAI',
+  tagline: 'Kanban Board for Human-AI Collaboration',
+
+  problem: {
+    title: 'Markdown Task Management Limitations',
+    content: [
+      'I was managing tasks in markdown files—simple and version-controllable, but frustrating to maintain. Lists don\'t show status visually, reorganizing means manual text editing, and AI agents struggle with unstructured markdown.',
+      '',
+      'I needed visual kanban for myself and structured data for AI agents, without maintaining two systems.',
+      '',
+      'The core problem with markdown task management:',
+      '• No visual status - Reading nested lists doesn\'t show project health',
+      '• Manual reorganization - Moving tasks between sections means cut/paste',
+      '• AI confusion - Agents had to parse unstructured text and rewrite entire files',
+      '• Missing metadata - Markdown doesn\'t naturally capture task states',
+      '',
+      'The insight: AI agents and humans have fundamentally different interaction preferences. I could create a system where I\'d enjoy visual, drag-and-drop kanban while agents could efficiently parse and modify structured data—both working with the same tasks.',
+    ],
+  },
+
+  understanding: {
+    title: 'Research Through Dogfooding',
+    content: [
+      'My validation process was practical: I used TaskBoardAI daily while building other projects. When errors appeared or workflows felt clunky, I\'d iterate immediately. This real-time feedback loop revealed what mattered.',
+    ],
+    keyInsights: [
+      'Visual feedback is essential even though data lives in files',
+      'AI agents need unambiguous data structures—optional fields cause confusion',
+      'State changes happen constantly—optimize for card movement',
+      'MCP\'s automatic context makes agent interactions dramatically smoother',
+    ],
+  },
+
+  solution: {
+    title: 'File-Based Dual Interface Architecture',
+    content: [
+      'Design Decisions:',
+      '',
+      '1. File-Based Architecture',
+      'I chose JSON files over a database because both humans and AI agents work naturally with files. AI agents prefer file operations to database queries, I can version control tasks in git, no database setup is needed, and both UI and agents work with identical data.',
+      '',
+      '2. Card-First Data Structure',
+      'Instead of "columns containing cards," I designed "cards that reference columns." Each card is an independent JSON file with a columnId attribute.',
+      '',
+      'Why this matters:',
+      '• Moving a card = changing one attribute (not restructuring arrays)',
+      '• Performance stays responsive with 100+ cards',
+      '• AI agents work with individual cards, not nested structures',
+      '• The system optimizes for the most frequent operation',
+      '',
+      '3. Model Context Protocol (MCP) Integration',
+      'MCP provides automatic context instead of requiring me to explain TaskBoardAI\'s structure in every prompt. Before MCP, I had to specify "Create a JSON file with fields: title (string), description (string)..." After MCP, I just say "Add a card for fixing the authentication bug." The agent handles data structure, formatting, and placement automatically.',
+    ],
+    features: [
+      'Markdown descriptions with subtasks, tags, dependencies',
+      'Multi-board management with project isolation',
+      'Web UI + CLI tools (both work with same files)',
+      'Webhook support for external integrations',
+      'Atomic file operations to prevent data corruption',
+      'Vanilla JavaScript for accessible, hackable codebase',
+      'Responsive design for mobile and desktop',
+    ],
+  },
+
+  impact: {
+    title: 'Natural Collaboration Through Dual Interfaces',
+    content: [
+      'Real-World Usage:',
+      'I use TaskBoardAI daily to manage all my projects. The dual-interface design means I switch between visual board (when thinking about project status) and agent conversations (when planning work)—both feel natural for their context.',
+      '',
+      'What changed for me:',
+      'Visual board shows project status instantly. AI agents help create and organize tasks through conversation. The system fits my workflow instead of forcing me into rigid structures.',
+      '',
+      'What changed for AI collaboration:',
+      'MCP integration transformed task management from "explaining data structures" to "discussing actual work." Reduced friction made collaboration feel natural.',
+      '',
+      'Key learnings:',
+      '• File-based architecture was the right choice - Both humans and AI agents work naturally with files',
+      '• Optimizing for card movement paid off - Single-attribute change keeps system responsive',
+      '• MCP changed everything - Natural language task management instead of JSON formatting',
+      '• Dogfooding reveals truth - Using TaskBoardAI to manage TaskBoardAI\'s development exposed every rough edge',
+      '',
+      'What this taught me about dual-interface design:',
+      'Dual-interface design requires understanding both users. Humans need visual feedback and intuitive interactions. AI agents need unambiguous data structures and file-based operations. Serving both well requires intentional architectural choices.',
+    ],
+    metrics: [
+      'Production-ready, actively used for daily task management',
+      'Published as open-source NPM package with global CLI',
+      'File-based architecture handles 100+ cards responsively',
+      'MCP integration enables natural language task management',
+      'Comprehensive test suite with Jest',
+      'Full API documentation with JSDoc',
+    ],
+  },
+
+  metadata: {
+    role: 'Solo Designer & Developer',
+    type: 'Open-source NPM Package',
+    stack: ['Node.js', 'Express', 'MCP SDK', 'Vanilla JavaScript', 'JSON Storage', 'Jest'],
+    skills: [
+      'Dual interface design',
+      'File-based architecture',
+      'MCP integration',
+      'User research through dogfooding',
+      'Iterative design',
+      'API design',
+      'Performance optimization',
+    ],
+    year: '2024-2025',
+  },
+}

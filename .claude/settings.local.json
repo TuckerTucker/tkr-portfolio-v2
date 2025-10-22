@@ -92,7 +92,12 @@
       "Bash(.context-kit/logging-client/setup-logging.sh:*)",
       "Bash(npx eslint:*)",
       "Read(//private/tmp/**)",
-      "Bash(npx license-checker:*)"
+      "Bash(npx license-checker:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npx tailwindcss:*)",
+      "Bash(rm:*)",
+      "Bash(npx shadcn@latest add:*)",
+      "Bash(timeout 10s npm run dev:*)"
     ],
     "deny": [
       "Bash(rm -rf /)",
