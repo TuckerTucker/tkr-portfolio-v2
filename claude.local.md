@@ -31,7 +31,49 @@ Use:
 - remove the 'generated with ...' and 'co-authored ...' messages if they are present.
 
 !! IMPORTANT Always run scripts from the project root !!
-# _context-kit.yml
+
+---
+
+# Portfolio Project Summary (tkr-portfolio-v2)
+
+**Status:** Production Deployed
+**Domain:** tucker.sh
+**Type:** Modern portfolio website with case studies
+
+## Quick Facts
+- **Tech Stack:** React 18 + TypeScript + Vite + Tailwind CSS 3 + Shadcn/ui
+- **Design System:** Tweakcn CSS with OKLCH color space
+- **Files:** 34 source files (12 TS, 20 TSX, 2 CSS)
+- **Bundle Size:** 142KB gzipped
+- **Deployment:** GitHub Actions → GitHub Pages
+- **Features:** 3 case studies, dark mode, responsive design, WCAG 2.1 AA accessible
+
+## Case Studies
+1. **DocuSearch** - Dual-interface RAG system (AI UX Innovation)
+2. **tkr-context-kit** - Context architecture for AI agents (AGx Methodology)
+3. **TaskBoardAI** - File-based kanban for human-AI collaboration (Dual Interface Design)
+
+## Architecture
+- **SPA:** React Router v6 client-side routing
+- **Components:** 19 components (layout, sections, case-studies, ui)
+- **Content:** TypeScript-based content management (type-safe case study data)
+- **Styling:** Tweakcn CSS design tokens + Tailwind utilities
+- **Accessibility:** Radix UI primitives with WCAG compliance
+
+## Development
+- **Start:** `npm run dev` (http://localhost:5173)
+- **Build:** `npm run build` → dist/
+- **Deploy:** Push to main → auto-deploy to tucker.sh
+
+## Design System Highlights
+- **OKLCH Colors:** Perceptually uniform color space for light/dark modes
+- **Typography:** Afacad (sans), Alice (serif), Courier Prime (mono)
+- **Dark Mode:** System-aware with manual toggle via next-themes
+- **Components:** Shadcn/ui customized with Tweakcn design tokens
+
+---
+
+# Reference: tkr-context-kit Configuration
 
 # Project configuration for AI agents - tkr-context-kit
 # Synthesized comprehensive context optimized for token efficiency
