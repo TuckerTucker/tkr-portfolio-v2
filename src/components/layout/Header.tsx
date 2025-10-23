@@ -39,8 +39,8 @@ export function Header() {
                 to={link.path}
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   isActive(link.path)
-                    ? 'text-foreground bg-accent'
-                    : 'text-foreground/60 hover:text-foreground hover:bg-accent/30'
+                    ? 'text-foreground bg-muted'
+                    : 'text-foreground/60 hover:text-foreground hover:bg-muted/50'
                 }`}
               >
                 {link.label}
