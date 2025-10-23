@@ -26,7 +26,7 @@ export function Header() {
           {/* Logo/Brand */}
           <Link
             to="/"
-            className="text-xl font-semibold text-foreground hover:text-foreground/80 transition-colors"
+            className="text-xl font-semibold text-foreground hover:text-primary transition-colors duration-200"
           >
             Tucker Harley
           </Link>
@@ -37,10 +37,10 @@ export function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors hover:text-foreground/80 ${
+                className={`text-sm font-medium transition-colors duration-200 ${
                   isActive(link.path)
                     ? 'text-foreground'
-                    : 'text-foreground/60'
+                    : 'text-foreground/60 hover:text-foreground'
                 }`}
               >
                 {link.label}
