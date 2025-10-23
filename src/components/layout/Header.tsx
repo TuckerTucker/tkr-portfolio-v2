@@ -37,10 +37,10 @@ export function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`text-sm font-medium transition-colors duration-200 ${
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
                   isActive(link.path)
-                    ? 'text-foreground'
-                    : 'text-foreground/60 hover:text-foreground'
+                    ? 'text-foreground bg-accent'
+                    : 'text-foreground/60 hover:text-foreground hover:bg-accent/50'
                 }`}
               >
                 {link.label}
