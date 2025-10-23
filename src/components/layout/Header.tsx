@@ -1,7 +1,8 @@
 import { Link, useLocation } from 'react-router-dom'
 import { ThemeToggle } from './ThemeToggle'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, Download } from 'lucide-react'
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
 
 export function Header() {
   const location = useLocation()
@@ -45,6 +46,16 @@ export function Header() {
                 {link.label}
               </Link>
             ))}
+
+            {/* Resume Download Button */}
+            <a
+              href="/Sean-Harley-Resume.pdf"
+              download
+              className="inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+            >
+              <Download className="h-4 w-4" />
+              Resume
+            </a>
           </nav>
 
           {/* Right side: Theme toggle & Mobile menu button */}
@@ -85,6 +96,17 @@ export function Header() {
                   {link.label}
                 </Link>
               ))}
+
+              {/* Resume Download Button (Mobile) */}
+              <a
+                href="/Sean-Harley-Resume.pdf"
+                download
+                onClick={() => setMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center gap-2 px-3 py-2 text-base font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                <Download className="h-5 w-5" />
+                Download Resume
+              </a>
             </div>
           </nav>
         )}
