@@ -42,7 +42,7 @@ export function ProjectCard({ project, variant = 'standard' }: ProjectCardProps)
           </div>
           <CardTitle
             className={cn(
-              'transition-colors group-hover:text-primary',
+              'inline-block px-4 py-2 rounded-md bg-secondary text-secondary-foreground transition-all',
               isHero ? 'text-3xl md:text-4xl' : 'text-2xl'
             )}
           >
