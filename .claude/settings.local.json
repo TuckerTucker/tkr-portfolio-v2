@@ -97,7 +97,8 @@
       "Bash(npx tailwindcss:*)",
       "Bash(rm:*)",
       "Bash(npx shadcn@latest add:*)",
-      "Bash(timeout 10s npm run dev:*)"
+      "Bash(timeout 10s npm run dev:*)",
+      "Bash(cp:*)"
     ],
     "deny": [
       "Bash(rm -rf /)",
