@@ -11,7 +11,7 @@ export const projects: Project[] = [
     oneLiner:
       'A dual-interface RAG system where humans browse documents visually while AI agents search semantically—both working with the same transparent, file-native architecture.',
     priority: 'primary',
-    caseStudyUrl: '/case-studies/docusearch',
+    caseStudyUrl: '/docusearch',
     category: 'AI UX Innovation',
     skills: [
       'Dual Interface Design',
@@ -37,7 +37,7 @@ export const projects: Project[] = [
     oneLiner:
       'A context architecture system that front-loads comprehensive project knowledge to AI agents through YAML semantic anchors, reducing context discovery overhead by 70%.',
     priority: 'secondary',
-    caseStudyUrl: '/case-studies/context-kit',
+    caseStudyUrl: '/context-kit',
     category: 'AGx Design Methodology',
     skills: [
       'Agent Experience (AGx) Research',
@@ -63,7 +63,7 @@ export const projects: Project[] = [
     oneLiner:
       'A file-based kanban system where humans use visual boards and AI agents read/write JSON—both working with identical task data.',
     priority: 'tertiary',
-    caseStudyUrl: '/case-studies/kanban',
+    caseStudyUrl: '/kanban',
     category: 'Dual Interface Design',
     skills: [
       'Dual Interface Design',
