@@ -1,4 +1,4 @@
-export { CaseStudyLayout } from './CaseStudyLayout'
+export { default as CaseStudyLayout } from './CaseStudyLayout'
 export { default as ProblemSection } from './ProblemSection'
 export { default as UnderstandingSection } from './UnderstandingSection'
 export { default as SolutionSection } from './SolutionSection'

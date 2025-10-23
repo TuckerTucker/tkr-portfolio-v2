@@ -111,3 +111,5 @@ export function CaseStudyLayout(props: CaseStudyLayoutProps) {
     </article>
   )
 }
+
+export default CaseStudyLayout
