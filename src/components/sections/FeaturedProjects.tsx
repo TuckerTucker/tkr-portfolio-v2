@@ -9,7 +9,7 @@ export function FeaturedProjects() {
 
   return (
     <section className="w-full py-12 md:py-16 lg:py-20">
-      <div className="container px-4 md:px-6">
+      <div className="container mx-auto px-4 md:px-6">
         <div className="mb-8 md:mb-12">
           <h2 className="text-3xl font-bold tracking-tight md:text-4xl">
             Featured Projects
@@ -19,16 +19,16 @@ export function FeaturedProjects() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:gap-8 lg:grid-cols-3">
-          {/* Hero project - DocuSearch takes full width on mobile, spans 2 cols on desktop */}
+        <div className="grid gap-6 md:gap-8">
+          {/* Hero project - DocuSearch takes full width */}
           {docusearch && (
-            <div className="lg:col-span-2">
+            <div>
               <ProjectCard project={docusearch} variant="hero" />
             </div>
           )}
 
-          {/* Standard projects stack vertically */}
-          <div className="flex flex-col gap-6 md:gap-8">
+          {/* Standard projects in a 2-column grid below */}
+          <div className="grid gap-6 md:gap-8 md:grid-cols-2">
             {contextKit && <ProjectCard project={contextKit} variant="standard" />}
             {kanban && <ProjectCard project={kanban} variant="standard" />}
           </div>

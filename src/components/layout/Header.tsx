@@ -32,19 +32,19 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex md:items-center md:gap-6">
+          <nav className="hidden md:flex md:items-center md:gap-2">
             {navLinks.map((link) => (
-              <Link
+              <Button
                 key={link.path}
-                to={link.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
-                  isActive(link.path)
-                    ? 'text-foreground bg-muted'
-                    : 'text-foreground/60 hover:text-foreground hover:bg-muted/50'
-                }`}
+                variant={isActive(link.path) ? "secondary" : "ghost"}
+                size="default"
+                className="text-base"
+                asChild
               >
-                {link.label}
-              </Link>
+                <Link to={link.path}>
+                  {link.label}
+                </Link>
+              </Button>
             ))}
 
             {/* Resume Download Button */}

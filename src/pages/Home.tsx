@@ -12,14 +12,14 @@ export default function Home() {
       {/* Separator */}
       <Separator className="my-8 md:my-12" />
 
-      {/* About Section */}
-      <About />
+      {/* Featured Projects Section */}
+      <FeaturedProjects />
 
       {/* Separator */}
       <Separator className="my-8 md:my-12" />
 
-      {/* Featured Projects Section */}
-      <FeaturedProjects />
+      {/* About Section */}
+      <About />
     </main>
   )
 }
