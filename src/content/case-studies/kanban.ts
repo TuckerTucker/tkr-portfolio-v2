@@ -111,5 +111,6 @@ export const kanbanCaseStudy: CaseStudyContent = {
       'Performance optimization',
     ],
     year: '2024-2025',
+    githubUrl: 'https://github.com/tuckertucker/taskboardai',
   },
 }

@@ -77,6 +77,7 @@ export function CaseStudyLayout(props: CaseStudyLayoutProps) {
               stack={content.metadata.stack}
               skills={content.metadata.skills}
               year={content.metadata.year}
+              githubUrl={content.metadata.githubUrl}
             />
           </div>
         </main>

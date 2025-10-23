@@ -26,6 +26,7 @@ export const projects: Project[] = [
       'ChromaDB',
       'Semantic Search',
     ],
+    githubUrl: 'https://github.com/tuckertucker/tkr-docusearch',
   },
   {
     id: 'context-kit',
@@ -52,6 +53,7 @@ export const projects: Project[] = [
       'SQLite',
       'MCP Integration',
     ],
+    githubUrl: 'https://github.com/tuckertucker/tkr-context-kit',
   },
   {
     id: 'kanban',
@@ -76,5 +78,6 @@ export const projects: Project[] = [
       'Vanilla JavaScript',
       'JSON Storage',
     ],
+    githubUrl: 'https://github.com/tuckertucker/taskboardai',
   },
 ]

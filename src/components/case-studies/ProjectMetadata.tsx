@@ -1,9 +1,13 @@
+import { Github } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+
 interface ProjectMetadataProps {
   role: string
   type: string
   stack: string[]
   skills: string[]
   year?: string
+  githubUrl?: string
 }
 
 export default function ProjectMetadata({
@@ -12,9 +16,32 @@ export default function ProjectMetadata({
   stack,
   skills,
   year,
+  githubUrl,
 }: ProjectMetadataProps) {
   return (
     <footer className="mt-16 pt-12 border-t">
+      {/* GitHub Link */}
+      {githubUrl && (
+        <div className="mb-8">
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="gap-2 border-border/40 hover:border-border"
+          >
+            <a
+              href={githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center"
+            >
+              <Github className="h-5 w-5" />
+              GitHub
+            </a>
+          </Button>
+        </div>
+      )}
+
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {/* Role & Type */}
         <div className="space-y-4">

@@ -16,6 +16,7 @@ export interface Project {
   caseStudyUrl: string
   category: string
   skills: string[]
+  githubUrl?: string
 }
 
 export interface WorkHistoryEntry {
@@ -62,5 +63,6 @@ export interface CaseStudyContent {
     stack: string[]
     skills: string[]
     year?: string
+    githubUrl?: string
   }
 }

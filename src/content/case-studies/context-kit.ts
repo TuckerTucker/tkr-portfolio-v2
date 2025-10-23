@@ -134,5 +134,6 @@ export const contextKitCaseStudy: CaseStudyContent = {
       'Knowledge graph design',
     ],
     year: '2024-2025',
+    githubUrl: 'https://github.com/tuckertucker/tkr-context-kit',
   },
 }

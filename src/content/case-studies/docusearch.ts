@@ -127,5 +127,6 @@ export const docusearchCaseStudy: CaseStudyContent = {
       'Full-stack development',
     ],
     year: '2025',
+    githubUrl: 'https://github.com/tuckertucker/tkr-docusearch',
   },
 }

@@ -8,7 +8,8 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, Github } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 interface ProjectCardProps {
   project: Project
@@ -61,10 +62,13 @@ export function ProjectCard({ project, variant = 'standard' }: ProjectCardProps)
           </p>
         </CardContent>
 
-        <CardFooter className={cn('pt-4', isHero && 'px-8 pb-8')}>
-          <div className="flex items-center gap-2 text-sm font-medium text-primary transition-gap group-hover:gap-3">
-            <span>{isHero ? 'Read full case study' : 'Learn more'}</span>
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+        <CardFooter className={cn('pt-4 flex-col gap-4', isHero && 'px-8 pb-8')}>
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center gap-2 text-sm font-medium text-primary transition-gap group-hover:gap-3">
+              <span>{isHero ? 'Read full case study' : 'Learn more'}</span>
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </div>
+            
           </div>
         </CardFooter>
       </Card>
