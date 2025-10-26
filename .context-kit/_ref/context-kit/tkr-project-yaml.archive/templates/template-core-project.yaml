@@ -101,7 +101,7 @@ structure:
   key_paths:
     "src/": "Application source code"
     "tests/": "Test files parallel to src structure"
-    "docs/": "Human documentation (if relevant to code)" 
+    "docs/": "Documentation (if relevant to code)" 
     
   find_patterns:
     component: "src/components/{category}/{ComponentName}.tsx"

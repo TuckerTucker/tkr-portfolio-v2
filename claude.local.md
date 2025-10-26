@@ -51,7 +51,7 @@ Use:
 ## Case Studies
 1. **DocuSearch** - Dual-interface RAG system (AI UX Innovation)
 2. **tkr-context-kit** - Context architecture for AI agents (AGx Methodology)
-3. **TaskBoardAI** - File-based kanban for human-AI collaboration (Dual Interface Design)
+3. **TaskBoardAI** - File-based kanban for people-AI collaboration (Dual Interface Design)
 
 ## Architecture
 - **SPA:** React Router v6 client-side routing

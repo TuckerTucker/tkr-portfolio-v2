@@ -3,7 +3,7 @@ import { CaseStudyContent } from '../types'
 export const kanbanCaseStudy: CaseStudyContent = {
   id: 'kanban',
   title: 'TaskBoardAI',
-  tagline: 'Kanban Board for Human-AI Collaboration',
+  tagline: 'Kanban Board for People-AI Collaboration',
 
   problem: {
     title: 'Markdown Task Management Limitations',
@@ -18,7 +18,7 @@ export const kanbanCaseStudy: CaseStudyContent = {
       '• AI confusion - Agents had to parse unstructured text and rewrite entire files',
       '• Missing metadata - Markdown doesn\'t naturally capture task states',
       '',
-      'The insight: AI agents and humans have fundamentally different interaction preferences. I could create a system where I\'d enjoy visual, drag-and-drop kanban while agents could efficiently parse and modify structured data—both working with the same tasks.',
+      'The insight: AI agents and people have fundamentally different interaction preferences. I could create a system where I\'d enjoy visual, drag-and-drop kanban while agents could efficiently parse and modify structured data—both working with the same tasks.',
     ],
   },
 
@@ -41,7 +41,7 @@ export const kanbanCaseStudy: CaseStudyContent = {
       'Design Decisions:',
       '',
       '1. File-Based Architecture',
-      'I chose JSON files over a database because both humans and AI agents work naturally with files. AI agents prefer file operations to database queries, I can version control tasks in git, no database setup is needed, and both UI and agents work with identical data.',
+      'I chose JSON files over a database because both people and AI agents work naturally with files. AI agents prefer file operations to database queries, I can version control tasks in git, no database setup is needed, and both UI and agents work with identical data.',
       '',
       '2. Card-First Data Structure',
       'Instead of "columns containing cards," I designed "cards that reference columns." Each card is an independent JSON file with a columnId attribute.',
@@ -79,13 +79,13 @@ export const kanbanCaseStudy: CaseStudyContent = {
       'MCP integration transformed task management from "explaining data structures" to "discussing actual work." Reduced friction made collaboration feel natural.',
       '',
       'Key learnings:',
-      '• File-based architecture was the right choice - Both humans and AI agents work naturally with files',
+      '• File-based architecture was the right choice - Both people and AI agents work naturally with files',
       '• Optimizing for card movement paid off - Single-attribute change keeps system responsive',
       '• MCP changed everything - Natural language task management instead of JSON formatting',
       '• Dogfooding reveals truth - Using TaskBoardAI to manage TaskBoardAI\'s development exposed every rough edge',
       '',
       'What this taught me about dual-interface design:',
-      'Dual-interface design requires understanding both users. Humans need visual feedback and intuitive interactions. AI agents need unambiguous data structures and file-based operations. Serving both well requires intentional architectural choices.',
+      'Dual-interface design requires understanding both users. People need visual feedback and intuitive interactions. AI agents need unambiguous data structures and file-based operations. Serving both well requires intentional architectural choices.',
     ],
     metrics: [
       'Production-ready, actively used for daily task management',

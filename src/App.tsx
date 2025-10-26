@@ -6,6 +6,8 @@ import Home from '@/pages/Home'
 import Docusearch from '@/pages/Docusearch'
 import ContextKit from '@/pages/ContextKit'
 import Kanban from '@/pages/Kanban'
+import Blog from '@/pages/Blog'
+import BlogArticle from '@/pages/BlogArticle'
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
               <Route path="/docusearch" element={<Docusearch />} />
               <Route path="/context-kit" element={<ContextKit />} />
               <Route path="/kanban" element={<Kanban />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:slug" element={<BlogArticle />} />
             </Routes>
           </main>
           <Footer />

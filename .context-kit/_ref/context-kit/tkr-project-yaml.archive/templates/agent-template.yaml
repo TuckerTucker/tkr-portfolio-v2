@@ -7,7 +7,7 @@ agent:
   # Basic agent information
   name: "agent-name"                          # Required: Technical name (kebab-case)
   metadata:
-    display_name: "Human-Readable Agent Name" # Required: User-friendly name
+    display_name: "Readable Agent Name" # Required: User-friendly name
     description: "Agent description"          # Required: Explain the agent's purpose
     category: "analyzer|consolidator|builder" # Required: Agent category
     status: "draft|ready|deprecated"          # Required: Agent status

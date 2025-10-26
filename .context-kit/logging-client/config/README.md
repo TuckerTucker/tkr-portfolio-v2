@@ -319,7 +319,7 @@ Get detailed validation errors.
 **Returns:** Array of error objects
 
 #### `getFormattedErrors()`
-Get human-readable error messages.
+Get readable error messages.
 
 **Returns:** Array of formatted error strings
 

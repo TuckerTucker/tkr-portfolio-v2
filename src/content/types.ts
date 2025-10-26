@@ -66,3 +66,16 @@ export interface CaseStudyContent {
     githubUrl?: string
   }
 }
+
+export interface BlogArticle {
+  id: string
+  slug: string
+  title: string
+  description: string
+  content: string[]
+  tags?: string[]
+  linkedinUrl?: string
+  linkedinEmbed?: string
+  image?: string
+  imageAlt?: string
+}

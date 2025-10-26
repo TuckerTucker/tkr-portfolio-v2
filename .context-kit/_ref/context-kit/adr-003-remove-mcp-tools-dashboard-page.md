@@ -12,7 +12,7 @@ The TKR Context Kit dashboard was initially designed with five main views:
 - Logs
 - MCP Tools
 
-The MCP Tools page was intended to provide a human-friendly interface for executing Model Context Protocol tools that AI agents use programmatically. This would have included tools for:
+The MCP Tools page was intended to provide a user-friendly interface for executing Model Context Protocol tools that AI agents use programmatically. This would have included tools for:
 - Log querying and analysis
 - Service health monitoring
 - Error trend analysis
@@ -23,8 +23,8 @@ However, upon review of the project's goals and user needs, several factors led 
 1. **Target Audience Mismatch**: The dashboard is primarily intended for monitoring and observability, not for manual tool execution
 2. **Redundant Functionality**: The logging tools already have dedicated UI in the Logs view with filtering, search, and real-time monitoring
 3. **Complexity vs. Value**: Implementing a generic tool execution interface adds significant complexity for limited practical benefit
-4. **AI-First Design**: MCP tools are specifically designed for AI agent interaction, not human use
-5. **Maintenance Overhead**: Maintaining dual interfaces (AI tools + human UI) creates unnecessary complexity
+4. **AI-First Design**: MCP tools are specifically designed for AI agent interaction, not user use
+5. **Maintenance Overhead**: Maintaining dual interfaces (AI tools + user UI) creates unnecessary complexity
 
 ## Decision
 

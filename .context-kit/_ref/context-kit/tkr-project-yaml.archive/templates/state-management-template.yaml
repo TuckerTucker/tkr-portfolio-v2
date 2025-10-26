@@ -7,7 +7,7 @@ state_management:
   # Basic state management information
   name: "StateManagementPattern"               # Required: Pattern name (PascalCase)
   metadata:
-    display_name: "Human-Readable State Pattern Name" # Required: User-friendly name
+    display_name: "Readable State Pattern Name" # Required: User-friendly name
     description: "State management pattern description" # Required: Explain the pattern's purpose
     category: "centralized_state"              # Required: Pattern category (centralized_state, local_state, url_state, context_state)
     complexity: "moderate"                     # Required: Complexity level (simple, moderate, complex)

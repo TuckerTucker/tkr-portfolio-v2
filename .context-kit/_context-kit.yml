@@ -165,9 +165,9 @@ content:
       category: "AI UX Innovation"
       priority: primary
       route: "/docusearch"
-      elevator_pitch: "Dual-interface RAG system where humans browse documents visually while AI agents search semantically—both working with the same transparent, file-native architecture"
-      problem: "Most RAG systems make uploaded documents invisible - need transparency for both humans and AI"
-      solution: "File-native architecture with dual interfaces: visual browser for humans, semantic search for AI"
+      elevator_pitch: "Dual-interface RAG system where users browse documents visually while AI agents search semantically—both working with the same transparent, file-native architecture"
+      problem: "Most RAG systems make uploaded documents invisible - need transparency for both users and AI"
+      solution: "File-native architecture with dual interfaces: visual browser for users, semantic search for AI"
       skills: [Dual Interface Design, Agent Experience Research, Multi-modal Architecture, React 19, Python, FastAPI, ColPali, ChromaDB]
 
     context_kit:
@@ -187,9 +187,9 @@ content:
       category: "Dual Interface Design"
       priority: tertiary
       route: "/kanban"
-      elevator_pitch: "File-based kanban system where humans use visual boards and AI agents read/write JSON—both working with identical task data"
+      elevator_pitch: "File-based kanban system where users use visual boards and AI agents read/write JSON—both working with identical task data"
       problem: "Managing tasks in markdown is version-controllable but lacks visual kanban benefits"
-      solution: "Dual interface: drag-and-drop kanban for humans, structured JSON for AI agents"
+      solution: "Dual interface: drag-and-drop kanban for users, structured JSON for AI agents"
       skills: [Dual Interface Design, File-based Architecture, MCP Integration, User Research, Node.js, Express, Vanilla JavaScript]
 
 # Tweakcn CSS Design System - OKLCH Color Space
@@ -421,7 +421,7 @@ accessibility:
 semantic:
   ~portfolio_website: "Professional portfolio showcasing product design work"
   ~case_study_driven: "Three detailed case studies: DocuSearch, Context Kit, Kanban"
-  ~dual_interface_focus: "Design pattern across projects: human + AI interfaces"
+  ~dual_interface_focus: "Design pattern across projects: user + AI interfaces"
   ~agx_research: "Agent Experience (AGx) design methodology"
   ~oklch_colors: "Perceptually uniform OKLCH color space implementation"
   ~tweakcn_design: "Custom design system built on Shadcn/ui and Tailwind"

@@ -1,6 +1,6 @@
 # DocuSearch: Designing Transparency into RAG Systems
 
-**I built DocuSearch to solve a problem I kept running into:** most RAG systems let you upload documents, but once they're in, they become invisible. You can't review them for outdated information, you can't see what the AI is actually working with, and you can't manage them like regular files. I needed a system that worked naturally for both humans and AI agents—where I could browse, read, and listen to documents while the AI could semantically search across everything.
+**I built DocuSearch to solve a problem I kept running into:** most RAG systems let you upload documents, but once they're in, they become invisible. You can't review them for outdated information, you can't see what the AI is actually working with, and you can't manage them like regular files. I needed a system that worked naturally for both people and AI agents—where I could browse, read, and listen to documents while the AI could semantically search across everything.
 
 ## The Problem: Black Box Document Systems
 
@@ -8,16 +8,16 @@ Traditional RAG systems treat documents like database entries—once uploaded, t
 
 - **No visibility** - You can't see what documents are actually in the system
 - **No verification** - Can't check if information is current or correct
-- **No natural interaction** - Humans need visual browsing, AI needs semantic search
+- **No natural interaction** - People need visual browsing, AI needs semantic search
 - **Limited formats** - Most systems handle PDFs but struggle with audio, presentations, or mixed media
 
-I realized this was fundamentally a **dual-interface design problem**. Humans and AI agents need different ways to interact with the same information, but most systems only optimize for one.
+I realized this was fundamentally a **dual-interface design problem**. People and AI agents need different ways to interact with the same information, but most systems only optimize for one.
 
-## Understanding the Users (Both Human and AI)
+## Understanding the Users (Both People and AI)
 
 My research process involved both traditional UX methods and something newer—what I call **Agent Experience (AGx) research**. I asked AI agents what context formats they preferred and how they wanted to consume document information.
 
-**What I learned from humans:**
+**What I learned from people:**
 - Need to **see thumbnails** and previews before diving into documents
 - Want to **verify sources** when AI gives answers
 - Prefer browsing over searching when exploring content
@@ -29,14 +29,14 @@ My research process involved both traditional UX methods and something newer—w
 - Need structured metadata but benefit from unstructured context
 - Prefer filesystem operations over database queries
 
-The key insight: **both humans and AI agents need transparency**, just in different forms.
+The key insight: **both people and AI agents need transparency**, just in different forms.
 
 ## Solution: File-Native Semantic Search
 
 I designed DocuSearch around three core principles:
 
 ### 1. Dual Interface for Dual Users
-**Humans interact through visual browsing:**
+**People interact through visual browsing:**
 - Card-based library with thumbnails
 - Audio player with waveform visualization
 - Image carousel for presentations
@@ -52,7 +52,7 @@ I designed DocuSearch around three core principles:
 Instead of hiding documents in a database, I built everything on the filesystem:
 - Documents live in a real directory structure
 - AI agents can use standard file operations
-- Humans can access files directly if needed
+- People can access files directly if needed
 - The system orchestrates between file storage and vector embeddings
 
 This emerged from understanding how AI agents actually prefer to work—they're more comfortable with file operations than database queries.
@@ -107,7 +107,7 @@ I built DocuSearch in 15 consecutive days (October 6-20, 2025) with daily commit
 ### The Kraft Paper Theme
 I designed a warm, tactile theme system inspired by kraft paper notebooks—something that feels personal for document management rather than corporate. Five color schemes (Sand, Clay, Slate, Moss, Ocean) give users customization without overwhelming choice.
 
-The theme serves humans while the underlying structure serves AI agents. This dual-layer design runs throughout the system.
+The theme serves people while the underlying structure serves AI agents. This dual-layer design runs throughout the system.
 
 ### Real-Time Processing Feedback
 When documents upload, users see:
@@ -147,17 +147,17 @@ I designed this after realizing users needed to **verify AI responses**, not jus
 
 ## Lessons: Designing for Two Audiences
 
-This project reinforced that **AI UX isn't just traditional UX with a chatbot**—it's designing systems where humans and AI agents collaborate naturally.
+This project reinforced that **AI UX isn't just traditional UX with a chatbot**—it's designing systems where people and AI agents collaborate naturally.
 
 **Key principles I validated:**
 
-1. **Transparency serves everyone** - Humans need visual feedback, AI needs structured data, but both benefit from seeing what's happening
+1. **Transparency serves everyone** - People need visual feedback, AI needs structured data, but both benefit from seeing what's happening
 
-2. **File-native beats database-native** - Agents prefer filesystem operations, humans want direct access, so why hide everything in a database?
+2. **File-native beats database-native** - Agents prefer filesystem operations, people want direct access, so why hide everything in a database?
 
 3. **Multi-modal search changes everything** - When AI understands document structure (not just text), retrieval quality dramatically improves
 
-4. **Real-time feedback is crucial** - Both humans and agents need to know when documents are ready for use
+4. **Real-time feedback is crucial** - Both people and agents need to know when documents are ready for use
 
 ## What I'd Do Differently
 
@@ -169,7 +169,7 @@ If starting over, I'd:
 
 ## Looking Forward
 
-DocuSearch demonstrates that **RAG systems don't have to be black boxes**. By designing for both human visibility and AI semantic understanding, we can create tools that feel natural while leveraging AI capabilities.
+DocuSearch demonstrates that **RAG systems don't have to be black boxes**. By designing for both visibility for people and AI semantic understanding, we can create tools that feel natural while leveraging AI capabilities.
 
 The next evolution involves:
 - **Collaborative features** - Shared document libraries with permissions
@@ -177,7 +177,7 @@ The next evolution involves:
 - **Cross-document synthesis** - Connect related concepts across multiple documents
 - **Export workflows** - Generate reports from semantic clusters
 
-But the core insight remains: **design for transparency, and both humans and AI agents benefit**.
+But the core insight remains: **design for transparency, and both people and AI agents benefit**.
 
 ---
 
@@ -198,4 +198,4 @@ But the core insight remains: **design for transparency, and both humans and AI 
 
 ---
 
-*DocuSearch is open-source and available for experimentation. It represents my exploration of how humans and AI can collaborate more effectively when we design the interfaces specifically for that collaboration.*
+*DocuSearch is open-source and available for experimentation. It represents my exploration of how people and AI can collaborate more effectively when we design the interfaces specifically for that collaboration.*

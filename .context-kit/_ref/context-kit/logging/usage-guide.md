@@ -198,9 +198,9 @@ mcp__context-kit__service_health service="UserService" timeWindow=7200
 mcp__context-kit__service_health timeWindow=3600
 ```
 
-## Human Interface (React UI) - ✅ Fully Working
+## User Interface (React UI) - ✅ Fully Working
 
-The React UI provides a professional log viewer interface for human users.
+The React UI provides a professional log viewer interface for users.
 
 ### Accessing the Log Viewer
 

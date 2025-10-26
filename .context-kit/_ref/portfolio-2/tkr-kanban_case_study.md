@@ -1,4 +1,4 @@
-# TaskBoardAI: Designing Kanban for Human-AI Collaboration
+# TaskBoardAI: Designing Kanban for People-AI Collaboration
 
 **I created TaskBoardAI to solve a workflow problem I was experiencing firsthand.** I knew I could manage to-do lists through markdown files, but I found them challenging to maintain and update effectively. I needed a solution that would let both AI agents and humans view and interact with the same task information, but in ways that felt natural to each.
 
@@ -15,9 +15,9 @@ I wanted the visual, drag-and-drop experience of a kanban board for myself, but 
 
 ## Understanding the Dual-User Problem
 
-This was fundamentally a **dual-interface design challenge**. I needed to understand how both users—human (me) and AI agents—naturally wanted to interact with task information.
+This was fundamentally a **dual-interface design challenge**. I needed to understand how both users—myself and AI agents—naturally wanted to interact with task information.
 
-**What I needed as a human:**
+**What I needed as a person:**
 - Visual board showing task distribution across columns
 - Drag-and-drop to move cards between states
 - Quick scanning to understand project status
@@ -29,11 +29,11 @@ This was fundamentally a **dual-interface design challenge**. I needed to unders
 - Clear task attributes without ambiguity
 - Ability to create, update, and reorganize tasks programmatically
 
-**The key insight:** AI agents and humans have fundamentally different interaction preferences. I could create a kanban board where I'd enjoy the visual, drag-and-drop experience of moving cards between columns, while AI agents could efficiently parse and modify the underlying data structure through file operations.
+**The key insight:** AI agents and people have fundamentally different interaction preferences. I could create a kanban board where I'd enjoy the visual, drag-and-drop experience of moving cards between columns, while AI agents could efficiently parse and modify the underlying data structure through file operations.
 
 ## Solution: One Data Structure, Two Natural Interfaces
 
-I chose a **file-based architecture** specifically because it serves both users well. As a human, I can still read the kanban structure directly if needed, and AI agents can leverage their existing file editing capabilities rather than requiring database management skills.
+I chose a **file-based architecture** specifically because it serves both users well. I can still read the kanban structure directly if needed, and AI agents can leverage their existing file editing capabilities rather than requiring database management skills.
 
 ### The File-Based Architecture
 
@@ -107,7 +107,7 @@ Different projects get separate boards with complete isolation:
 I chose JSON files over a traditional database because:
 
 1. **AI agents prefer file operations** - They're built to read and write files
-2. **Human-readable backups** - I can version control my tasks in git
+2. **Readable backups** - I can version control my tasks in git
 3. **Simple deployment** - No database setup, just files on disk
 4. **Direct access** - Both UI and agents work with the same files
 5. **Portable** - Move boards between machines by copying directories
@@ -144,7 +144,7 @@ This real-time feedback loop between myself, AI agents, and the tool itself beca
 
 **What I learned from dogfooding:**
 
-1. **Visual feedback matters** - Even though data is in files, humans need the web UI for quick status checks
+1. **Visual feedback matters** - Even though data is in files, I need the web UI for quick status checks
 2. **AI agents are literal** - Ambiguous field names or optional attributes caused confusion; clarity is essential
 3. **State changes are frequent** - Optimizing for card movement was the right choice
 4. **Context is everything** - MCP's automatic context made agent interactions dramatically smoother
@@ -192,7 +192,7 @@ The MCP integration transformed how I work with AI on tasks. Instead of explaini
 
 ### File-Based Beats Database-Based (For This Use Case)
 
-The decision to use JSON files instead of a database proved correct. Both humans and AI agents work naturally with files. Version control comes free. Deployment is trivial. The simplicity serves both audiences without compromising either.
+The decision to use JSON files instead of a database proved correct. Both people and AI agents work naturally with files. Version control comes free. Deployment is trivial. The simplicity serves both audiences without compromising either.
 
 ### Optimize for the Most Frequent Operation
 
@@ -232,7 +232,7 @@ Future directions include:
 - **Automation rules** - "When card moves to Done, archive after 7 days"
 - **Integration webhooks** - Connect to GitHub, Slack, etc.
 
-But the core lesson remains: **design for the actual interaction patterns of both users**—human and AI—and the system will feel natural to both.
+But the core lesson remains: **design for the actual interaction patterns of both users**—people and AI—and the system will feel natural to both.
 
 ---
 
@@ -251,4 +251,4 @@ But the core lesson remains: **design for the actual interaction patterns of bot
 
 ---
 
-*What started as solving my own markdown to-do list frustrations evolved into a deeper exploration of how humans and AI can collaborate effectively on task management, with each party interacting through their preferred interface while working with the same underlying data.*
+*What started as solving my own markdown to-do list frustrations evolved into a deeper exploration of how people and AI can collaborate effectively on task management, with each party interacting through their preferred interface while working with the same underlying data.*

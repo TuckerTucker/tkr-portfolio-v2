@@ -182,7 +182,7 @@ export class Utils {
         return '';
     }
     /**
-     * Format bytes to human readable string
+     * Format bytes to readable string
      */
     static formatBytes(bytes, decimals = 2) {
         if (bytes === 0)
@@ -194,7 +194,7 @@ export class Utils {
         return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
     }
     /**
-     * Format duration in milliseconds to human readable string
+     * Format duration in milliseconds to readable string
      */
     static formatDuration(ms) {
         if (ms < 1000) {

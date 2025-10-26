@@ -960,7 +960,7 @@ WHERE period_start < (unixepoch() - 30 * 24 * 60 * 60); -- 30 days
 
 ### Existing Systems
 - **Knowledge Graph**: Logs become entities with relationships
-- **React UI**: LazyLog component for human-readable log viewing
+- **React UI**: LazyLog component for readable log viewing
 - **MCP Server**: Extended with logging capabilities
 - **Port Management**: Follows 42xxx allocation scheme (Log API: 42004)
 - **Security**: Uses existing path validation patterns
@@ -1033,4 +1033,4 @@ export const logEndpoints = {
 };
 ```
 
-This implementation provides a comprehensive, scalable logging solution that integrates seamlessly with the existing tkr-context-kit architecture while providing powerful AI agent capabilities for system observability and human-friendly log viewing through react-lazylog.
+This implementation provides a comprehensive, scalable logging solution that integrates seamlessly with the existing tkr-context-kit architecture while providing powerful AI agent capabilities for system observability and user-friendly log viewing through react-lazylog.

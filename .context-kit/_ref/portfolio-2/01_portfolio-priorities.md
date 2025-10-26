@@ -82,11 +82,11 @@ Use kanban as **proof of concept** for dual interface thinking that informed bot
 ### The Unifying Theme: Dual Interface Design
 All three projects demonstrate variations on the same core innovation:
 
-1. **tkr-kanban:** Humans use visual board, agents read/write spec files
-2. **tkr-docusearch:** Humans search visually, agents consume structured documentation
-3. **tkr-context-kit:** Humans read markdown, agents parse YAML context maps
+1. **tkr-kanban:** People use visual board, agents read/write spec files
+2. **tkr-docusearch:** People search visually, agents consume structured documentation
+3. **tkr-context-kit:** People read markdown, agents parse YAML context maps
 
-**Portfolio Message:** "I design systems where humans and AI agents work with the same information, each through interfaces optimized for their needs."
+**Portfolio Message:** "I design systems where people and AI agents work with the same information, each through interfaces optimized for their needs."
 
 ---
 

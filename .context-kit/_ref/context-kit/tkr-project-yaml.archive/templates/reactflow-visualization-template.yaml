@@ -7,7 +7,7 @@ reactflow_visualization:
   # Basic visualization information
   name: "VisualizationName"                    # Required: Technical name (PascalCase)
   metadata:
-    display_name: "Human-Readable Visualization Name" # Required: User-friendly name
+    display_name: "Readable Visualization Name" # Required: User-friendly name
     description: "ReactFlow visualization description" # Required: Explain the visualization's purpose
     category: "knowledge_graph"                # Required: Visualization category (knowledge_graph, flow_diagram, network, hierarchy)
     complexity: "interactive"                  # Required: Complexity level (simple, interactive, complex)

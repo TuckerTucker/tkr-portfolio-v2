@@ -4,7 +4,7 @@
 **[Image: Comparison diagram showing traditional RAG as black box vs. DocuSearch transparency]**
 
 Traditional RAG systems hide documents behind embeddings and database queries.
-DocuSearch makes documents visible to both humans (visual browsing) and AI (semantic search).
+DocuSearch makes documents visible to both people (visual browsing) and AI (semantic search).
 
 ---
 
@@ -102,7 +102,7 @@ Comprehensive cleanup removes both files and embeddings.
 ## Design Decision Highlights
 
 ### Why File-Native Architecture?
-I chose filesystem-based storage because both humans and AI agents work more naturally with files than database abstractions. Humans expect to browse directories; AI agents prefer file operations to SQL queries. The system orchestrates between these natural interfaces and the semantic layer.
+I chose filesystem-based storage because both people and AI agents work more naturally with files than database abstractions. People expect to browse directories; AI agents prefer file operations to SQL queries. The system orchestrates between these natural interfaces and the semantic layer.
 
 ### Why Multi-Modal Embeddings?
 Text-only search misses crucial document context—layouts, diagrams, emphasis. ColPali's multi-modal embeddings understand document structure, making retrieval dramatically more accurate. Users report finding relevant content they'd never locate with keyword search.
@@ -232,4 +232,4 @@ WebSocket Broadcast → Frontend Update
 
 ---
 
-**This project showcases the evolution from traditional UX to AI UX—designing not just for human users, but for the collaboration between humans and AI agents working together naturally.**
+**This project showcases the evolution from traditional UX to AI UX—designing not just for individual users, but for the collaboration between people and AI agents working together naturally.**

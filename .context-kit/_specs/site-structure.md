@@ -192,7 +192,7 @@ Songwriting and podcast production taught distillation and storytelling—skills
 - User research methodology
 - Information architecture decisions
 - Search system design
-- Dual interface implementation (human visual + agent structured data)
+- Dual interface implementation (visual UI + agent structured data)
 - Real-world impact
 
 **Length:** 800-1200 words
@@ -248,9 +248,9 @@ Songwriting and podcast production taught distillation and storytelling—skills
 ### Unifying Theme: Dual Interface Design
 All three projects demonstrate the same core innovation in different contexts:
 
-1. **tkr-kanban:** Humans drag cards on visual board, agents read/write markdown spec files
-2. **tkr-docusearch:** Humans search through visual UI, agents consume structured documentation via API
-3. **tkr-context-kit:** Humans read markdown docs, agents parse YAML context maps
+1. **tkr-kanban:** People drag cards on visual board, agents read/write markdown spec files
+2. **tkr-docusearch:** People search through visual UI, agents consume structured documentation via API
+3. **tkr-context-kit:** People read markdown docs, agents parse YAML context maps
 
 ### Narrative Progression
 

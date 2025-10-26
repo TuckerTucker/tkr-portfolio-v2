@@ -11,9 +11,9 @@ These three projects tell the story of my evolution from traditional UX design t
 ### TaskBoardAI: Discovering Dual Interfaces
 **The Question:** "How do I design for two users at once?"
 
-I started by solving a personal problem—markdown to-do lists were hard to maintain. But the real discovery was realizing that **humans and AI agents need different interfaces to the same data**.
+I started by solving a personal problem—markdown to-do lists were hard to maintain. But the real discovery was realizing that **people and AI agents need different interfaces to the same data**.
 
-- **Humans** want visual, drag-and-drop kanban boards
+- **People** want visual, drag-and-drop kanban boards
 - **AI agents** want structured JSON files they can parse and edit
 - **Both** need to work with the same tasks without synchronization
 
@@ -64,7 +64,7 @@ DocuSearch synthesizes everything learned from the previous projects into a prod
 
 ## The Common Thread: Agent Experience (AGx) Design
 
-All three projects explore the same core question: **How do we design systems where humans and AI agents collaborate naturally?**
+All three projects explore the same core question: **How do we design systems where people and AI agents collaborate naturally?**
 
 ### What Traditional UX Taught Me
 
@@ -99,9 +99,9 @@ Working with AI agents as users required expanding my UX toolkit:
 
 ### 1. Design for Both Users Explicitly
 
-Don't assume one interface serves everyone. Humans and AI agents have different needs. Design explicitly for both:
+Don't assume one interface serves everyone. People and AI agents have different needs. Design explicitly for both:
 
-- **Humans:** Visual feedback, intuitive interactions, emotional reassurance
+- **People:** Visual feedback, intuitive interactions, emotional reassurance
 - **AI Agents:** Structured data, clear hierarchies, semantic context
 
 When both interfaces serve their user well, collaboration feels natural.
@@ -129,7 +129,7 @@ Whether it's:
 ### 4. File-Native When Possible
 
 All three projects use file-based architectures because:
-- Both humans and AI agents understand files
+- Both people and AI agents understand files
 - Version control comes naturally
 - No database abstraction layer
 - Direct access when needed
@@ -239,11 +239,11 @@ These projects prove ability to:
 
 ## The Core Message
 
-**AI UX isn't traditional UX with a chatbot added**—it's fundamentally designing for collaboration between humans and AI agents, where both need natural interfaces to the same information.
+**AI UX isn't traditional UX with a chatbot added**—it's fundamentally designing for collaboration between people and AI agents, where both need natural interfaces to the same information.
 
-The future of UX involves designing for **at least two user types**: humans and AI agents. Systems that optimize for both will enable new forms of collaboration we're only beginning to explore.
+The future of UX involves designing for **at least two user types**: people and AI agents. Systems that optimize for both will enable new forms of collaboration we're only beginning to explore.
 
-These three projects represent my exploration of this frontier—learning how to design systems where humans and AI work together naturally, each through interfaces that respect their needs and interaction patterns.
+These three projects represent my exploration of this frontier—learning how to design systems where people and AI work together naturally, each through interfaces that respect their needs and interaction patterns.
 
 ---
 

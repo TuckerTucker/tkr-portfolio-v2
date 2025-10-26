@@ -8,8 +8,7 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
-import { ArrowRight, Github } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { ArrowRight } from 'lucide-react'
 
 interface ProjectCardProps {
   project: Project

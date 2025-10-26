@@ -15,7 +15,7 @@ export function FeaturedProjects() {
             Featured Projects
           </h2>
           <p className="mt-2 text-muted-foreground md:text-lg">
-            Exploring the intersection of human and AI agent experiences
+            Exploring the intersection of people and AI agent experiences
           </p>
         </div>
 

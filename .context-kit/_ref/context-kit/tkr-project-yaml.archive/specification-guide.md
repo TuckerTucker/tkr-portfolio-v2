@@ -5,7 +5,7 @@ This specification defines a YAML structure optimized for AI agent context windo
 
 ## Core Principle: Maximum Utility, Minimum Tokens
 
-Unlike human-oriented documentation, AI agents need:
+Unlike user-oriented documentation, AI agents need:
 - **Quick navigation** to find files and understand structure
 - **Pattern references** to maintain consistency
 - **Semantic markers** over verbose explanations
@@ -37,7 +37,7 @@ structure:
       - "hooks/": "Custom React hooks"
       - "utils/": "Pure utility functions"
     - "tests/": "Test files parallel to src structure"
-    - "docs/": "Human documentation (if relevant to code)"
+    - "docs/": "Documentation (if relevant to code)"
   
   find_patterns:
     component: "src/components/{complexity}/{ComponentName}.tsx"
@@ -314,7 +314,7 @@ common_patterns:
 - Performance metrics (unless performance task)
 - Historical decisions (unless affecting current patterns)
 - Deployment details (unless deployment task)
-- Human workflow processes
+- User workflow processes
 - Verbose explanations (use semantic compression instead)
 
 ### When to Update

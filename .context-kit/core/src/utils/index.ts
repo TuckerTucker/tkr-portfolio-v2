@@ -255,7 +255,7 @@ export class Utils {
   }
 
   /**
-   * Format bytes to human readable string
+   * Format bytes to readable string
    */
   static formatBytes(bytes: number, decimals: number = 2): string {
     if (bytes === 0) return '0 Bytes';
@@ -270,7 +270,7 @@ export class Utils {
   }
 
   /**
-   * Format duration in milliseconds to human readable string
+   * Format duration in milliseconds to readable string
    */
   static formatDuration(ms: number): string {
     if (ms < 1000) {

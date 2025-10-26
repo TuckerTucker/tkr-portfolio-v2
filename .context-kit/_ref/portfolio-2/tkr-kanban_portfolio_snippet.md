@@ -1,5 +1,5 @@
 # TaskBoardAI
-## Kanban Board for Human-AI Collaboration
+## Kanban Board for People-AI Collaboration
 
 ---
 
@@ -20,7 +20,7 @@ I wanted to use markdown for tasks because they're simple, but maintaining them 
 - **AI confusion** - Agents had to parse unstructured text and rewrite entire files
 - **Missing metadata** - Markdown doesn't naturally capture task states
 
-**The insight:** AI agents and humans have fundamentally different interaction preferences. I could create a system where I'd enjoy visual, drag-and-drop kanban while agents could efficiently parse and modify structured data—both working with the same tasks.
+**The insight:** AI agents and people have fundamentally different interaction preferences. I could create a system where I'd enjoy visual, drag-and-drop kanban while agents could efficiently parse and modify structured data—both working with the same tasks.
 
 ### Research Through Dogfooding
 
@@ -39,7 +39,7 @@ My validation process was practical: **I used TaskBoardAI daily while building o
 ### Design Decisions
 
 **1. File-Based Architecture**
-I chose JSON files over a database because both humans and AI agents work naturally with files:
+I chose JSON files over a database because both people and AI agents work naturally with files:
 - AI agents prefer file operations to database queries
 - I can version control tasks in git
 - No database setup—just files on disk
@@ -152,7 +152,7 @@ MCP integration transformed task management from "explaining data structures" to
 
 ### What Worked
 
-**File-based architecture was the right choice.** Both humans and AI agents work naturally with files. Version control comes free. Deployment is trivial. The simplicity serves both audiences without compromising either.
+**File-based architecture was the right choice.** Both people and AI agents work naturally with files. Version control comes free. Deployment is trivial. The simplicity serves both audiences without compromising either.
 
 **Optimizing for card movement paid off.** By making it a single-attribute change rather than array restructuring, the system stays responsive. Observing my own usage patterns revealed what to optimize.
 
@@ -168,7 +168,7 @@ MCP integration transformed task management from "explaining data structures" to
 
 ### What This Taught Me
 
-**Dual-interface design requires understanding both users.** Humans need visual feedback and intuitive interactions. AI agents need unambiguous data structures and file-based operations. Serving both well requires intentional architectural choices.
+**Dual-interface design requires understanding both users.** People need visual feedback and intuitive interactions. AI agents need unambiguous data structures and file-based operations. Serving both well requires intentional architectural choices.
 
 **Dogfooding reveals truth.** Using TaskBoardAI to manage TaskBoardAI's development exposed every rough edge. Features that seemed useful in planning turned out to be rarely used. Real usage differs from imagined usage—always test with actual work.
 

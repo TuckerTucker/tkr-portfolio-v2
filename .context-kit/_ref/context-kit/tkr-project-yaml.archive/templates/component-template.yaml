@@ -7,7 +7,7 @@ component:
   # Basic component information
   name: "ComponentName"                       # Required: Technical name (PascalCase)
   metadata:
-    display_name: "Human-Readable Name"       # Required: User-friendly name
+    display_name: "Readable Name"       # Required: User-friendly name
     description: "Component description"       # Required: Explain the component's purpose
     category: "category_name"                  # Required: UI category (e.g., navigation, form, display, reactflow)
     status: "ready"                            # Required: Component status (draft, ready, deprecated)

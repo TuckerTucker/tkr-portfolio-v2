@@ -36,7 +36,7 @@ export default function ProjectMetadata({
               className="inline-flex items-center"
             >
               <Github className="h-5 w-5" />
-              GitHub
+              View on GitHub
             </a>
           </Button>
         </div>

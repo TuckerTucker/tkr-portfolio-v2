@@ -103,4 +103,4 @@ curl http://localhost:42003/api/logs/health
                     └─────────────┘
 ```
 
-The system provides both human-friendly log viewing (React UI) and AI agent access (MCP tools).
+The system provides both user-friendly log viewing (React UI) and AI agent access (MCP tools).

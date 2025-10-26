@@ -321,9 +321,9 @@ What I'd keep: YAML format, semantic anchors, progressive disclosure, and the pa
 
 tkr-context-kit represents exploration of a new design discipline: **creating information architectures specifically for AI agent consumption**.
 
-Traditional UX design principles apply—progressive disclosure, consistent mental models, reducing cognitive load—but the implementation details differ. Agents "read" hierarchical structures differently than humans browse interfaces.
+Traditional UX design principles apply—progressive disclosure, consistent mental models, reducing cognitive load—but the implementation details differ. Agents "read" hierarchical structures differently than people browse interfaces.
 
-**The core insight:** AI agents are users too. They deserve thoughtful UX design that considers their needs, preferences, and interaction patterns. When we design for agent efficiency while maintaining human accessibility, we enable new forms of human-AI collaboration.
+**The core insight:** AI agents are users too. They deserve thoughtful UX design that considers their needs, preferences, and interaction patterns. When we design for agent efficiency while maintaining accessibility for people, we enable new forms of collaboration between people and AI.
 
 ---
 
@@ -342,4 +342,4 @@ Traditional UX design principles apply—progressive disclosure, consistent ment
 
 ---
 
-*This toolkit demonstrates advanced full-stack development skills, microservices architecture, and innovative AI integration for enhanced developer productivity. More importantly, it represents the evolution from designing for humans to designing for human-AI collaboration.*
+*This toolkit demonstrates advanced full-stack development skills, microservices architecture, and innovative AI integration for enhanced developer productivity. More importantly, it represents the evolution from designing for people to designing for collaboration between people and AI.*

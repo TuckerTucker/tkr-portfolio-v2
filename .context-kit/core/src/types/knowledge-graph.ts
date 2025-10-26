@@ -15,7 +15,7 @@ export interface Entity {
   /** Type classification of the entity (e.g., 'file', 'component', 'function') */
   type: string;
 
-  /** Human-readable name of the entity */
+  /** Readable name of the entity */
   name: string;
 
   /** Flexible data storage for entity-specific properties */
@@ -228,7 +228,7 @@ export interface EntityTypeDefinition {
   /** Type name */
   name: string;
 
-  /** Human-readable description */
+  /** Readable description */
   description: string;
 
   /** Required properties in entity.data */
@@ -248,7 +248,7 @@ export interface RelationTypeDefinition {
   /** Relation type name */
   name: string;
 
-  /** Human-readable description */
+  /** Readable description */
   description: string;
 
   /** Valid source entity types */

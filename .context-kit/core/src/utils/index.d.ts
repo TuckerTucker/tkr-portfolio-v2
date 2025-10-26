@@ -62,11 +62,11 @@ export declare class Utils {
      */
     static getFileExtension(filePath: string): string;
     /**
-     * Format bytes to human readable string
+     * Format bytes to readable string
      */
     static formatBytes(bytes: number, decimals?: number): string;
     /**
-     * Format duration in milliseconds to human readable string
+     * Format duration in milliseconds to readable string
      */
     static formatDuration(ms: number): string;
 }

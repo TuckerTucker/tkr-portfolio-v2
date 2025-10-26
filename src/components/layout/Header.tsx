@@ -13,6 +13,7 @@ export function Header() {
     { path: '/docusearch', label: 'docusearch' },
     { path: '/context-kit', label: 'context-kit' },
     { path: '/kanban', label: 'kanban' },
+    { path: '/blog', label: 'Blog' },
   ]
 
   const isActive = (path: string) => {
