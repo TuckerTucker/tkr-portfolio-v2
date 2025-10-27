@@ -54,7 +54,26 @@ export function Footer() {
         {/* Footer Bottom */}
         <div className="pt-8 border-t border-border/40">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
-            <p>© {currentYear} Tucker Harley. All rights reserved.</p>
+            <p>
+              © {currentYear} Tucker Harley. Code:{' '}
+              <a
+                href="https://github.com/tuckertucker/tkr-portfolio-v2/blob/main/LICENSE"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors underline decoration-border/40 hover:decoration-foreground"
+              >
+                MIT
+              </a>
+              {' '}· Content:{' '}
+              <a
+                href="https://creativecommons.org/licenses/by/4.0/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-foreground transition-colors underline decoration-border/40 hover:decoration-foreground"
+              >
+                CC BY 4.0
+              </a>
+            </p>
             <div className="flex items-center gap-4">
               <p>
                 UX Designer specializing in interfaces for humans and AI agents
