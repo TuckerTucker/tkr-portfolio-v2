@@ -224,7 +224,15 @@ Built on Shadcn/ui components with Radix UI primitives:
 
 ## License
 
-© 2025 Tucker. All rights reserved.
+This project uses a dual-license approach:
+
+### Code (MIT License)
+The source code is licensed under the MIT License. You're free to use, modify, and distribute the code with attribution.
+
+### Content (CC BY 4.0)
+All content including case studies, documentation, and project narratives is licensed under the Creative Commons Attribution 4.0 International License. Please provide proper attribution when referencing the content.
+
+See the [LICENSE](./LICENSE) file for full details.
 
 ---
 
