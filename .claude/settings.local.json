@@ -98,7 +98,11 @@
       "Bash(rm:*)",
       "Bash(npx shadcn@latest add:*)",
       "Bash(timeout 10s npm run dev:*)",
-      "Bash(cp:*)"
+      "Bash(cp:*)",
+      "Bash(tr:*)",
+      "Bash(lsof:*)",
+      "Read(//Volumes/tkr-riffic/@tkr-projects/tkr-portfolio/**)",
+      "Bash(xargs -I {} sh -c 'echo \"\"\"\"=== {} ===\"\"\"\" && file {}')"
     ],
     "deny": [
       "Bash(rm -rf /)",

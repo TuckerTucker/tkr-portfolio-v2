@@ -19,12 +19,25 @@ export interface Project {
   githubUrl?: string
 }
 
+export interface ProjectDetail {
+  title: string
+  description: string
+  outcomes: string[]
+  image?: string
+  imageAlt?: string
+}
+
 export interface WorkHistoryEntry {
   company: string
   role: string
   period: string
   description: string
   highlights: string[]
+  companyImage?: string
+  companyImageAlt?: string
+  companyColor?: string
+  companyColorAccent?: string
+  projects: ProjectDetail[]
 }
 
 export interface WorkHistory {
