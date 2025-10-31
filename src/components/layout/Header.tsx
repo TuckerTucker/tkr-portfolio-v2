@@ -11,9 +11,7 @@ export function Header() {
   const navLinks = [
     { path: '/', label: 'Home' },
     { path: '/docusearch', label: 'docusearch' },
-    { path: '/context-kit', label: 'context-kit' },
     { path: '/kanban', label: 'kanban' },
-    { path: '/blog', label: 'Blog' },
   ]
 
   const isActive = (path: string) => {
