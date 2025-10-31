@@ -55,7 +55,7 @@ export function Footer() {
         <div className="pt-8 border-t border-border/40">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
             <p>
-              © {currentYear} Tucker Harley. Code:{' '}
+              © {currentYear} Sean 'Tucker' Harley. Code:{' '}
               <a
                 href="https://github.com/tuckertucker/tkr-portfolio-v2/blob/main/LICENSE"
                 target="_blank"

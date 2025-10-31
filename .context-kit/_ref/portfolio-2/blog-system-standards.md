@@ -724,5 +724,5 @@ npm run dev
 ---
 
 **Last Updated:** 2025-01-23
-**Maintained By:** Tucker Harley
+**Maintained By:** Sean 'Tucker' Harley
 **Questions?** Refer to inline code comments or portfolio documentation

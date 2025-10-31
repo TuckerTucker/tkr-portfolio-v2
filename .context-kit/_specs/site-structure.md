@@ -488,5 +488,5 @@ Located in `.context-kit/_ref/portfolio-2/`:
 ---
 
 **Last Updated:** 2025-10-22
-**Maintained By:** Tucker Harley
+**Maintained By:** Sean 'Tucker' Harley
 **Status:** Planning phase - ready for content drafting

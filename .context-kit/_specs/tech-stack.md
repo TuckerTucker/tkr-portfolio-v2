@@ -593,7 +593,7 @@ jobs:
     <!-- Google Fonts - Load -->
     <link href="https://fonts.googleapis.com/css2?family=Afacad:wght@400;500;600;700&family=Alice&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
-    <title>Tucker Harley - UX Designer</title>
+    <title>Sean 'Tucker' Harley - UX Designer</title>
   </head>
   <body>
     <div id="root"></div>
@@ -855,7 +855,7 @@ Create `public/404.html`:
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Tucker Harley</title>
+    <title>Sean 'Tucker' Harley</title>
     <script type="text/javascript">
       // Single Page Apps for GitHub Pages
       // https://github.com/rafgraph/spa-github-pages
@@ -1136,5 +1136,5 @@ npm run format           # Run Prettier
 ---
 
 **Last Updated:** 2025-10-22
-**Maintained By:** Tucker Harley
+**Maintained By:** Sean 'Tucker' Harley
 **Status:** Planning phase - ready for implementation

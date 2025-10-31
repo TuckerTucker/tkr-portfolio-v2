@@ -77,7 +77,7 @@ All required directories created:
 - Google Fonts preconnect and load (Afacad, Alice, Courier Prime)
 - Proper meta tags (charset, viewport)
 - Icon link (placeholder)
-- Title: "Tucker Harley - UX Designer"
+- Title: "Sean 'Tucker' Harley - UX Designer"
 - Root div with id="root"
 - Module script loading `/src/main.tsx`
 

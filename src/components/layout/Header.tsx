@@ -27,7 +27,7 @@ export function Header() {
             to="/"
             className="text-xl font-semibold text-foreground hover:text-primary transition-colors duration-200"
           >
-            Tucker Harley
+            Sean 'Tucker' Harley
           </Link>
 
           {/* Desktop Navigation */}
