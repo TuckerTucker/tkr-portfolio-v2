@@ -1,3 +1,6 @@
+/* Syntax highlighting for code blocks */
+@import 'highlight.js/styles/github-dark.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -186,5 +189,10 @@
 
 body {
   letter-spacing: var(--tracking-normal);
+}
+
+/* Fix for inline code in prose */
+.prose code:not(pre code) {
+  color: hsl(var(--foreground)) !important;
 }
 }

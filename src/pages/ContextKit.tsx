@@ -23,6 +23,7 @@ export default function ContextKit() {
         title={contextKitCaseStudy.understanding.title}
         content={contextKitCaseStudy.understanding.content}
         highlights={contextKitCaseStudy.understanding.keyInsights}
+        showConversation={true}
       />
 
       <SolutionSection
