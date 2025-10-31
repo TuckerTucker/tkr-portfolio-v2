@@ -1,3 +1,7 @@
+import { useState } from 'react'
+import { Expand } from 'lucide-react'
+import { ImageLightbox } from '@/components/ui/ImageLightbox'
+
 interface ProjectSlideProps {
   title: string
   description: string
@@ -13,6 +17,14 @@ export function ProjectSlide({
   image,
   imageAlt = '',
 }: ProjectSlideProps) {
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false)
+
+  const handleImageClick = () => {
+    if (image) {
+      setIsLightboxOpen(true)
+    }
+  }
+
   return (
     <article
       className="relative w-full max-w-[840px] mx-auto overflow-hidden rounded-xl bg-muted shadow-lg"
@@ -21,14 +33,27 @@ export function ProjectSlide({
       {/* Mobile-first layout: stacks vertically on small screens, side-by-side on md+ */}
       <div className="flex flex-col md:flex-row md:h-[425px]">
         {/* Image Section */}
-        <div className="relative w-full md:w-[375px] h-[250px] md:h-full flex-shrink-0 bg-muted-foreground/20">
+        <div className="relative w-full md:w-[375px] h-[250px] md:h-full flex-shrink-0 bg-muted-foreground/20 group">
           {image ? (
-            <img
-              src={image}
-              alt={imageAlt}
-              className="w-full h-full object-cover"
-              loading="lazy"
-            />
+            <>
+              <img
+                src={image}
+                alt={imageAlt}
+                className="w-full h-full object-cover cursor-pointer"
+                loading="lazy"
+                onClick={handleImageClick}
+              />
+              {/* Expand icon overlay - visible on hover */}
+              <button
+                onClick={handleImageClick}
+                className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+                aria-label="Expand image"
+              >
+                <div className="rounded-full bg-white/20 p-3 backdrop-blur-sm">
+                  <Expand className="h-8 w-8 text-white" />
+                </div>
+              </button>
+            </>
           ) : (
             <div className="w-full h-full flex items-center justify-center text-muted-foreground/40">
               <svg
@@ -50,7 +75,7 @@ export function ProjectSlide({
           )}
 
           {/* Project highlight badge with dark grey background */}
-          <div className="absolute bottom-0 left-0 right-0 backdrop-blur-sm px-4 py-2 bg-black/50">
+          <div className="absolute bottom-0 left-0 right-0 backdrop-blur-sm px-4 py-2 bg-black/50 pointer-events-none">
             <span className="text-sm font-medium text-white tracking-wide">
               Project Highlight
             </span>
@@ -93,6 +118,16 @@ export function ProjectSlide({
           )}
         </div>
       </div>
+
+      {/* Image Lightbox Modal */}
+      {image && (
+        <ImageLightbox
+          isOpen={isLightboxOpen}
+          onClose={() => setIsLightboxOpen(false)}
+          imageSrc={image}
+          imageAlt={imageAlt}
+        />
+      )}
     </article>
   )
 }
