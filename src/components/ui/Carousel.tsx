@@ -197,7 +197,7 @@ export function Carousel({
                 prefersReducedMotion ? "" : "duration-300",
                 currentIndex === index
                   ? "w-8 bg-primary"
-                  : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                  : "w-2 bg-white/50 hover:bg-white/70"
               )}
               onClick={() => goToSlide(index)}
               aria-label={`Go to slide ${index + 1}`}

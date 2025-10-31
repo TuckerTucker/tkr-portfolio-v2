@@ -26,34 +26,36 @@ export function WorkHistoryCarousel({
   autoPlay = false,
   className,
 }: WorkHistoryCarouselProps) {
+  // Build slides array to ensure proper child structure for Carousel
+  const slides = [
+    // Company overview slide
+    <CompanySlide
+      key={`${entry.company}-overview`}
+      company={entry.company}
+      role={entry.role}
+      period={entry.period}
+      description={entry.description}
+      image={entry.companyImage}
+      imageAlt={entry.companyImageAlt}
+      companyColor={entry.companyColor}
+    />,
+    // Project detail slides
+    ...entry.projects.map((project, index) => (
+      <ProjectSlide
+        key={`${entry.company}-project-${index}`}
+        title={project.title}
+        description={project.description}
+        outcomes={project.outcomes}
+        image={project.image}
+        imageAlt={project.imageAlt}
+      />
+    )),
+  ]
+
   return (
     <div className={className}>
       <Carousel autoPlay={autoPlay} autoPlayInterval={8000}>
-        {/* Company overview slide */}
-        <CompanySlide
-          company={entry.company}
-          role={entry.role}
-          period={entry.period}
-          description={entry.description}
-          image={entry.companyImage}
-          imageAlt={entry.companyImageAlt}
-          companyColor={entry.companyColor}
-          companyColorAccent={entry.companyColorAccent}
-        />
-
-        {/* Project detail slides */}
-        {entry.projects.map((project, index) => (
-          <ProjectSlide
-            key={`${entry.company}-project-${index}`}
-            title={project.title}
-            description={project.description}
-            outcomes={project.outcomes}
-            image={project.image}
-            imageAlt={project.imageAlt}
-            companyColor={entry.companyColor}
-            companyColorAccent={entry.companyColorAccent}
-          />
-        ))}
+        {slides}
       </Carousel>
     </div>
   )
