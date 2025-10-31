@@ -6,7 +6,6 @@ interface CompanySlideProps {
   image?: string
   imageAlt?: string
   companyColor?: string
-  companyColorAccent?: string
 }
 
 export function CompanySlide({
@@ -17,7 +16,6 @@ export function CompanySlide({
   image,
   imageAlt = '',
   companyColor,
-  companyColorAccent,
 }: CompanySlideProps) {
   return (
     <article
@@ -27,15 +25,12 @@ export function CompanySlide({
       {/* Mobile-first layout: stacks vertically on small screens, side-by-side on md+ */}
       <div className="flex flex-col md:flex-row md:h-[425px]">
         {/* Image Section */}
-        <div className="relative w-full md:w-[375px] h-[250px] md:h-full flex-shrink-0 bg-muted-foreground/20">
-          {/* Subtle color overlay for brand identity */}
-          {companyColor && (
-            <div
-              className="absolute inset-0 mix-blend-multiply opacity-10"
-              style={{ backgroundColor: companyColor }}
-              aria-hidden="true"
-            />
-          )}
+        <div
+          className="relative w-full md:w-[375px] h-[250px] md:h-full flex-shrink-0"
+          style={{
+            backgroundColor: companyColor || 'hsl(var(--muted-foreground) / 0.2)',
+          }}
+        >
 
           {image ? (
             <img
@@ -64,14 +59,8 @@ export function CompanySlide({
             </div>
           )}
 
-          {/* Period overlay with company accent color */}
-          <div
-            className="absolute bottom-0 left-0 right-0 backdrop-blur-sm px-4 py-2"
-            style={{
-              backgroundColor: companyColor ? `${companyColor}e6` : 'rgb(0 0 0 / 0.9)',
-              borderLeft: companyColorAccent ? `4px solid ${companyColorAccent}` : 'none',
-            }}
-          >
+          {/* Period overlay with dark grey background */}
+          <div className="absolute bottom-0 left-0 right-0 backdrop-blur-sm px-4 py-2 bg-black/50">
             <time className="text-sm font-medium text-white tracking-wide">
               {period}
             </time>

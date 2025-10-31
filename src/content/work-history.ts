@@ -14,8 +14,8 @@ export const COMPANY_COLORS = {
     badge: '#00729D', // 5.39:1 contrast - WCAG AA compliant (darker cyan)
   },
   'Nutrien': {
-    primary: '#0033A0',
-    accent: '#76BC21',
+    primary: '#76BC21', // Brand green for logo background
+    accent: '#0033A0',
     badge: '#0033A0', // 10.60:1 contrast - WCAG AA compliant
   },
 } as const
@@ -41,7 +41,7 @@ export const workHistory: WorkHistory = {
       ],
       companyImage: '/images/work/nutrien-logo.svg',
       companyImageAlt: 'Nutrien company logo',
-      companyColor: COMPANY_COLORS['Nutrien'].badge,
+      companyColor: COMPANY_COLORS['Nutrien'].primary,
       companyColorAccent: COMPANY_COLORS['Nutrien'].accent,
       projects: [
         {
@@ -89,7 +89,7 @@ export const workHistory: WorkHistory = {
       ],
       companyImage: '/images/work/worldplay-logo.svg',
       companyImageAlt: 'Worldplay Networks company logo',
-      companyColor: COMPANY_COLORS['Worldplay Networks'].badge,
+      companyColor: COMPANY_COLORS['Worldplay Networks'].primary,
       companyColorAccent: COMPANY_COLORS['Worldplay Networks'].accent,
       projects: [
         {
@@ -159,7 +159,7 @@ export const workHistory: WorkHistory = {
       ],
       companyImage: '/images/work/shaw-logo.svg',
       companyImageAlt: 'Shaw Communications company logo',
-      companyColor: COMPANY_COLORS['Shaw Communications'].badge,
+      companyColor: COMPANY_COLORS['Shaw Communications'].primary,
       companyColorAccent: COMPANY_COLORS['Shaw Communications'].accent,
       projects: [
         {

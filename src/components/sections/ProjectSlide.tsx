@@ -4,8 +4,6 @@ interface ProjectSlideProps {
   outcomes: string[]
   image?: string
   imageAlt?: string
-  companyColor?: string
-  companyColorAccent?: string
 }
 
 export function ProjectSlide({
@@ -14,8 +12,6 @@ export function ProjectSlide({
   outcomes,
   image,
   imageAlt = '',
-  companyColor,
-  companyColorAccent,
 }: ProjectSlideProps) {
   return (
     <article
@@ -53,14 +49,8 @@ export function ProjectSlide({
             </div>
           )}
 
-          {/* Project highlight badge with company accent color */}
-          <div
-            className="absolute bottom-0 left-0 right-0 backdrop-blur-sm px-4 py-2"
-            style={{
-              backgroundColor: companyColor ? `${companyColor}e6` : 'rgb(0 0 0 / 0.9)',
-              borderLeft: companyColorAccent ? `4px solid ${companyColorAccent}` : 'none',
-            }}
-          >
+          {/* Project highlight badge with dark grey background */}
+          <div className="absolute bottom-0 left-0 right-0 backdrop-blur-sm px-4 py-2 bg-black/50">
             <span className="text-sm font-medium text-white tracking-wide">
               Project Highlight
             </span>
@@ -92,10 +82,7 @@ export function ProjectSlide({
                     className="flex items-start gap-2 text-sm text-foreground/80"
                   >
                     <span
-                      className="inline-block w-1.5 h-1.5 rounded-full flex-shrink-0 mt-1.5"
-                      style={{
-                        backgroundColor: companyColorAccent || 'hsl(var(--secondary))',
-                      }}
+                      className="inline-block w-1.5 h-1.5 rounded-full bg-secondary flex-shrink-0 mt-1.5"
                       aria-hidden="true"
                     />
                     <span className="line-clamp-1">{outcome}</span>
