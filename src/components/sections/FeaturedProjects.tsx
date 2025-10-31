@@ -2,9 +2,8 @@ import { projects } from '@/content/projects'
 import { ProjectCard } from './ProjectCard'
 
 export function FeaturedProjects() {
-  // Get the three featured projects in the specified order
+  // Get the two featured projects in the specified order
   const docusearch = projects.find((p) => p.id === 'docusearch')
-  const contextKit = projects.find((p) => p.id === 'context-kit')
   const kanban = projects.find((p) => p.id === 'kanban')
 
   return (
@@ -27,11 +26,12 @@ export function FeaturedProjects() {
             </div>
           )}
 
-          {/* Standard projects in a 2-column grid below */}
-          <div className="grid gap-6 md:gap-8 md:grid-cols-2">
-            {contextKit && <ProjectCard project={contextKit} variant="standard" />}
-            {kanban && <ProjectCard project={kanban} variant="standard" />}
-          </div>
+          {/* Standard project below */}
+          {kanban && (
+            <div>
+              <ProjectCard project={kanban} variant="standard" />
+            </div>
+          )}
         </div>
       </div>
     </section>
