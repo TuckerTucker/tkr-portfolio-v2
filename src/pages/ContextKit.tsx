@@ -7,6 +7,7 @@ import {
   ProjectMetadata,
 } from '@/components/case-studies'
 import { contextKitCaseStudy } from '@/content/case-studies/context-kit'
+import contextKitYaml from '@/content/context-kit.yml?raw'
 
 export default function ContextKit() {
   return (
@@ -30,6 +31,8 @@ export default function ContextKit() {
         title={contextKitCaseStudy.solution.title}
         content={contextKitCaseStudy.solution.content}
         highlights={contextKitCaseStudy.solution.features}
+        showYaml={true}
+        yamlContent={contextKitYaml}
       />
 
       <ImpactSection
