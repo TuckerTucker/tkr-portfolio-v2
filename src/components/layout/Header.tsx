@@ -25,8 +25,14 @@ export function Header() {
           {/* Logo/Brand */}
           <Link
             to="/"
-            className="text-xl font-semibold text-foreground hover:text-primary transition-colors duration-200"
+            className="flex items-center gap-2 text-xl font-semibold text-foreground hover:text-primary transition-colors duration-200"
           >
+            <img
+              src="/tkr-favicon.svg"
+              alt="Tucker logo"
+              className="h-8 w-16 rounded object-contain"
+              style={{ backgroundColor: '#3c3c3c' }}
+            />
             Sean 'Tucker' Harley
           </Link>
 
