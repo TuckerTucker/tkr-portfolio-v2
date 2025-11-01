@@ -27,6 +27,9 @@ export const projects: Project[] = [
       'Semantic Search',
     ],
     githubUrl: 'https://github.com/tuckertucker/tkr-docusearch',
+    image: '/images/work/placeholder/rain-duck.png',
+    imageAlt: 'DocuSearch interface placeholder',
+    imagePosition: 'right',
   },
   {
     id: 'context-kit',
@@ -79,5 +82,8 @@ export const projects: Project[] = [
       'JSON Storage',
     ],
     githubUrl: 'https://github.com/tuckertucker/taskboardai',
+    image: '/images/work/placeholder/knitten.png',
+    imageAlt: 'TaskBoardAI interface placeholder',
+    imagePosition: 'left',
   },
 ]

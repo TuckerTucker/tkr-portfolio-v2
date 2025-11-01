@@ -17,6 +17,64 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, variant = 'standard' }: ProjectCardProps) {
   const isHero = variant === 'hero'
+  const hasImage = !!project.image
+  const imagePosition = project.imagePosition || 'right'
+
+  const contentSection = (
+    <div className="flex-1 min-w-0">
+      <CardHeader className={cn(isHero && 'p-8')}>
+        <div className="mb-2 flex items-center gap-2">
+          <span className="text-xs font-medium text-muted-foreground">
+            {project.category}
+          </span>
+          {isHero && (
+            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
+              Featured
+            </span>
+          )}
+        </div>
+        <CardTitle
+          className={cn(
+            'inline-block px-4 py-2 rounded-md bg-secondary text-secondary-foreground transition-all',
+            isHero ? 'text-3xl md:text-4xl' : 'text-2xl'
+          )}
+        >
+          {project.title}
+        </CardTitle>
+        <CardDescription
+          className={cn('mt-2', isHero ? 'text-base md:text-lg' : 'text-sm')}
+        >
+          {project.tagline}
+        </CardDescription>
+      </CardHeader>
+
+      <CardContent className={cn(isHero && 'px-8')}>
+        <p className={cn('text-muted-foreground', isHero ? 'text-base' : 'text-sm')}>
+          {project.oneLiner || project.elevatorPitch}
+        </p>
+      </CardContent>
+
+      <CardFooter className={cn('pt-4 flex-col gap-4', isHero && 'px-8 pb-8')}>
+        <div className="flex items-center justify-between w-full">
+          <div className="flex items-center gap-2 text-sm font-medium text-primary transition-gap group-hover:gap-3">
+            <span>{isHero ? 'Read full case study' : 'Learn more'}</span>
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </div>
+
+        </div>
+      </CardFooter>
+    </div>
+  )
+
+  const imageSection = hasImage && (
+    <div className="w-full md:max-w-[66.666%] flex-shrink-0 max-h-[400px] overflow-hidden">
+      <img
+        src={project.image}
+        alt={project.imageAlt || `${project.title} screenshot`}
+        className="w-full h-full object-cover rounded-lg"
+      />
+    </div>
+  )
 
   return (
     <a
@@ -29,47 +87,17 @@ export function ProjectCard({ project, variant = 'standard' }: ProjectCardProps)
           isHero && 'border-primary/50 dark:border-primary/30'
         )}
       >
-        <CardHeader className={cn(isHero && 'p-8')}>
-          <div className="mb-2 flex items-center gap-2">
-            <span className="text-xs font-medium text-muted-foreground">
-              {project.category}
-            </span>
-            {isHero && (
-              <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">
-                Featured
-              </span>
-            )}
+        {hasImage ? (
+          <div className={cn(
+            'flex flex-col md:flex-row gap-6',
+            imagePosition === 'left' && 'md:flex-row-reverse'
+          )}>
+            {contentSection}
+            {imageSection}
           </div>
-          <CardTitle
-            className={cn(
-              'inline-block px-4 py-2 rounded-md bg-secondary text-secondary-foreground transition-all',
-              isHero ? 'text-3xl md:text-4xl' : 'text-2xl'
-            )}
-          >
-            {project.title}
-          </CardTitle>
-          <CardDescription
-            className={cn('mt-2', isHero ? 'text-base md:text-lg' : 'text-sm')}
-          >
-            {project.tagline}
-          </CardDescription>
-        </CardHeader>
-
-        <CardContent className={cn(isHero && 'px-8')}>
-          <p className={cn('text-muted-foreground', isHero ? 'text-base' : 'text-sm')}>
-            {project.oneLiner || project.elevatorPitch}
-          </p>
-        </CardContent>
-
-        <CardFooter className={cn('pt-4 flex-col gap-4', isHero && 'px-8 pb-8')}>
-          <div className="flex items-center justify-between w-full">
-            <div className="flex items-center gap-2 text-sm font-medium text-primary transition-gap group-hover:gap-3">
-              <span>{isHero ? 'Read full case study' : 'Learn more'}</span>
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </div>
-            
-          </div>
-        </CardFooter>
+        ) : (
+          contentSection
+        )}
       </Card>
     </a>
   )

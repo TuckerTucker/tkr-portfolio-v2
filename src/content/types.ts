@@ -17,6 +17,9 @@ export interface Project {
   category: string
   skills: string[]
   githubUrl?: string
+  image?: string
+  imageAlt?: string
+  imagePosition?: 'left' | 'right'
 }
 
 export interface ProjectDetail {
