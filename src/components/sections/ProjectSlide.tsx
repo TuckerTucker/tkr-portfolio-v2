@@ -90,7 +90,7 @@ export function ProjectSlide({
           </h2>
 
           {/* Description */}
-          <p className="text-sm md:text-base text-foreground/80 leading-relaxed line-clamp-2">
+          <p className="text-sm md:text-base text-foreground/80 leading-relaxed">
             {description}
           </p>
 
@@ -110,7 +110,7 @@ export function ProjectSlide({
                       className="inline-block w-1.5 h-1.5 rounded-full bg-secondary flex-shrink-0 mt-1.5"
                       aria-hidden="true"
                     />
-                    <span className="line-clamp-1">{outcome}</span>
+                    <span>{outcome}</span>
                   </li>
                 ))}
               </ul>

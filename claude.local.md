@@ -30,9 +30,11 @@ Use:
 - Do not add the Claude code footer to commit messages.
 - remove the 'generated with ...' and 'co-authored ...' messages if they are present.
 
-!! IMPORTANT Always run scripts from the project root !!
 
 ---
+
+!! We are building my portfolio site. This is very important to my career so quality is very important !!
+
 
 # Portfolio Project Summary (tkr-portfolio-v2)
 

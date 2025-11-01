@@ -80,7 +80,7 @@ export function CompanySlide({
           </h3>
 
           {/* Description */}
-          <p className="text-sm md:text-base text-foreground/80 leading-relaxed line-clamp-3 md:line-clamp-4">
+          <p className="text-sm md:text-base text-foreground/80 leading-relaxed">
             {description}
           </p>
         </div>
