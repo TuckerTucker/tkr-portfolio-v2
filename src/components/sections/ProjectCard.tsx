@@ -67,11 +67,11 @@ export function ProjectCard({ project, variant = 'standard' }: ProjectCardProps)
   )
 
   const imageSection = hasImage && (
-    <div className="w-full md:max-w-[66.666%] flex-shrink-0 max-h-[400px] overflow-hidden">
+    <div className="w-full md:max-w-[66.666%] flex-shrink-0 max-h-[500px] overflow-hidden flex items-center justify-center">
       <img
         src={project.image}
         alt={project.imageAlt || `${project.title} screenshot`}
-        className="w-full h-full object-cover rounded-lg"
+        className="w-full h-full object-cover object-center rounded-lg"
       />
     </div>
   )
