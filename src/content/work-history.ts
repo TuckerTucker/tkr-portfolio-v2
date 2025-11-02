@@ -53,7 +53,7 @@ export const workHistory: WorkHistory = {
             'Enabled employees to find safety standards faster and navigate documentation confidently',
             'Delivered design decisions rooted in watching real employees interact with the system across different roles and locations',
           ],
-          image: '/images/work/placeholder/beached_balls.png',
+          image: '/images/placeholder/beached_balls.png',
           imageAlt: 'Operating Standards interface showing two-column layout',
         },
         {
@@ -65,7 +65,7 @@ export const workHistory: WorkHistory = {
             'Enabled employees to upload documentation confidently',
             'Conducted usability tests that revealed opportunities shaping future product roadmap',
           ],
-          image: '/images/work/placeholder/knitten.png',
+          image: '/images/placeholder/knitten.png',
           imageAlt: 'Multi-file upload interface with feedback patterns',
         },
       ],
@@ -101,7 +101,7 @@ export const workHistory: WorkHistory = {
             'Interviewed all Customer Success team members to understand real-time debugging needs during live event crises',
             'Identified and ranked data sources by accessibility and level of effort, enabling phased implementation',
           ],
-          image: '/images/work/placeholder/rain-duck.png',
+          image: '/images/placeholder/rain-duck.png',
           imageAlt: 'VFLive dashboard showing stream health metrics',
         },
         {
@@ -113,7 +113,7 @@ export const workHistory: WorkHistory = {
             'Conducted usability testing that revealed hidden functionality issues',
             'Learned valuable lessons about exposing important actions to users',
           ],
-          image: '/images/work/placeholder/ramoon.png',
+          image: '/images/placeholder/ramoon.png',
           imageAlt: 'Redesigned video library with card-based layout',
         },
         {
@@ -125,7 +125,7 @@ export const workHistory: WorkHistory = {
             'Translated technical language into customer-focused language (e.g., "ingest endpoint" became "upload video")',
             'Reorganized portal around customer tasks rather than system architecture',
           ],
-          image: '/images/work/placeholder/beached_balls.png',
+          image: '/images/placeholder/beached_balls.png',
           imageAlt: 'Admin portal interface showing task-focused design',
         },
         {
@@ -137,7 +137,7 @@ export const workHistory: WorkHistory = {
             'Enabled communities to preserve languages and traditions through video on their own terms',
             'Provided full content sovereignty to Indigenous communities',
           ],
-          image: '/images/work/placeholder/knitten.png',
+          image: '/images/placeholder/knitten.png',
           imageAlt:
             'Indigenous community video platform interface',
         },
@@ -171,7 +171,7 @@ export const workHistory: WorkHistory = {
             'Reduced call center volume for basic phone management questions',
             'Analyzed call center data and conducted usability testing to understand customer mental models',
           ],
-          image: '/images/work/placeholder/rain-duck.png',
+          image: '/images/placeholder/rain-duck.png',
           imageAlt: 'Shaw phone portal responsive interface',
         },
         {
@@ -183,7 +183,7 @@ export const workHistory: WorkHistory = {
             'Enabled customers to solve problems independently',
             'Improved support call quality by helping customers complete relevant troubleshooting before contacting support',
           ],
-          image: '/images/work/placeholder/ramoon.png',
+          image: '/images/placeholder/ramoon.png',
           imageAlt: 'Shaw support portal showing customer-focused navigation',
         },
       ],
