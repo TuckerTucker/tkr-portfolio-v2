@@ -40,7 +40,7 @@ export interface WorkHistoryEntry {
   companyImageAlt?: string
   companyColor?: string
   companyColorAccent?: string
-  projects: ProjectDetail[]
+  projects?: ProjectDetail[]
 }
 
 export interface WorkHistory {

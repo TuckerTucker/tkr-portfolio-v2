@@ -3,6 +3,7 @@ interface CompanySlideProps {
   role: string
   period: string
   description: string
+  highlights?: string[]
   image?: string
   imageAlt?: string
   companyColor?: string
@@ -13,6 +14,7 @@ export function CompanySlide({
   role,
   period,
   description,
+  highlights,
   image,
   imageAlt = '',
   companyColor,
@@ -79,10 +81,24 @@ export function CompanySlide({
             {role}
           </h3>
 
-          {/* Description */}
-          <p className="text-sm md:text-base text-foreground/80 leading-relaxed">
-            {description}
-          </p>
+          {/* Description (if provided) */}
+          {description && (
+            <p className="text-sm md:text-base text-foreground/80 leading-relaxed">
+              {description}
+            </p>
+          )}
+
+          {/* Highlights list */}
+          {highlights && highlights.length > 0 && (
+            <ul className="space-y-2 text-sm md:text-base text-foreground/80">
+              {highlights.map((highlight, index) => (
+                <li key={index} className="flex gap-2">
+                  <span className="text-primary flex-shrink-0 mt-1">•</span>
+                  <span className="leading-relaxed">{highlight}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </article>

@@ -10,11 +10,11 @@ interface WorkHistoryCarouselProps {
 }
 
 /**
- * WorkHistoryCarousel - Displays a company's work history with projects
+ * WorkHistoryCarousel - Displays a company's work history with optional projects
  *
  * Renders a carousel containing:
  * - First slide: Company overview (CompanySlide)
- * - Subsequent slides: Individual projects (ProjectSlide)
+ * - Subsequent slides (optional): Individual projects (ProjectSlide)
  *
  * @example
  * ```tsx
@@ -35,12 +35,13 @@ export function WorkHistoryCarousel({
       role={entry.role}
       period={entry.period}
       description={entry.description}
+      highlights={entry.highlights}
       image={entry.companyImage}
       imageAlt={entry.companyImageAlt}
       companyColor={entry.companyColor}
     />,
-    // Project detail slides
-    ...entry.projects.map((project, index) => (
+    // Project detail slides (only if projects exist)
+    ...(entry.projects?.map((project, index) => (
       <ProjectSlide
         key={`${entry.company}-project-${index}`}
         title={project.title}
@@ -49,7 +50,7 @@ export function WorkHistoryCarousel({
         image={project.image}
         imageAlt={project.imageAlt}
       />
-    )),
+    )) ?? []),
   ]
 
   return (
