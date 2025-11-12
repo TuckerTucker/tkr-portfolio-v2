@@ -1,10 +1,141 @@
 {
   "version": "1.0",
-  "generated": "2025-09-30T22:53:05.552Z",
+  "generated": "2025-11-07T07:25:38.608Z",
   "reports": [
     {
+      "date": "2025-11-07",
+      "count": 5,
+      "reports": [
+        {
+          "id": "accessibility",
+          "filename": "accessibility-report.html",
+          "title": "Accessibility Audit Report - tkr-portfolio-v2",
+          "type": "Phase 2",
+          "score": 82,
+          "issues": {
+            "critical": 3,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "total": 3
+          },
+          "summary": "The tkr-portfolio-v2 website demonstrates a strong commitment to accessibility with an overall score of 82/100. The application uses Radix UI primitives, implements proper ARIA attributes in interacti",
+          "size": 59969,
+          "modified": "2025-11-07T07:09:19.000Z"
+        },
+        {
+          "id": "architecture",
+          "filename": "architecture-report.html",
+          "title": "Architecture Consistency Report - tkr-portfolio-v2",
+          "type": "Phase 3",
+          "score": 92,
+          "issues": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "total": 0
+          },
+          "summary": "Overall Score: 95% - Excellent",
+          "size": 51830,
+          "modified": "2025-11-07T07:15:19.000Z"
+        },
+        {
+          "id": "commit-pr-quality",
+          "filename": "commit-pr-quality-report.html",
+          "title": "Commit & PR Quality Report",
+          "type": "Phase 3",
+          "score": 86,
+          "issues": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "total": 0
+          },
+          "summary": "af516ca: feat(work-history): convert to logo and summary presentation",
+          "size": 29176,
+          "modified": "2025-11-07T07:25:32.000Z"
+        },
+        {
+          "id": "performance",
+          "filename": "performance-report.html",
+          "title": "Performance Analysis Report - tkr-portfolio-v2",
+          "type": "Phase 2",
+          "score": 72,
+          "issues": {
+            "critical": 0,
+            "high": 2,
+            "medium": 3,
+            "low": 1,
+            "total": 9
+          },
+          "summary": "Performance Analysis Agent | Generated on 2025-11-07",
+          "size": 45758,
+          "modified": "2025-11-07T07:08:34.000Z"
+        },
+        {
+          "id": "test-coverage",
+          "filename": "test-coverage-report.html",
+          "title": "Test Coverage Analysis Report - tkr-portfolio-v2",
+          "type": "Phase 2",
+          "score": null,
+          "issues": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "total": 0
+          },
+          "summary": "",
+          "size": 39755,
+          "modified": "2025-11-07T07:07:55.000Z"
+        }
+      ]
+    },
+    {
+      "date": "2025-11-06",
+      "count": 2,
+      "reports": [
+        {
+          "id": "code-quality",
+          "filename": "code-quality-report.html",
+          "title": "Code Quality Analysis Report - tkr-portfolio-v2",
+          "type": "Phase 1",
+          "score": null,
+          "issues": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "total": 0
+          },
+          "summary": "Overall Assessment: This portfolio website demonstrates strong code quality with excellent TypeScript type safety, modern React patterns, and good component organization. The codebase shows profession",
+          "size": 30397,
+          "modified": "2025-11-07T06:58:24.000Z"
+        },
+        {
+          "id": "security",
+          "filename": "security-report.html",
+          "title": "Security Audit Report - tkr-portfolio-v2",
+          "type": "Phase 1",
+          "score": null,
+          "issues": {
+            "critical": 0,
+            "high": 0,
+            "medium": 0,
+            "low": 0,
+            "total": 0
+          },
+          "summary": "",
+          "size": 47447,
+          "modified": "2025-11-07T06:59:15.000Z"
+        }
+      ]
+    },
+    {
       "date": "2025-01-30",
-      "count": 9,
+      "count": 10,
       "reports": [
         {
           "id": "accessibility",
@@ -21,7 +152,7 @@
           },
           "summary": ".context-kit/dashboard/src/App.tsx:1616-1807",
           "size": 46200,
-          "modified": "2025-09-30T22:35:11.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
         },
         {
           "id": "architecture-report-content",
@@ -38,7 +169,7 @@
           },
           "summary": "",
           "size": 4364,
-          "modified": "2025-09-30T22:43:58.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
         },
         {
           "id": "architecture",
@@ -55,7 +186,7 @@
           },
           "summary": "The unified core module successfully implements IoC principles by consolidating business logic and providing clean interfaces for consumer modules.",
           "size": 17718,
-          "modified": "2025-09-30T22:45:21.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
         },
         {
           "id": "code-quality",
@@ -72,7 +203,7 @@
           },
           "summary": "Functions exceeding recommended cyclomatic complexity threshold (>10):",
           "size": 35224,
-          "modified": "2025-09-30T22:19:45.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
         },
         {
           "id": "commit-pr-quality",
@@ -89,7 +220,24 @@
           },
           "summary": "GitHub CLI (gh) is not installed or configured. PR analysis requires the gh command to be available.",
           "size": 23315,
-          "modified": "2025-09-30T22:52:23.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
+        },
+        {
+          "id": "consolidated-summary",
+          "filename": "consolidated-summary.html",
+          "title": "Repository Review - Consolidated Summary",
+          "type": "Summary",
+          "score": null,
+          "issues": {
+            "critical": 10,
+            "high": 5,
+            "medium": 0,
+            "low": 0,
+            "total": 9
+          },
+          "summary": "Repository Review - Consolidated Summary",
+          "size": 43022,
+          "modified": "2025-10-22T20:54:49.000Z"
         },
         {
           "id": "dependency-audit",
@@ -106,7 +254,7 @@
           },
           "summary": "Module: Core",
           "size": 19134,
-          "modified": "2025-09-30T22:19:07.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
         },
         {
           "id": "performance",
@@ -123,7 +271,7 @@
           },
           "summary": "File: .context-kit/analysis/assets/js/theme-toggle.js:205-219",
           "size": 8960,
-          "modified": "2025-09-30T22:37:58.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
         },
         {
           "id": "security",
@@ -140,7 +288,7 @@
           },
           "summary": "Security Posture: Moderate Risk",
           "size": 21621,
-          "modified": "2025-09-30T22:30:01.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
         },
         {
           "id": "test-coverage",
@@ -157,7 +305,7 @@
           },
           "summary": "Risk Level: Critical - 0% coverage",
           "size": 29879,
-          "modified": "2025-09-30T22:35:37.000Z"
+          "modified": "2025-10-22T20:54:49.000Z"
         }
       ]
     }
