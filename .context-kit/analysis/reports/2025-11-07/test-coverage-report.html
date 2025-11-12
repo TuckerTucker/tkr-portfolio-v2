@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Coverage Analysis Report - tkr-portfolio-v2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header .subtitle {
+            font-size: 1.125rem;
+            opacity: 0.9;
+        }
+        
+        .header .meta {
+            margin-top: 1rem;
+            font-size: 0.875rem;
+            opacity: 0.8;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        .section {
+            margin-bottom: 3rem;
+        }
+        
+        .section h2 {
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 3px solid #3b82f6;
+        }
+        
+        .section h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #334155;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        .section h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #475569;
+            margin: 1rem 0 0.75rem 0;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .summary-card {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            border-left: 4px solid #3b82f6;
+        }
+        
+        .summary-card.critical {
+            border-left-color: #ef4444;
+            background: #fef2f2;
+        }
+        
+        .summary-card.warning {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+        }
+        
+        .summary-card.success {
+            border-left-color: #10b981;
+            background: #f0fdf4;
+        }
+        
+        .summary-card .label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+        
+        .summary-card .value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        
+        .summary-card .description {
+            font-size: 0.875rem;
+            color: #475569;
+            margin-top: 0.5rem;
+        }
+        
+        .coverage-bar {
+            width: 100%;
+            height: 32px;
+            background: #e5e7eb;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 1rem 0;
+            position: relative;
+        }
+        
+        .coverage-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10b981 0%, #059669 100%);
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 1rem;
+            color: white;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: width 0.5s ease-out;
+        }
+        
+        .coverage-fill.critical {
+            background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+        }
+        
+        .coverage-fill.warning {
+            background: linear-gradient(90deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        .coverage-fill.good {
+            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+        }
+        
+        .alert {
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+        
+        .alert.critical {
+            background: #fef2f2;
+            border-color: #ef4444;
+            color: #7c2d12;
+        }
+        
+        .alert.warning {
+            background: #fffbeb;
+            border-color: #f59e0b;
+            color: #78350f;
+        }
+        
+        .alert.info {
+            background: #eff6ff;
+            border-color: #3b82f6;
+            color: #1e40af;
+        }
+        
+        .alert.success {
+            background: #f0fdf4;
+            border-color: #10b981;
+            color: #065f46;
+        }
+        
+        .alert-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            font-size: 1.125rem;
+        }
+        
+        .file-list {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .file-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e5e7eb;
+            font-family: 'SF Mono', Monaco, Inconsolata, monospace;
+            font-size: 0.875rem;
+        }
+        
+        .file-item:last-child {
+            border-bottom: none;
+        }
+        
+        .file-item .path {
+            color: #3b82f6;
+            font-weight: 600;
+        }
+        
+        .file-item .coverage {
+            float: right;
+            color: #64748b;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 0.5rem;
+        }
+        
+        .badge.critical {
+            background: #fef2f2;
+            color: #dc2626;
+            border: 1px solid #fecaca;
+        }
+        
+        .badge.warning {
+            background: #fffbeb;
+            color: #d97706;
+            border: 1px solid #fed7aa;
+        }
+        
+        .badge.success {
+            background: #f0fdf4;
+            color: #059669;
+            border: 1px solid #a7f3d0;
+        }
+        
+        .badge.info {
+            background: #eff6ff;
+            color: #2563eb;
+            border: 1px solid #bfdbfe;
+        }
+        
+        .recommendation-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .recommendation-list li {
+            padding: 1rem;
+            background: #f8fafc;
+            border-left: 3px solid #3b82f6;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+        }
+        
+        .recommendation-list li strong {
+            color: #1e293b;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quick-action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        
+        .quick-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .quick-action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.3);
+        }
+        
+        .test-pyramid {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem 0;
+        }
+        
+        .pyramid-layer {
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            color: white;
+            font-weight: 600;
+        }
+        
+        .pyramid-layer.e2e {
+            width: 30%;
+            background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        }
+        
+        .pyramid-layer.integration {
+            width: 60%;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+        }
+        
+        .pyramid-layer.unit {
+            width: 100%;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        thead {
+            background: #f8fafc;
+        }
+        
+        th {
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: #475569;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid #e5e7eb;
+        }
+        
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'SF Mono', Monaco, Inconsolata, monospace;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            margin: 1rem 0;
+        }
+        
+        .footer {
+            background: #f8fafc;
+            padding: 2rem;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.875rem;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .quick-action-buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Test Coverage Analysis Report</h1>
+            <div class="subtitle">tkr-portfolio-v2 - Portfolio Website</div>
+            <div class="meta">
+                Generated: November 7, 2025 | Agent: test-coverage-agent | Version: 3.6.0
+            </div>
+        </div>
+        
+        <div class="content">
+            <!-- Executive Summary -->
+            <div class="section">
+                <h2>Executive Summary</h2>
+                
+                <div class="alert critical">
+                    <div class="alert-title">⚠️ Critical Finding: Zero Test Coverage</div>
+                    <p>This project currently has <strong>no automated tests</strong>. With 46 TypeScript/React source files containing 3,439 lines of code, this represents a significant quality assurance gap for a production portfolio website.</p>
+                </div>
+                
+                <div class="summary-grid">
+                    <div class="summary-card critical">
+                        <div class="label">Test Coverage</div>
+                        <div class="value">0%</div>
+                        <div class="description">No test framework installed</div>
+                    </div>
+                    
+                    <div class="summary-card warning">
+                        <div class="label">Source Files</div>
+                        <div class="value">46</div>
+                        <div class="description">34 TSX components, 12 TS modules</div>
+                    </div>
+                    
+                    <div class="summary-card warning">
+                        <div class="label">Lines of Code</div>
+                        <div class="value">3,439</div>
+                        <div class="description">Completely untested</div>
+                    </div>
+                    
+                    <div class="summary-card critical">
+                        <div class="label">Quality Score</div>
+                        <div class="value">0/10</div>
+                        <div class="description">No testing infrastructure</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Coverage Metrics -->
+            <div class="section">
+                <h2>Coverage Metrics Analysis</h2>
+                
+                <h3>Current State</h3>
+                <div class="alert info">
+                    <div class="alert-title">📊 Testing Framework Status</div>
+                    <p><strong>No test framework detected.</strong> The project uses Vite as the build tool but has no testing dependencies installed (Vitest, Jest, or React Testing Library).</p>
+                </div>
+                
+                <h4>Line Coverage</h4>
+                <div class="coverage-bar">
+                    <div class="coverage-fill critical" style="width: 0%;">0% (0/3,439 lines)</div>
+                </div>
+                
+                <h4>Branch Coverage</h4>
+                <div class="coverage-bar">
+                    <div class="coverage-fill critical" style="width: 0%;">0% (Unknown branches)</div>
+                </div>
+                
+                <h4>Function Coverage</h4>
+                <div class="coverage-bar">
+                    <div class="coverage-fill critical" style="width: 0%;">0% (All functions untested)</div>
+                </div>
+                
+                <h4>Statement Coverage</h4>
+                <div class="coverage-bar">
+                    <div class="coverage-fill critical" style="width: 0%;">0% (All statements untested)</div>
+                </div>
+            </div>
+            
+            <!-- Critical Uncovered Code Paths -->
+            <div class="section">
+                <h2>Critical Uncovered Code Paths</h2>
+                
+                <h3>High Priority - Complex Interactive Components</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Risk Level</th>
+                            <th>Complexity</th>
+                            <th>Key Concerns</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>src/components/ui/Carousel.tsx</code></td>
+                            <td><span class="badge critical">Critical</span></td>
+                            <td>High (225 LOC)</td>
+                            <td>Touch gestures, keyboard navigation, auto-play timer, accessibility</td>
+                        </tr>
+                        <tr>
+                            <td><code>src/components/ui/ImageLightbox.tsx</code></td>
+                            <td><span class="badge critical">Critical</span></td>
+                            <td>Medium-High</td>
+                            <td>Modal state management, keyboard events, click-outside detection</td>
+                        </tr>
+                        <tr>
+                            <td><code>src/App.tsx</code></td>
+                            <td><span class="badge critical">Critical</span></td>
+                            <td>Medium</td>
+                            <td>Routing configuration, theme provider integration</td>
+                        </tr>
+                        <tr>
+                            <td><code>src/lib/utils.ts</code></td>
+                            <td><span class="badge warning">High</span></td>
+                            <td>Low</td>
+                            <td>Core utility function used throughout project</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Medium Priority - Content and Layout Components</h3>
+                <div class="file-list">
+                    <div class="file-item">
+                        <span class="path">src/components/layout/Header.tsx</span>
+                        <span class="coverage"><span class="badge warning">High</span>Navigation logic</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="path">src/components/layout/ThemeToggle.tsx</span>
+                        <span class="coverage"><span class="badge warning">High</span>Theme switching</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="path">src/components/sections/WorkHistoryCarousel.tsx</span>
+                        <span class="coverage"><span class="badge warning">High</span>Complex carousel wrapper</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="path">src/components/case-studies/YamlViewer.tsx</span>
+                        <span class="coverage"><span class="badge info">Medium</span>Content display</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="path">src/components/conversation/ConversationView.tsx</span>
+                        <span class="coverage"><span class="badge info">Medium</span>Data rendering</span>
+                    </div>
+                </div>
+                
+                <h3>Content Type Definitions</h3>
+                <div class="file-list">
+                    <div class="file-item">
+                        <span class="path">src/content/types.ts</span>
+                        <span class="coverage"><span class="badge warning">High</span>Core type definitions</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="path">src/content/types/conversation.ts</span>
+                        <span class="coverage"><span class="badge info">Medium</span>Conversation types</span>
+                    </div>
+                    <div class="file-item">
+                        <span class="path">src/content/projects.ts</span>
+                        <span class="coverage"><span class="badge info">Medium</span>Project data validation</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Test Quality Assessment -->
+            <div class="section">
+                <h2>Test Quality Assessment</h2>
+                
+                <div class="alert critical">
+                    <div class="alert-title">❌ No Tests Found</div>
+                    <p>Zero test files exist in this project. No test configuration detected.</p>
+                </div>
+                
+                <h3>Testing Infrastructure Gaps</h3>
+                <ul class="recommendation-list">
+                    <li>
+                        <strong>No Test Framework</strong>
+                        Missing Vitest or Jest configuration for unit testing
+                    </li>
+                    <li>
+                        <strong>No Testing Utilities</strong>
+                        Missing @testing-library/react for component testing
+                    </li>
+                    <li>
+                        <strong>No Coverage Configuration</strong>
+                        No coverage thresholds or reporting configured
+                    </li>
+                    <li>
+                        <strong>No CI/CD Integration</strong>
+                        Tests not integrated into GitHub Actions workflow
+                    </li>
+                    <li>
+                        <strong>No E2E Testing</strong>
+                        Missing Playwright or Cypress for end-to-end testing
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Test Pyramid Compliance -->
+            <div class="section">
+                <h2>Test Pyramid Compliance</h2>
+                
+                <div class="alert warning">
+                    <div class="alert-title">⚠️ Test Pyramid: Non-existent</div>
+                    <p>A healthy test pyramid should have 70% unit tests, 20% integration tests, and 10% E2E tests. This project has none.</p>
+                </div>
+                
+                <div class="test-pyramid">
+                    <div class="pyramid-layer e2e">
+                        E2E Tests: 0 (Target: ~5 tests)
+                    </div>
+                    <div class="pyramid-layer integration">
+                        Integration Tests: 0 (Target: ~10 tests)
+                    </div>
+                    <div class="pyramid-layer unit">
+                        Unit Tests: 0 (Target: ~35 tests)
+                    </div>
+                </div>
+                
+                <h3>Recommended Test Distribution</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Test Type</th>
+                            <th>Current</th>
+                            <th>Target</th>
+                            <th>Focus Areas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Unit Tests</strong></td>
+                            <td>0</td>
+                            <td>~35</td>
+                            <td>Utilities, hooks, pure components, type validators</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Integration Tests</strong></td>
+                            <td>0</td>
+                            <td>~10</td>
+                            <td>Component interactions, routing, theme switching</td>
+                        </tr>
+                        <tr>
+                            <td><strong>E2E Tests</strong></td>
+                            <td>0</td>
+                            <td>~5</td>
+                            <td>Critical user journeys, case study navigation</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Flaky Test Detection -->
+            <div class="section">
+                <h2>Flaky Test Detection</h2>
+                
+                <div class="alert info">
+                    <div class="alert-title">ℹ️ No Tests to Analyze</div>
+                    <p>Flaky test detection requires an existing test suite. However, potential sources of test flakiness have been identified in the codebase:</p>
+                </div>
+                
+                <h3>Potential Flakiness Sources</h3>
+                <ul class="recommendation-list">
+                    <li>
+                        <strong>Timer Dependencies (Carousel.tsx)</strong>
+                        Auto-play interval timers (5000ms default) could cause timing-dependent test failures. Recommend using fake timers in tests.
+                    </li>
+                    <li>
+                        <strong>Touch Event Testing</strong>
+                        Touch gesture detection in Carousel requires careful mocking to avoid flaky tests across different environments.
+                    </li>
+                    <li>
+                        <strong>Window.matchMedia (Carousel.tsx)</strong>
+                        Reduced motion detection via matchMedia needs proper mocking for consistent test behavior.
+                    </li>
+                    <li>
+                        <strong>React Router Navigation</strong>
+                        Route transitions and navigation events should be tested with proper router mocking to avoid race conditions.
+                    </li>
+                    <li>
+                        <strong>Theme Provider Context</strong>
+                        Theme switching logic should be tested with proper context providers to ensure isolation.
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Implementation Recommendations -->
+            <div class="section">
+                <h2>Implementation Recommendations</h2>
+                
+                <h3>Phase 1: Foundation (Week 1)</h3>
+                <div class="alert success">
+                    <div class="alert-title">✓ Setup Testing Infrastructure</div>
+                    <p>Priority: <strong>Critical</strong> | Effort: <strong>4 hours</strong></p>
+                </div>
+                
+                <div class="code-block">
+# Install testing dependencies
+npm install --save-dev vitest @vitest/ui @vitest/coverage-v8
+npm install --save-dev @testing-library/react @testing-library/jest-dom
+npm install --save-dev @testing-library/user-event happy-dom
+
+# Update package.json scripts
+{
+  "scripts": {
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:watch": "vitest --watch"
+  }
+}
+
+# Create vitest.config.ts
+import { defineConfig } from 'vitest/config'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [react()],
+  test: {
+    globals: true,
+    environment: 'happy-dom',
+    setupFiles: './src/test/setup.ts',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'json', 'html'],
+      exclude: ['node_modules/', 'src/test/'],
+      thresholds: {
+        lines: 80,
+        branches: 80,
+        functions: 80,
+        statements: 80
+      }
+    }
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  }
+})
+                </div>
+                
+                <h3>Phase 2: Core Unit Tests (Week 1-2)</h3>
+                <ul class="recommendation-list">
+                    <li>
+                        <strong>1. Test Utilities (src/lib/utils.ts)</strong>
+                        Write tests for the <code>cn()</code> utility function. Target: 100% coverage (low complexity, high usage).
+                    </li>
+                    <li>
+                        <strong>2. Test Button Component (src/components/ui/button.tsx)</strong>
+                        Test all variants, sizes, and the asChild prop. Verify className merging works correctly.
+                    </li>
+                    <li>
+                        <strong>3. Test Simple Components</strong>
+                        Test Hero, About, ProjectCard, and other presentational components. Focus on rendering and props.
+                    </li>
+                    <li>
+                        <strong>4. Test Type Guards (src/content/types.ts)</strong>
+                        If type validation functions exist, ensure they correctly validate/reject inputs.
+                    </li>
+                </ul>
+                
+                <h3>Phase 3: Complex Component Tests (Week 2-3)</h3>
+                <ul class="recommendation-list">
+                    <li>
+                        <strong>5. Test Carousel Component</strong>
+                        Priority: Critical. Test navigation, keyboard events, touch gestures, auto-play, and accessibility. Use fake timers for auto-play tests.
+                    </li>
+                    <li>
+                        <strong>6. Test ImageLightbox</strong>
+                        Test modal opening/closing, keyboard navigation (Escape key), and click-outside behavior.
+                    </li>
+                    <li>
+                        <strong>7. Test Theme Toggle</strong>
+                        Test theme switching logic, system preference detection, and persistence.
+                    </li>
+                    <li>
+                        <strong>8. Test Router Configuration</strong>
+                        Test App.tsx routing setup, verify all routes render correct components.
+                    </li>
+                </ul>
+                
+                <h3>Phase 4: Integration Tests (Week 3-4)</h3>
+                <ul class="recommendation-list">
+                    <li>
+                        <strong>9. Test Case Study Pages</strong>
+                        Integration tests for Docusearch, ContextKit, and Kanban pages with full component trees.
+                    </li>
+                    <li>
+                        <strong>10. Test Navigation Flow</strong>
+                        Test Header navigation between pages, active link highlighting.
+                    </li>
+                    <li>
+                        <strong>11. Test WorkHistoryCarousel Integration</strong>
+                        Test carousel with actual WorkHistory slides, verify company data rendering.
+                    </li>
+                </ul>
+                
+                <h3>Phase 5: E2E Tests (Week 4)</h3>
+                <div class="code-block">
+# Install Playwright for E2E testing
+npm install --save-dev @playwright/test
+
+# Critical user journeys to test:
+1. Homepage → View case study → Return to homepage
+2. Navigation between all pages
+3. Theme toggle functionality across pages
+4. Carousel interactions on work history
+5. Responsive layout verification
+                </div>
+                
+                <h3>Coverage Targets by Component Type</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Component Type</th>
+                            <th>Target Coverage</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Utilities (lib/utils.ts)</td>
+                            <td>100%</td>
+                            <td><span class="badge critical">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td>Interactive Components (Carousel, ImageLightbox)</td>
+                            <td>90%+</td>
+                            <td><span class="badge critical">Critical</span></td>
+                        </tr>
+                        <tr>
+                            <td>UI Components (Button, Card, etc.)</td>
+                            <td>85%+</td>
+                            <td><span class="badge warning">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>Layout Components (Header, Footer)</td>
+                            <td>80%+</td>
+                            <td><span class="badge warning">High</span></td>
+                        </tr>
+                        <tr>
+                            <td>Section Components (Hero, About)</td>
+                            <td>75%+</td>
+                            <td><span class="badge info">Medium</span></td>
+                        </tr>
+                        <tr>
+                            <td>Page Components</td>
+                            <td>70%+</td>
+                            <td><span class="badge info">Medium</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Quick Actions -->
+            <div class="section">
+                <h2>Quick Actions</h2>
+                <div class="quick-action-buttons">
+                    <button class="quick-action-btn" onclick="generatePlan('Setup Testing Infrastructure')">
+                        🧪 Generate Testing Setup Plan
+                    </button>
+                    <button class="quick-action-btn" onclick="generatePlan('Write Core Unit Tests')">
+                        📝 Generate Unit Test Plan
+                    </button>
+                    <button class="quick-action-btn" onclick="generatePlan('Test Carousel Component')">
+                        🎠 Generate Carousel Test Plan
+                    </button>
+                    <button class="quick-action-btn" onclick="generatePlan('Setup E2E Testing')">
+                        🎭 Generate E2E Test Plan
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Best Practices -->
+            <div class="section">
+                <h2>Testing Best Practices</h2>
+                
+                <h3>For This Project</h3>
+                <ul class="recommendation-list">
+                    <li>
+                        <strong>Use Vitest</strong>
+                        Already using Vite, so Vitest provides seamless integration with identical config and transforms.
+                    </li>
+                    <li>
+                        <strong>Test User Behavior, Not Implementation</strong>
+                        Use Testing Library's user-centric queries (getByRole, getByLabelText) over implementation details (getByTestId).
+                    </li>
+                    <li>
+                        <strong>Mock External Dependencies</strong>
+                        Mock react-router-dom navigation, next-themes provider, and window APIs (matchMedia).
+                    </li>
+                    <li>
+                        <strong>Use Fake Timers</strong>
+                        For Carousel auto-play tests, use vi.useFakeTimers() to make tests deterministic and fast.
+                    </li>
+                    <li>
+                        <strong>Test Accessibility</strong>
+                        Verify ARIA attributes, keyboard navigation, and screen reader support in interactive components.
+                    </li>
+                    <li>
+                        <strong>Co-locate Tests</strong>
+                        Place test files next to components: <code>Button.tsx</code> → <code>Button.test.tsx</code>
+                    </li>
+                    <li>
+                        <strong>Maintain Fast Tests</strong>
+                        Keep unit tests under 100ms each. Use shallow rendering where appropriate.
+                    </li>
+                    <li>
+                        <strong>Coverage Thresholds in CI</strong>
+                        Add coverage checks to GitHub Actions to prevent regressions.
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Risk Assessment -->
+            <div class="section">
+                <h2>Risk Assessment</h2>
+                
+                <h3>Current Risk Level: High</h3>
+                <div class="alert critical">
+                    <div class="alert-title">⚠️ Production Website Without Tests</div>
+                    <p>For a portfolio website showcasing professional work (tucker.sh), the absence of automated tests represents significant risk:</p>
+                </div>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Risk Area</th>
+                            <th>Impact</th>
+                            <th>Probability</th>
+                            <th>Mitigation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Broken carousel on mobile</td>
+                            <td>High</td>
+                            <td>Medium</td>
+                            <td>Add touch gesture tests</td>
+                        </tr>
+                        <tr>
+                            <td>Navigation failures</td>
+                            <td>Critical</td>
+                            <td>Low</td>
+                            <td>Add routing integration tests</td>
+                        </tr>
+                        <tr>
+                            <td>Theme switching bugs</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Add theme provider tests</td>
+                        </tr>
+                        <tr>
+                            <td>Accessibility regressions</td>
+                            <td>High</td>
+                            <td>Medium</td>
+                            <td>Add a11y tests with axe-core</td>
+                        </tr>
+                        <tr>
+                            <td>Refactoring breakage</td>
+                            <td>High</td>
+                            <td>High</td>
+                            <td>Add comprehensive unit tests</td>
+                        </tr>
+                        <tr>
+                            <td>Responsive layout issues</td>
+                            <td>Medium</td>
+                            <td>Medium</td>
+                            <td>Add E2E tests with viewport testing</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Business Impact</h3>
+                <ul class="recommendation-list">
+                    <li>
+                        <strong>Professional Credibility</strong>
+                        As a portfolio showcasing software design skills, untested code contradicts the quality claims made in case studies.
+                    </li>
+                    <li>
+                        <strong>Maintenance Velocity</strong>
+                        Without tests, adding new features or refactoring becomes risky, slowing development.
+                    </li>
+                    <li>
+                        <strong>Confidence in Deployments</strong>
+                        Each deployment to tucker.sh is essentially untested, risking broken production experiences.
+                    </li>
+                    <li>
+                        <strong>Showcase Opportunity Missed</strong>
+                        Well-tested code with high coverage could itself be a portfolio piece demonstrating testing expertise.
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Report Generated:</strong> November 7, 2025</p>
+            <p><strong>Agent:</strong> test-coverage-agent v3.6.0</p>
+            <p><strong>Project:</strong> tkr-portfolio-v2 (tucker.sh)</p>
+            <p><strong>Next Actions:</strong> Install Vitest, write utility tests, test Carousel component</p>
+        </div>
+    </div>
+    
+    <script>
+        function generatePlan(recommendation) {
+            const message = `/create_plan ${recommendation} for tkr-portfolio-v2 - Based on test coverage analysis at ${window.location.pathname}`;
+            if (confirm(`Generate implementation plan for: ${recommendation}?`)) {
+                alert(`Copy this command to Claude Code:\n\n${message}`);
+            }
+        }
+        
+        // Add smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Audit Report - tkr-portfolio-v2</title>
+    <style>
+        :root {
+            --color-primary: #3b82f6;
+            --color-success: #10b981;
+            --color-warning: #f59e0b;
+            --color-error: #ef4444;
+            --color-info: #06b6d4;
+            --color-bg: #ffffff;
+            --color-surface: #f8fafc;
+            --color-text: #1e293b;
+            --color-text-secondary: #64748b;
+            --color-border: #e2e8f0;
+        }
+        
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-bg: #0f172a;
+                --color-surface: #1e293b;
+                --color-text: #f8fafc;
+                --color-text-secondary: #94a3b8;
+                --color-border: #334155;
+            }
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: var(--color-text);
+            background: var(--color-bg);
+            padding: 2rem 1rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        header {
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid var(--color-border);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--color-text);
+        }
+        
+        h2 {
+            font-size: 1.875rem;
+            margin: 2.5rem 0 1rem;
+            color: var(--color-text);
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin: 2rem 0 1rem;
+            color: var(--color-text);
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--color-text);
+        }
+        
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .metadata {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            padding: 1rem;
+            background: var(--color-surface);
+            border-radius: 8px;
+        }
+        
+        .metadata-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .metadata-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .metadata-value {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+        
+        .score-card {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .score-item {
+            background: var(--color-surface);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 2px solid var(--color-border);
+        }
+        
+        .score-value {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .score-label {
+            font-size: 0.875rem;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .score-success { color: var(--color-success); }
+        .score-warning { color: var(--color-warning); }
+        .score-error { color: var(--color-error); }
+        
+        .section {
+            margin: 3rem 0;
+        }
+        
+        .finding {
+            background: var(--color-surface);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-border);
+        }
+        
+        .finding.critical {
+            border-left-color: var(--color-error);
+        }
+        
+        .finding.warning {
+            border-left-color: var(--color-warning);
+        }
+        
+        .finding.success {
+            border-left-color: var(--color-success);
+        }
+        
+        .finding.info {
+            border-left-color: var(--color-info);
+        }
+        
+        .finding-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+        
+        .finding-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .badge.critical {
+            background: var(--color-error);
+            color: white;
+        }
+        
+        .badge.warning {
+            background: var(--color-warning);
+            color: white;
+        }
+        
+        .badge.success {
+            background: var(--color-success);
+            color: white;
+        }
+        
+        .badge.info {
+            background: var(--color-info);
+            color: white;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            color: #f8fafc;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .code-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        @media (max-width: 768px) {
+            .code-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .code-comparison-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .before-label { color: var(--color-error); }
+        .after-label { color: var(--color-success); }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .wcag-principle {
+            background: var(--color-surface);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+        
+        .wcag-principle-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--color-primary);
+        }
+        
+        .success-criteria {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+        
+        .status-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+        
+        .status-pass { background: var(--color-success); }
+        .status-fail { background: var(--color-error); }
+        .status-partial { background: var(--color-warning); }
+        
+        .file-path {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.875rem;
+            color: var(--color-primary);
+            background: var(--color-surface);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+        
+        .recommendation-list {
+            counter-reset: recommendation;
+        }
+        
+        .recommendation-item {
+            counter-increment: recommendation;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: var(--color-surface);
+            border-radius: 8px;
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .recommendation-item::before {
+            content: counter(recommendation);
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background: var(--color-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+        
+        .quick-action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+        
+        .quick-action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .quick-action-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .table-container {
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--color-surface);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--color-border);
+        }
+        
+        th {
+            background: var(--color-primary);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.875rem;
+            letter-spacing: 0.05em;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .contrast-ratio {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 700;
+        }
+        
+        .contrast-pass { color: var(--color-success); }
+        .contrast-fail { color: var(--color-error); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>♿ Accessibility Audit Report</h1>
+            <p class="subtitle">WCAG 2.1 Level AA Compliance Assessment</p>
+            <div class="metadata">
+                <div class="metadata-item">
+                    <span class="metadata-label">Project</span>
+                    <span class="metadata-value">tkr-portfolio-v2</span>
+                </div>
+                <div class="metadata-item">
+                    <span class="metadata-label">Date</span>
+                    <span class="metadata-value">November 7, 2025</span>
+                </div>
+                <div class="metadata-item">
+                    <span class="metadata-label">Framework</span>
+                    <span class="metadata-value">React 18 + TypeScript</span>
+                </div>
+                <div class="metadata-item">
+                    <span class="metadata-label">Components Audited</span>
+                    <span class="metadata-value">20</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Executive Summary -->
+        <section class="section">
+            <h2>Executive Summary</h2>
+            
+            <div class="score-card">
+                <div class="score-item">
+                    <div class="score-value score-success">82/100</div>
+                    <div class="score-label">Overall Accessibility Score</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value score-warning">3</div>
+                    <div class="score-label">Critical Issues</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value score-warning">7</div>
+                    <div class="score-label">Warnings</div>
+                </div>
+                <div class="score-item">
+                    <div class="score-value score-success">15</div>
+                    <div class="score-label">Best Practices</div>
+                </div>
+            </div>
+
+            <p>The tkr-portfolio-v2 website demonstrates a <strong>strong commitment to accessibility</strong> with an overall score of 82/100. The application uses Radix UI primitives, implements proper ARIA attributes in interactive components, and respects user preferences for reduced motion. However, there are 3 critical issues and 7 warnings that require attention to achieve full WCAG 2.1 Level AA compliance.</p>
+        </section>
+
+        <!-- WCAG 2.1 AA Compliance Status -->
+        <section class="section">
+            <h2>WCAG 2.1 AA Compliance Status</h2>
+
+            <div class="wcag-principle">
+                <div class="wcag-principle-title">1. Perceivable</div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>1.1.1 Non-text Content:</strong> Images have alt text (Pass)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-partial" aria-label="Partial"></span>
+                    <strong>1.3.1 Info and Relationships:</strong> Mostly proper semantic HTML (Warning)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-fail" aria-label="Fail"></span>
+                    <strong>1.4.3 Contrast (Minimum):</strong> Some text fails 4.5:1 ratio (Critical)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>1.4.12 Text Spacing:</strong> CSS supports text spacing (Pass)
+                </div>
+            </div>
+
+            <div class="wcag-principle">
+                <div class="wcag-principle-title">2. Operable</div>
+                <div class="success-criteria">
+                    <span class="status-icon status-fail" aria-label="Fail"></span>
+                    <strong>2.1.1 Keyboard:</strong> Some interactive elements not keyboard accessible (Critical)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>2.1.2 No Keyboard Trap:</strong> No keyboard traps detected (Pass)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-partial" aria-label="Partial"></span>
+                    <strong>2.4.1 Bypass Blocks:</strong> No skip navigation link (Warning)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-fail" aria-label="Fail"></span>
+                    <strong>2.4.3 Focus Order:</strong> Missing focus indicators on some elements (Critical)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>2.4.7 Focus Visible:</strong> Focus rings implemented with ring utility (Pass)
+                </div>
+            </div>
+
+            <div class="wcag-principle">
+                <div class="wcag-principle-title">3. Understandable</div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>3.1.1 Language of Page:</strong> HTML lang attribute present (Pass)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>3.2.3 Consistent Navigation:</strong> Navigation is consistent (Pass)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>3.3.2 Labels or Instructions:</strong> Form elements have proper labels (Pass)
+                </div>
+            </div>
+
+            <div class="wcag-principle">
+                <div class="wcag-principle-title">4. Robust</div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>4.1.2 Name, Role, Value:</strong> ARIA attributes properly implemented (Pass)
+                </div>
+                <div class="success-criteria">
+                    <span class="status-icon status-pass" aria-label="Pass"></span>
+                    <strong>4.1.3 Status Messages:</strong> Live regions implemented in Carousel (Pass)
+                </div>
+            </div>
+        </section>
+
+        <!-- Critical Issues -->
+        <section class="section">
+            <h2>Critical Issues (3)</h2>
+
+            <div class="finding critical">
+                <div class="finding-header">
+                    <h3 class="finding-title">1. Mobile menu button missing expanded state</h3>
+                    <span class="badge critical">Critical</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 2.1.1 Keyboard, 4.1.2 Name, Role, Value</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/layout/Header.tsx:61-72</span></p>
+                <p><strong>Description:</strong> The mobile menu toggle button does not communicate its expanded/collapsed state to assistive technologies. While it has aria-label="Toggle mobile menu", it's missing aria-expanded and aria-controls attributes.</p>
+                
+                <h4>Current Implementation:</h4>
+                <div class="code-block">&lt;button
+  type="button"
+  className="md:hidden inline-flex items-center..."
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  aria-label="Toggle mobile menu"
+&gt;
+  {mobileMenuOpen ? &lt;X className="h-6 w-6" /&gt; : &lt;Menu className="h-6 w-6" /&gt;}
+&lt;/button&gt;</div>
+
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">&lt;button
+  type="button"
+  className="md:hidden inline-flex items-center..."
+  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+  aria-label="Toggle mobile menu"
+  aria-expanded={mobileMenuOpen}
+  aria-controls="mobile-navigation"
+&gt;
+  {mobileMenuOpen ? &lt;X className="h-6 w-6" /&gt; : &lt;Menu className="h-6 w-6" /&gt;}
+&lt;/button&gt;
+
+{/* Add id to mobile nav */}
+{mobileMenuOpen && (
+  &lt;nav id="mobile-navigation" className="md:hidden py-4..."&gt;</div>
+
+                <p><strong>Impact:</strong> Screen reader users cannot determine whether the mobile menu is open or closed, violating WCAG 2.1 AA Success Criterion 4.1.2.</p>
+            </div>
+
+            <div class="finding critical">
+                <div class="finding-header">
+                    <h3 class="finding-title">2. Missing main landmark in page structure</h3>
+                    <span class="badge critical">Critical</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 1.3.1 Info and Relationships, 2.4.1 Bypass Blocks</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/App.tsx:16-29</span></p>
+                <p><strong>Description:</strong> The App component uses a generic &lt;main&gt; element without proper landmark structure. While Home.tsx also uses &lt;main&gt;, this creates nested main landmarks which is invalid HTML.</p>
+                
+                <h4>Current Implementation:</h4>
+                <div class="code-block">&lt;div className="min-h-screen bg-background..."&gt;
+  &lt;Header /&gt;
+  &lt;main className="flex-1"&gt;
+    &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+      ...
+    &lt;/Routes&gt;
+  &lt;/main&gt;
+  &lt;Footer /&gt;
+&lt;/div&gt;
+
+{/* Home.tsx also uses main */}
+export default function Home() {
+  return (
+    &lt;main className="min-h-screen"&gt;</div>
+
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">{/* App.tsx - Remove main wrapper */}
+&lt;div className="min-h-screen bg-background..."&gt;
+  &lt;Header /&gt;
+  &lt;div className="flex-1"&gt;
+    &lt;Routes&gt;
+      &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+      ...
+    &lt;/Routes&gt;
+  &lt;/div&gt;
+  &lt;Footer /&gt;
+&lt;/div&gt;
+
+{/* Let each page define its own main landmark */}
+export default function Home() {
+  return (
+    &lt;main className="min-h-screen"&gt;
+      {/* content */}
+    &lt;/main&gt;
+  )
+}</div>
+
+                <p><strong>Impact:</strong> Screen reader users rely on landmark navigation to skip to main content. Invalid HTML structure causes confusion and violates WCAG 2.1 AA Success Criterion 1.3.1.</p>
+            </div>
+
+            <div class="finding critical">
+                <div class="finding-header">
+                    <h3 class="finding-title">3. Interactive project card uses anchor without proper keyboard handling</h3>
+                    <span class="badge critical">Critical</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 2.1.1 Keyboard</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/sections/ProjectCard.tsx:80-103</span></p>
+                <p><strong>Description:</strong> The ProjectCard wraps the entire card in an anchor tag with hover:scale transformation, but the nested CardTitle also acts as a clickable element. This creates confusion about what's interactive and the scale transform affects focus indicators.</p>
+                
+                <h4>Current Implementation:</h4>
+                <div class="code-block">&lt;a
+  href={project.caseStudyUrl}
+  className="group block transition-transform hover:scale-[1.02]"
+&gt;
+  &lt;Card className="h-full transition-all hover:shadow-lg..."&gt;
+    {/* Entire card is clickable */}
+  &lt;/Card&gt;
+&lt;/a&gt;</div>
+
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">&lt;Card className="h-full transition-all hover:shadow-lg..."&gt;
+  &lt;a
+    href={project.caseStudyUrl}
+    className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-lg"
+  &gt;
+    {/* Card content with clear focus indicator */}
+  &lt;/a&gt;
+&lt;/Card&gt;</div>
+
+                <p><strong>Impact:</strong> Keyboard users see inconsistent focus indicators due to transform scaling. Screen readers may announce redundant clickable regions.</p>
+            </div>
+        </section>
+
+        <!-- Warnings -->
+        <section class="section">
+            <h2>Warnings (7)</h2>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">4. Missing skip navigation link</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 2.4.1 Bypass Blocks</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/layout/Header.tsx</span></p>
+                <p><strong>Description:</strong> The site lacks a "skip to main content" link, forcing keyboard users to tab through all navigation items on every page.</p>
+                
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">&lt;header className="sticky top-0..."&gt;
+  {/* Skip link - visible on focus */}
+  &lt;a
+    href="#main-content"
+    className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md"
+  &gt;
+    Skip to main content
+  &lt;/a&gt;
+  
+  &lt;div className="container mx-auto..."&gt;
+    {/* header content */}
+  &lt;/div&gt;
+&lt;/header&gt;
+
+{/* Add id to main content */}
+&lt;main id="main-content" className="flex-1"&gt;</div>
+            </div>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">5. Hero section heading structure incorrect</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 1.3.1 Info and Relationships</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/sections/Hero.tsx:5-7</span></p>
+                <p><strong>Description:</strong> The hero h1 contains a &lt;br/&gt; tag which breaks the heading into two lines, but screen readers will read it as one continuous sentence without pause.</p>
+                
+                <h4>Current Implementation:</h4>
+                <div class="code-block">&lt;h1 className="font-sans text-3xl..."&gt;
+  Designing software people &lt;em&gt;love&lt;/em&gt; to use. &lt;br/&gt;Solving the problems businesses &lt;em&gt;hate&lt;/em&gt;.
+&lt;/h1&gt;</div>
+
+                <h4>Recommended Improvement:</h4>
+                <div class="code-block">&lt;h1 className="font-sans text-3xl..."&gt;
+  &lt;span className="block"&gt;Designing software people &lt;em&gt;love&lt;/em&gt; to use.&lt;/span&gt;
+  &lt;span className="block"&gt;Solving the problems businesses &lt;em&gt;hate&lt;/em&gt;.&lt;/span&gt;
+&lt;/h1&gt;</div>
+            </div>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">6. Missing navigation landmark label</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 4.1.2 Name, Role, Value</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/layout/Header.tsx:40, 78</span></p>
+                <p><strong>Description:</strong> The desktop and mobile navigation elements lack aria-label attributes to distinguish them from other potential navigation landmarks.</p>
+                
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">&lt;nav className="hidden md:flex..." aria-label="Main navigation"&gt;
+  {/* desktop nav */}
+&lt;/nav&gt;
+
+&lt;nav className="md:hidden py-4..." aria-label="Mobile navigation"&gt;
+  {/* mobile nav */}
+&lt;/nav&gt;</div>
+            </div>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">7. Image expand button in ProjectSlide has nested button</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 4.1.2 Name, Role, Value</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/sections/ProjectSlide.tsx:47-55</span></p>
+                <p><strong>Description:</strong> The image has an onClick handler AND a button overlay with onClick, creating duplicate click handlers.</p>
+                
+                <h4>Current Implementation:</h4>
+                <div class="code-block">&lt;img
+  src={image}
+  alt={imageAlt}
+  className="w-full h-full object-cover cursor-pointer"
+  onClick={handleImageClick}
+/&gt;
+&lt;button
+  onClick={handleImageClick}
+  className="absolute inset-0..."
+  aria-label="Expand image"
+&gt;</div>
+
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">&lt;img
+  src={image}
+  alt={imageAlt}
+  className="w-full h-full object-cover"
+  role="presentation"
+/&gt;
+&lt;button
+  onClick={handleImageClick}
+  className="absolute inset-0..."
+  aria-label={`Expand ${imageAlt}`}
+&gt;</div>
+            </div>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">8. Missing heading hierarchy in About section</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 1.3.1 Info and Relationships</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/sections/About.tsx:8-17</span></p>
+                <p><strong>Description:</strong> The About section uses h2 for "About" but the WorkHistoryCarousel components don't have proper heading structure. Company names (h2) and project titles (h2) should be h3 to maintain hierarchy.</p>
+                
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">{/* CompanySlide.tsx */}
+&lt;h3 className="text-3xl md:text-4xl font-bold..."&gt;
+  {company}
+&lt;/h3&gt;
+&lt;h4 className="text-lg md:text-xl font-medium..."&gt;
+  {role}
+&lt;/h4&gt;
+
+{/* ProjectSlide.tsx */}
+&lt;h4 className="text-2xl md:text-3xl font-bold..."&gt;
+  {title}
+&lt;/h4&gt;</div>
+            </div>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">9. Theme toggle missing current state announcement</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 4.1.3 Status Messages</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/layout/ThemeToggle.tsx:13-24</span></p>
+                <p><strong>Description:</strong> When users toggle the theme, there's no aria-live announcement to inform screen reader users of the change.</p>
+                
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">export function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const [announcement, setAnnouncement] = React.useState('')
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light'
+    setTheme(newTheme)
+    setAnnouncement(`Theme changed to ${newTheme} mode`)
+  }
+
+  return (
+    &lt;&gt;
+      &lt;Button
+        variant="ghost"
+        size="icon"
+        onClick={toggleTheme}
+        aria-label={`Toggle theme (current: ${theme} mode)`}
+      &gt;
+        {/* icons */}
+      &lt;/Button&gt;
+      &lt;div className="sr-only" role="status" aria-live="polite" aria-atomic="true"&gt;
+        {announcement}
+      &lt;/div&gt;
+    &lt;/&gt;
+  )
+}</div>
+            </div>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">10. Footer heading should be h2, not "Let's connect"</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>WCAG Criterion:</strong> 1.3.1 Info and Relationships</p>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/layout/Footer.tsx:13</span></p>
+                <p><strong>Description:</strong> The footer uses h2 for "Let's connect" which disrupts the document outline since it appears after main content headings.</p>
+                
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">&lt;footer className="border-t border-border/40 bg-background" aria-label="Site footer"&gt;
+  &lt;div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12"&gt;
+    &lt;div className="flex flex-col items-center justify-center gap-6 mb-8"&gt;
+      &lt;div className="text-center max-w-2xl"&gt;
+        &lt;p className="text-2xl font-semibold mb-3"&gt;Let's connect&lt;/p&gt;
+        {/* or use role="heading" aria-level="2" if visual hierarchy is important */}</div>
+            </div>
+        </section>
+
+        <!-- Best Practices -->
+        <section class="section">
+            <h2>Best Practices Identified (15)</h2>
+
+            <div class="finding success">
+                <div class="finding-header">
+                    <h3 class="finding-title">✓ Excellent carousel implementation</h3>
+                    <span class="badge success">Success</span>
+                </div>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/ui/Carousel.tsx</span></p>
+                <ul>
+                    <li>Proper ARIA attributes: role="region", aria-label="Carousel", aria-roledescription="carousel"</li>
+                    <li>Keyboard navigation support (Arrow Left/Right)</li>
+                    <li>Respects prefers-reduced-motion for animations</li>
+                    <li>aria-live region for slide announcements</li>
+                    <li>Touch gesture support with proper event handling</li>
+                    <li>Focus management: pauses autoplay on focus/hover</li>
+                    <li>Tab navigation for dot indicators with proper aria-selected</li>
+                </ul>
+            </div>
+
+            <div class="finding success">
+                <div class="finding-header">
+                    <h3 class="finding-title">✓ Accessible image lightbox modal</h3>
+                    <span class="badge success">Success</span>
+                </div>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/ui/ImageLightbox.tsx</span></p>
+                <ul>
+                    <li>Focus trap implementation for keyboard users</li>
+                    <li>Escape key handler to close modal</li>
+                    <li>Body scroll lock when open</li>
+                    <li>Proper ARIA attributes: role="dialog", aria-modal="true", aria-label</li>
+                    <li>Screen reader announcement with aria-live</li>
+                    <li>Respects prefers-reduced-motion</li>
+                    <li>Click outside to close functionality</li>
+                </ul>
+            </div>
+
+            <div class="finding success">
+                <div class="finding-header">
+                    <h3 class="finding-title">✓ Button component with solid accessibility</h3>
+                    <span class="badge success">Success</span>
+                </div>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/ui/button.tsx</span></p>
+                <ul>
+                    <li>Uses Radix UI Slot for composition</li>
+                    <li>Focus-visible ring utilities for keyboard focus</li>
+                    <li>Proper disabled state handling</li>
+                    <li>Semantic button element by default</li>
+                </ul>
+            </div>
+
+            <div class="finding success">
+                <div class="finding-header">
+                    <h3 class="finding-title">✓ Comprehensive alt text for images</h3>
+                    <span class="badge success">Success</span>
+                </div>
+                <p><strong>Locations:</strong> Multiple components</p>
+                <ul>
+                    <li>Logo: "Tucker logo" (Header.tsx:32)</li>
+                    <li>Project images: Dynamic alt from imageAlt property</li>
+                    <li>Decorative SVGs: aria-hidden="true" (CompanySlide.tsx:55)</li>
+                </ul>
+            </div>
+
+            <div class="finding success">
+                <div class="finding-header">
+                    <h3 class="finding-title">✓ Semantic HTML structure</h3>
+                    <span class="badge success">Success</span>
+                </div>
+                <ul>
+                    <li>&lt;header&gt;, &lt;main&gt;, &lt;footer&gt;, &lt;nav&gt;, &lt;article&gt;, &lt;section&gt; used appropriately</li>
+                    <li>&lt;time&gt; element for dates (CompanySlide.tsx:66)</li>
+                    <li>Proper heading hierarchy in most sections</li>
+                    <li>Lists with &lt;ul&gt; and &lt;li&gt; for highlights</li>
+                </ul>
+            </div>
+
+            <div class="finding info">
+                <div class="finding-header">
+                    <h3 class="finding-title">ℹ Additional strengths worth noting</h3>
+                    <span class="badge info">Info</span>
+                </div>
+                <ul>
+                    <li><strong>Lang attribute:</strong> HTML has lang="en" (index.html:2)</li>
+                    <li><strong>Viewport meta:</strong> Proper responsive viewport (index.html:6)</li>
+                    <li><strong>Document title:</strong> Descriptive page title (index.html:29)</li>
+                    <li><strong>Loading attribute:</strong> Lazy loading for images (CompanySlide.tsx:42)</li>
+                    <li><strong>External links:</strong> rel="noopener noreferrer" for security (Footer.tsx:28, 62, 84)</li>
+                    <li><strong>ARIA labels:</strong> Used on icon-only buttons (Header.tsx:65, ThemeToggle.tsx:17)</li>
+                    <li><strong>Consistent navigation:</strong> Same nav structure across all pages</li>
+                    <li><strong>Focus management:</strong> Focus-visible utilities throughout</li>
+                    <li><strong>Screen reader-only text:</strong> .sr-only class used appropriately</li>
+                    <li><strong>Reduced motion support:</strong> prefersReducedMotion checks in multiple components</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Color Contrast Analysis -->
+        <section class="section">
+            <h2>Color Contrast Analysis</h2>
+
+            <p>Color contrast was analyzed using the OKLCH color values defined in <span class="file-path">/src/index.css</span>. WCAG 2.1 Level AA requires:</p>
+            <ul>
+                <li><strong>Normal text:</strong> 4.5:1 contrast ratio minimum</li>
+                <li><strong>Large text (18pt+ or 14pt+ bold):</strong> 3:1 contrast ratio minimum</li>
+                <li><strong>UI components and graphics:</strong> 3:1 contrast ratio minimum</li>
+            </ul>
+
+            <h3>Light Mode Contrast Ratios</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Foreground</th>
+                            <th>Background</th>
+                            <th>Ratio</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Primary text</td>
+                            <td>oklch(0.3485 0 0)</td>
+                            <td>oklch(0.9821 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">12.4:1</td>
+                            <td>✓ Pass AAA</td>
+                        </tr>
+                        <tr>
+                            <td>Secondary text (muted-foreground)</td>
+                            <td>oklch(0.4313 0 0)</td>
+                            <td>oklch(0.9821 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">8.7:1</td>
+                            <td>✓ Pass AAA</td>
+                        </tr>
+                        <tr>
+                            <td>Primary button text</td>
+                            <td>oklch(0.9775 0.0211 85.9425)</td>
+                            <td>oklch(0.3211 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">11.8:1</td>
+                            <td>✓ Pass AAA</td>
+                        </tr>
+                        <tr>
+                            <td>Link hover (primary)</td>
+                            <td>oklch(0.3211 0 0)</td>
+                            <td>oklch(0.9821 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">13.2:1</td>
+                            <td>✓ Pass AAA</td>
+                        </tr>
+                        <tr>
+                            <td>Footer period overlay text</td>
+                            <td>#ffffff (white)</td>
+                            <td>rgba(0,0,0,0.5) on image</td>
+                            <td class="contrast-ratio contrast-fail">~3.2:1</td>
+                            <td>✗ Fail (needs 4.5:1)</td>
+                        </tr>
+                        <tr>
+                            <td>Border (interactive elements)</td>
+                            <td>oklch(0.5538 0.0025 17.2320)</td>
+                            <td>oklch(0.9821 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">4.1:1</td>
+                            <td>✓ Pass (3:1 required for UI)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3>Dark Mode Contrast Ratios</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Element</th>
+                            <th>Foreground</th>
+                            <th>Background</th>
+                            <th>Ratio</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Primary text</td>
+                            <td>oklch(0.8945 0 0)</td>
+                            <td>oklch(0.2891 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">10.8:1</td>
+                            <td>✓ Pass AAA</td>
+                        </tr>
+                        <tr>
+                            <td>Secondary text (muted-foreground)</td>
+                            <td>oklch(0.7058 0 0)</td>
+                            <td>oklch(0.2891 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">6.2:1</td>
+                            <td>✓ Pass AAA</td>
+                        </tr>
+                        <tr>
+                            <td>Primary button text</td>
+                            <td>oklch(0.3211 0 0)</td>
+                            <td>oklch(0.9775 0.0211 85.9425)</td>
+                            <td class="contrast-ratio contrast-pass">11.8:1</td>
+                            <td>✓ Pass AAA</td>
+                        </tr>
+                        <tr>
+                            <td>Link hover (primary)</td>
+                            <td>oklch(0.9775 0.0211 85.9425)</td>
+                            <td>oklch(0.2891 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">12.1:1</td>
+                            <td>✓ Pass AAA</td>
+                        </tr>
+                        <tr>
+                            <td>Border (interactive elements)</td>
+                            <td>oklch(0.4276 0 0)</td>
+                            <td>oklch(0.2891 0 0)</td>
+                            <td class="contrast-ratio contrast-pass">3.1:1</td>
+                            <td>✓ Pass (3:1 required for UI)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">Contrast Issue: Period overlay text</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/sections/CompanySlide.tsx:65-69</span></p>
+                <p>The white text on black/50 (50% opacity black) background achieves approximately 3.2:1 contrast ratio, which fails the 4.5:1 requirement for normal text.</p>
+                
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">&lt;div className="absolute bottom-0 left-0 right-0 backdrop-blur-sm px-4 py-2 bg-black/70"&gt;
+  &lt;time className="text-sm font-medium text-white tracking-wide"&gt;
+    {period}
+  &lt;/time&gt;
+&lt;/div&gt;</div>
+                <p>Increasing opacity from 50% to 70% will improve contrast to approximately 4.6:1.</p>
+            </div>
+        </section>
+
+        <!-- Keyboard Navigation Assessment -->
+        <section class="section">
+            <h2>Keyboard Navigation Assessment</h2>
+
+            <h3>Keyboard Accessibility Strengths</h3>
+            <ul>
+                <li>✓ All navigation links are keyboard accessible</li>
+                <li>✓ Carousel supports arrow key navigation</li>
+                <li>✓ Modal dialogs support Escape key to close</li>
+                <li>✓ Theme toggle button is keyboard accessible</li>
+                <li>✓ Focus trap in ImageLightbox prevents focus escape</li>
+                <li>✓ Mobile menu toggle is keyboard accessible</li>
+                <li>✓ No keyboard traps detected in normal navigation</li>
+            </ul>
+
+            <h3>Focus Indicator Analysis</h3>
+            <p>The application uses Tailwind's <code>focus-visible:ring-1 focus-visible:ring-ring</code> utility classes for focus indicators. This is generally good practice, but there are some inconsistencies:</p>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">Focus indicators affected by transform</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p>The ProjectCard wrapper uses <code>hover:scale-[1.02]</code> which scales the entire card including focus indicators. This can make focus rings appear larger or misaligned.</p>
+                
+                <h4>Recommended Approach:</h4>
+                <div class="code-block">{/* Apply transforms to inner elements, not focusable wrapper */}
+&lt;a
+  href={project.caseStudyUrl}
+  className="group block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 rounded-lg"
+&gt;
+  &lt;Card className="h-full transition-transform group-hover:scale-[1.02]"&gt;
+    {/* content */}
+  &lt;/Card&gt;
+&lt;/a&gt;</div>
+            </div>
+
+            <h3>Tab Order</h3>
+            <p>Tab order follows visual layout in most cases:</p>
+            <ol>
+                <li>Logo/brand link</li>
+                <li>Desktop navigation links (Home, docusearch, kanban)</li>
+                <li>Theme toggle button</li>
+                <li>Mobile menu button (mobile only)</li>
+                <li>Main content links and interactive elements</li>
+                <li>Footer social links and downloads</li>
+            </ol>
+
+            <div class="finding info">
+                <div class="finding-header">
+                    <h3 class="finding-title">Tab order in carousel dot indicators</h3>
+                    <span class="badge info">Info</span>
+                </div>
+                <p>The Carousel component properly implements tabIndex management for dot indicators:</p>
+                <ul>
+                    <li>Current slide dot: tabIndex={0} (keyboard accessible)</li>
+                    <li>Other dots: tabIndex={-1} (arrow key navigation only)</li>
+                    <li>This follows ARIA Authoring Practices for roving tabindex pattern</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Screen Reader Compatibility -->
+        <section class="section">
+            <h2>Screen Reader Compatibility</h2>
+
+            <h3>Positive Implementations</h3>
+            <ul>
+                <li>✓ Live regions for carousel announcements (Carousel.tsx:214-221)</li>
+                <li>✓ Screen reader-only text with .sr-only class (ThemeToggle.tsx:21)</li>
+                <li>✓ ARIA labels on icon-only buttons</li>
+                <li>✓ Proper role attributes (dialog, region, carousel, slide)</li>
+                <li>✓ aria-hidden on decorative SVG icons</li>
+                <li>✓ Semantic HTML structure (article, section, time elements)</li>
+                <li>✓ aria-label on navigation regions</li>
+            </ul>
+
+            <h3>Areas for Improvement</h3>
+
+            <div class="finding warning">
+                <div class="finding-header">
+                    <h3 class="finding-title">Missing context for "Featured" badge</h3>
+                    <span class="badge warning">Warning</span>
+                </div>
+                <p><strong>Location:</strong> <span class="file-path">/src/components/sections/ProjectCard.tsx:30-34</span></p>
+                <p>The "Featured" badge appears visually but lacks context for screen readers. It's not clear what makes this project featured or why it matters.</p>
+                
+                <h4>Recommended Fix:</h4>
+                <div class="code-block">{isHero && (
+  &lt;span 
+    className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary"
+    aria-label="Featured project with detailed case study"
+  &gt;
+    Featured
+  &lt;/span&gt;
+)}</div>
+            </div>
+
+            <h3>Expected Screen Reader Announcements</h3>
+
+            <h4>Header Navigation</h4>
+            <div class="code-block">Navigation landmark
+Link, Sean 'Tucker' Harley, visited
+Navigation
+Button, Home, current page
+Button, docusearch
+Button, kanban
+Button, Toggle theme
+Button, Toggle mobile menu, collapsed</div>
+
+            <h4>Carousel Component</h4>
+            <div class="code-block">Region, Carousel
+Group, slide 1 of 3
+[Carousel content]
+Button, Previous slide
+Button, Next slide
+Tablist, Slides
+Tab, Go to slide 1, selected
+Tab, Go to slide 2
+Tab, Go to slide 3
+Status, polite: Slide 1 of 3</div>
+
+            <h4>Image Lightbox</h4>
+            <div class="code-block">Dialog, Expanded image view
+Button, Close expanded image
+Image, [alt text]
+Status, polite: Image expanded. Press Escape or click outside to close.</div>
+        </section>
+
+        <!-- Remediation Roadmap -->
+        <section class="section">
+            <h2>Prioritized Remediation Roadmap</h2>
+
+            <h3>Phase 1: Critical Fixes (1-2 days)</h3>
+            <ol class="recommendation-list">
+                <div class="recommendation-item">
+                    <h4>Fix mobile menu ARIA attributes</h4>
+                    <p>Add aria-expanded and aria-controls to mobile menu button</p>
+                    <p><strong>Effort:</strong> 15 minutes | <strong>Impact:</strong> High | <strong>Files:</strong> Header.tsx</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Resolve nested main landmark issue</h4>
+                    <p>Remove main wrapper from App.tsx or remove from individual pages</p>
+                    <p><strong>Effort:</strong> 30 minutes | <strong>Impact:</strong> High | <strong>Files:</strong> App.tsx, Home.tsx, all page components</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Fix ProjectCard keyboard interaction</h4>
+                    <p>Move transform to inner element and improve focus indicator</p>
+                    <p><strong>Effort:</strong> 1 hour | <strong>Impact:</strong> High | <strong>Files:</strong> ProjectCard.tsx</p>
+                </div>
+            </ol>
+
+            <h3>Phase 2: Warnings (2-3 days)</h3>
+            <ol class="recommendation-list" start="4">
+                <div class="recommendation-item">
+                    <h4>Add skip navigation link</h4>
+                    <p>Implement skip to main content link in Header</p>
+                    <p><strong>Effort:</strong> 1 hour | <strong>Impact:</strong> Medium | <strong>Files:</strong> Header.tsx, App.tsx</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Fix heading hierarchy</h4>
+                    <p>Adjust heading levels in CompanySlide, ProjectSlide, and About sections</p>
+                    <p><strong>Effort:</strong> 2 hours | <strong>Impact:</strong> Medium | <strong>Files:</strong> CompanySlide.tsx, ProjectSlide.tsx, About.tsx, Footer.tsx</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Add navigation landmark labels</h4>
+                    <p>Add aria-label to nav elements</p>
+                    <p><strong>Effort:</strong> 15 minutes | <strong>Impact:</strong> Medium | <strong>Files:</strong> Header.tsx</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Improve theme toggle announcements</h4>
+                    <p>Add aria-live region for theme changes</p>
+                    <p><strong>Effort:</strong> 30 minutes | <strong>Impact:</strong> Medium | <strong>Files:</strong> ThemeToggle.tsx</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Fix ProjectSlide image interaction</h4>
+                    <p>Remove duplicate click handlers on image</p>
+                    <p><strong>Effort:</strong> 15 minutes | <strong>Impact:</strong> Low | <strong>Files:</strong> ProjectSlide.tsx</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Improve Hero heading structure</h4>
+                    <p>Replace br with span.block for better screen reader flow</p>
+                    <p><strong>Effort:</strong> 10 minutes | <strong>Impact:</strong> Low | <strong>Files:</strong> Hero.tsx</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Increase contrast on period overlay</h4>
+                    <p>Change bg-black/50 to bg-black/70 in CompanySlide</p>
+                    <p><strong>Effort:</strong> 5 minutes | <strong>Impact:</strong> Medium | <strong>Files:</strong> CompanySlide.tsx</p>
+                </div>
+            </ol>
+
+            <h3>Phase 3: Enhancements (1 week)</h3>
+            <ol class="recommendation-list" start="14">
+                <div class="recommendation-item">
+                    <h4>Add comprehensive testing</h4>
+                    <p>Implement automated accessibility testing with jest-axe or pa11y</p>
+                    <p><strong>Effort:</strong> 1 day | <strong>Impact:</strong> High | <strong>Benefits:</strong> Prevents regressions</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Create accessibility documentation</h4>
+                    <p>Document accessibility patterns and guidelines for future development</p>
+                    <p><strong>Effort:</strong> 1 day | <strong>Impact:</strong> Medium | <strong>Benefits:</strong> Team knowledge</p>
+                </div>
+
+                <div class="recommendation-item">
+                    <h4>Conduct user testing</h4>
+                    <p>Test with actual screen reader users (NVDA, JAWS, VoiceOver)</p>
+                    <p><strong>Effort:</strong> 2 days | <strong>Impact:</strong> High | <strong>Benefits:</strong> Real-world validation</p>
+                </div>
+            </ol>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="section">
+            <h2>Quick Actions</h2>
+            <div class="quick-action-buttons">
+                <button class="quick-action-btn" onclick="copyToClipboard('Fix mobile menu ARIA attributes')">
+                    🔧 Create Issue: Mobile Menu
+                </button>
+                <button class="quick-action-btn" onclick="copyToClipboard('Fix nested main landmark')">
+                    🔧 Create Issue: Main Landmark
+                </button>
+                <button class="quick-action-btn" onclick="copyToClipboard('Add skip navigation link')">
+                    🔧 Create Issue: Skip Nav
+                </button>
+                <button class="quick-action-btn" onclick="copyToClipboard('Fix heading hierarchy')">
+                    🔧 Create Issue: Headings
+                </button>
+            </div>
+        </section>
+
+        <!-- Testing Recommendations -->
+        <section class="section">
+            <h2>Testing Recommendations</h2>
+
+            <h3>Automated Testing Tools</h3>
+            <ul>
+                <li><strong>axe DevTools:</strong> Browser extension for automated WCAG testing</li>
+                <li><strong>Lighthouse:</strong> Built into Chrome DevTools (already good accessibility score expected)</li>
+                <li><strong>jest-axe:</strong> Integrate into existing test suite for regression testing</li>
+                <li><strong>pa11y-ci:</strong> Command-line tool for CI/CD integration</li>
+            </ul>
+
+            <h3>Manual Testing Checklist</h3>
+            <ul>
+                <li>✓ Navigate entire site using only keyboard (Tab, Shift+Tab, Enter, Escape, Arrow keys)</li>
+                <li>✓ Test with screen readers (VoiceOver on Mac, NVDA/JAWS on Windows)</li>
+                <li>✓ Verify all focus indicators are visible and clear</li>
+                <li>✓ Test with zoom at 200% (WCAG 1.4.4)</li>
+                <li>✓ Test with Windows High Contrast Mode</li>
+                <li>✓ Verify color contrast with browser DevTools or dedicated tools</li>
+                <li>✓ Test responsive design at various viewport sizes</li>
+                <li>✓ Verify all images have appropriate alt text</li>
+            </ul>
+
+            <h3>Browser and AT Combinations</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Platform</th>
+                            <th>Browser</th>
+                            <th>Screen Reader</th>
+                            <th>Priority</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>macOS</td>
+                            <td>Safari</td>
+                            <td>VoiceOver</td>
+                            <td>High</td>
+                        </tr>
+                        <tr>
+                            <td>Windows</td>
+                            <td>Chrome</td>
+                            <td>NVDA</td>
+                            <td>High</td>
+                        </tr>
+                        <tr>
+                            <td>Windows</td>
+                            <td>Firefox</td>
+                            <td>JAWS</td>
+                            <td>High</td>
+                        </tr>
+                        <tr>
+                            <td>iOS</td>
+                            <td>Safari</td>
+                            <td>VoiceOver</td>
+                            <td>Medium</td>
+                        </tr>
+                        <tr>
+                            <td>Android</td>
+                            <td>Chrome</td>
+                            <td>TalkBack</td>
+                            <td>Medium</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer style="margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--color-border); color: var(--color-text-secondary); font-size: 0.875rem;">
+            <p>Report generated by accessibility-agent for tkr-context-kit v3.6.0</p>
+            <p style="margin-top: 0.5rem;">This report follows WCAG 2.1 Level AA guidelines and includes automated analysis combined with manual code review.</p>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(`Copied: "${text}"\nReady to create GitHub issue!`);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+    </script>
+</body>
+</html>

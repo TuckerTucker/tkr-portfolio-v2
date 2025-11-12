@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dependency Security Audit Report - tkr-portfolio-v2</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+            padding: 2rem;
+        }
+        .container { max-width: 1200px; margin: 0 auto; background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        header { margin-bottom: 3rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 2rem; }
+        h1 { font-size: 2.5rem; margin-bottom: 0.5rem; color: #0f172a; }
+        h2 { font-size: 1.8rem; margin: 2rem 0 1rem; color: #1e293b; border-left: 4px solid #3b82f6; padding-left: 1rem; }
+        h3 { font-size: 1.4rem; margin: 1.5rem 0 1rem; color: #334155; }
+        h4 { font-size: 1.2rem; margin: 1rem 0 0.5rem; color: #475569; }
+        .meta { color: #64748b; font-size: 0.9rem; margin-top: 0.5rem; }
+        .section { margin-bottom: 3rem; }
+        .score-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+        .score-card { padding: 1.5rem; border-radius: 6px; border-left: 4px solid; }
+        .score-card h3 { margin: 0 0 0.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .score { font-size: 2.5rem; font-weight: bold; margin: 0.5rem 0; }
+        .score-subtitle { font-size: 0.85rem; color: #64748b; }
+        .score-card.medium { background: #fef3c7; border-color: #f59e0b; }
+        .score-card.info { background: #dbeafe; border-color: #3b82f6; }
+        .score-card.warning { background: #fef3c7; border-color: #f59e0b; }
+        .score-card.success { background: #dcfce7; border-color: #10b981; }
+        table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+        th, td { text-align: left; padding: 0.75rem; border-bottom: 1px solid #e2e8f0; }
+        thead th { background: #f1f5f9; font-weight: 600; color: #0f172a; }
+        tr.warning { background: #fef3c7; }
+        tr.success { background: #dcfce7; }
+        .badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: 500; }
+        .badge.critical { background: #fee2e2; color: #991b1b; }
+        .badge.high { background: #fed7aa; color: #9a3412; }
+        .badge.moderate { background: #fef3c7; color: #92400e; }
+        .badge.low { background: #dbeafe; color: #1e40af; }
+        .badge.info { background: #dbeafe; color: #1e40af; }
+        .badge.success { background: #dcfce7; color: #065f46; }
+        .badge.warning { background: #fef3c7; color: #92400e; }
+        .card { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 1.5rem; margin: 1rem 0; }
+        .details-table th { width: 200px; background: #f9fafb; }
+        code { background: #f1f5f9; padding: 0.2rem 0.4rem; border-radius: 3px; font-family: 'Monaco', 'Courier New', monospace; font-size: 0.9em; }
+        a { color: #3b82f6; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        .quick-action-buttons { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+        .quick-action-btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: #3b82f6;
+            color: white;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .quick-action-btn:hover { background: #2563eb; text-decoration: none; }
+        footer { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #e2e8f0; color: #64748b; font-size: 0.9rem; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📦 Dependency Security Audit Report</h1>
+            <div class="meta">
+                <p>Comprehensive dependency analysis with CVE detection, license compliance, supply chain security, and dependency bloat assessment</p>
+                <p style="margin-top: 0.5rem;">
+                    <strong>Project:</strong> tkr-portfolio-v2 |
+                    <strong>Date:</strong> 2025-11-06 |
+                    <strong>Agent:</strong> dependency-audit-agent
+                </p>
+            </div>
+        </header>
+
+        <!-- Executive Summary -->
+        <div class="section">
+            <h2>Executive Summary</h2>
+            <div class="score-grid">
+                <div class="score-card medium">
+                    <h3>Overall Risk</h3>
+                    <div class="score">Medium</div>
+                    <div class="score-subtitle">Risk Score: 4/100</div>
+                </div>
+                <div class="score-card info">
+                    <h3>Total Dependencies</h3>
+                    <div class="score">466</div>
+                    <div class="score-subtitle">232 prod + 192 dev</div>
+                </div>
+                <div class="score-card warning">
+                    <h3>Vulnerabilities</h3>
+                    <div class="score">2</div>
+                    <div class="score-subtitle">2 moderate</div>
+                </div>
+                <div class="score-card success">
+                    <h3>License Compliance</h3>
+                    <div class="score">Pass</div>
+                    <div class="score-subtitle">No GPL conflicts</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CVE Vulnerabilities -->
+        <div class="section">
+            <h2>1. CVE Vulnerabilities</h2>
+            
+            <h3>Vulnerability Summary</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Severity</th>
+                        <th>Count</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="badge critical">Critical</span></td>
+                        <td>0</td>
+                        <td>✓ None found</td>
+                    </tr>
+                    <tr>
+                        <td><span class="badge high">High</span></td>
+                        <td>0</td>
+                        <td>✓ None found</td>
+                    </tr>
+                    <tr class="warning">
+                        <td><span class="badge moderate">Moderate</span></td>
+                        <td>2</td>
+                        <td>⚠ Requires attention</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Detailed CVE Findings</h3>
+            
+            <div class="card">
+                <h4>CVE-GHSA-67mh-4wv8-2f99: esbuild Development Server Vulnerability</h4>
+                <table class="details-table">
+                    <tr>
+                        <th>Severity</th>
+                        <td><span class="badge moderate">Moderate (CVSS 5.3)</span></td>
+                    </tr>
+                    <tr>
+                        <th>Package</th>
+                        <td>esbuild (transitive via vite)</td>
+                    </tr>
+                    <tr>
+                        <th>Affected Versions</th>
+                        <td>≤ 0.24.2</td>
+                    </tr>
+                    <tr>
+                        <th>Description</th>
+                        <td>esbuild enables any website to send any requests to the development server and read the response</td>
+                    </tr>
+                    <tr>
+                        <th>CWE</th>
+                        <td>CWE-346: Origin Validation Error</td>
+                    </tr>
+                    <tr>
+                        <th>CVSS Vector</th>
+                        <td><code>CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:H/I:N/A:N</code></td>
+                    </tr>
+                    <tr>
+                        <th>Impact</th>
+                        <td>High confidentiality impact, development environment only</td>
+                    </tr>
+                    <tr>
+                        <th>Fix Available</th>
+                        <td><strong>Upgrade vite to 7.2.2</strong> (⚠ Major version upgrade)</td>
+                    </tr>
+                    <tr>
+                        <th>Advisory</th>
+                        <td><a href="https://github.com/advisories/GHSA-67mh-4wv8-2f99" target="_blank">GHSA-67mh-4wv8-2f99</a></td>
+                    </tr>
+                </table>
+            </div>
+
+            <h3>Remediation Priority</h3>
+            <ol>
+                <li><strong>Immediate:</strong> No critical or high severity vulnerabilities</li>
+                <li><strong>Short-term:</strong> Upgrade Vite to v7.2.2 (requires React 19 compatibility testing)</li>
+                <li><strong>Context:</strong> This is a development-only vulnerability with limited impact in production</li>
+            </ol>
+        </div>
+
+        <!-- License Compliance -->
+        <div class="section">
+            <h2>2. License Compliance</h2>
+            
+            <h3>License Distribution</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>License</th>
+                        <th>Count</th>
+                        <th>Status</th>
+                        <th>Compatibility</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="success">
+                        <td>MIT</td>
+                        <td>316</td>
+                        <td>✓ Pass</td>
+                        <td>Fully compatible</td>
+                    </tr>
+                    <tr class="success">
+                        <td>ISC</td>
+                        <td>31</td>
+                        <td>✓ Pass</td>
+                        <td>Fully compatible</td>
+                    </tr>
+                    <tr class="success">
+                        <td>Apache-2.0</td>
+                        <td>13</td>
+                        <td>✓ Pass</td>
+                        <td>Compatible with attribution</td>
+                    </tr>
+                    <tr class="success">
+                        <td>BSD-2-Clause</td>
+                        <td>8</td>
+                        <td>✓ Pass</td>
+                        <td>Fully compatible</td>
+                    </tr>
+                    <tr class="success">
+                        <td>BSD-3-Clause</td>
+                        <td>4</td>
+                        <td>✓ Pass</td>
+                        <td>Fully compatible</td>
+                    </tr>
+                    <tr class="warning">
+                        <td>LGPL-3.0-or-later</td>
+                        <td>1</td>
+                        <td>⚠ Review</td>
+                        <td>Copyleft, review usage</td>
+                    </tr>
+                    <tr>
+                        <td>Other</td>
+                        <td>8</td>
+                        <td>✓ Pass</td>
+                        <td>Various permissive licenses</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Compliance Analysis</h3>
+            <div class="card">
+                <h4>✓ Overall Status: Compliant</h4>
+                <ul>
+                    <li><strong>Permissive Licenses:</strong> 372/381 (97.6%) - MIT, ISC, Apache, BSD</li>
+                    <li><strong>Weak Copyleft:</strong> 1 package (LGPL-3.0) - Requires review for dynamic linking</li>
+                    <li><strong>Strong Copyleft:</strong> 0 packages (GPL/AGPL) - ✓ No conflicts</li>
+                    <li><strong>Public Domain:</strong> Multiple packages (CC0, 0BSD, BlueOak) - Fully compatible</li>
+                </ul>
+            </div>
+
+            <h3>Action Items</h3>
+            <ol>
+                <li><strong>Review LGPL-3.0 package:</strong> Identify the package and confirm dynamic linking compliance</li>
+                <li><strong>Attribution requirements:</strong> Apache-2.0 and BSD licenses require attribution in documentation</li>
+                <li><strong>No blockers:</strong> All licenses are compatible with proprietary/commercial use</li>
+            </ol>
+        </div>
+
+        <!-- Outdated Packages -->
+        <div class="section">
+            <h2>3. Outdated Packages</h2>
+            
+            <h3>Major Version Updates Available</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>Current</th>
+                        <th>Latest</th>
+                        <th>Breaking</th>
+                        <th>Priority</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="warning">
+                        <td>vite</td>
+                        <td>5.4.21</td>
+                        <td>7.2.2</td>
+                        <td><span class="badge warning">Major</span></td>
+                        <td><span class="badge high">High</span> - Security fix included</td>
+                    </tr>
+                    <tr>
+                        <td>react</td>
+                        <td>18.3.1</td>
+                        <td>19.2.0</td>
+                        <td><span class="badge warning">Major</span></td>
+                        <td><span class="badge moderate">Medium</span> - Stable ecosystem</td>
+                    </tr>
+                    <tr>
+                        <td>react-dom</td>
+                        <td>18.3.1</td>
+                        <td>19.2.0</td>
+                        <td><span class="badge warning">Major</span></td>
+                        <td><span class="badge moderate">Medium</span> - Follows React</td>
+                    </tr>
+                    <tr>
+                        <td>tailwindcss</td>
+                        <td>3.4.18</td>
+                        <td>4.1.17</td>
+                        <td><span class="badge warning">Major</span></td>
+                        <td><span class="badge moderate">Medium</span> - New features</td>
+                    </tr>
+                    <tr>
+                        <td>eslint</td>
+                        <td>8.57.1</td>
+                        <td>9.39.1</td>
+                        <td><span class="badge warning">Major</span></td>
+                        <td><span class="badge low">Low</span> - Dev tooling</td>
+                    </tr>
+                    <tr>
+                        <td>@typescript-eslint/*</td>
+                        <td>6.21.0</td>
+                        <td>8.46.3</td>
+                        <td><span class="badge warning">Major</span></td>
+                        <td><span class="badge low">Low</span> - Follows ESLint</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Minor/Patch Updates Available</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>Current</th>
+                        <th>Latest</th>
+                        <th>Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>lucide-react</td>
+                        <td>0.294.0</td>
+                        <td>0.552.0</td>
+                        <td><span class="badge info">Minor</span></td>
+                    </tr>
+                    <tr>
+                        <td>next-themes</td>
+                        <td>0.2.1</td>
+                        <td>0.4.6</td>
+                        <td><span class="badge info">Minor</span></td>
+                    </tr>
+                    <tr>
+                        <td>marked</td>
+                        <td>16.4.1</td>
+                        <td>17.0.0</td>
+                        <td><span class="badge warning">Major</span></td>
+                    </tr>
+                    <tr>
+                        <td>@radix-ui/react-separator</td>
+                        <td>1.1.7</td>
+                        <td>1.1.8</td>
+                        <td><span class="badge success">Patch</span></td>
+                    </tr>
+                    <tr>
+                        <td>@radix-ui/react-slot</td>
+                        <td>1.2.3</td>
+                        <td>1.2.4</td>
+                        <td><span class="badge success">Patch</span></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Update Recommendations</h3>
+            <div class="card">
+                <h4>Prioritized Update Plan</h4>
+                <ol>
+                    <li><strong>High Priority:</strong>
+                        <ul>
+                            <li>Upgrade Vite to 7.2.2 (addresses CVE)</li>
+                            <li>Test with current React 18 first, then consider React 19</li>
+                        </ul>
+                    </li>
+                    <li><strong>Medium Priority:</strong>
+                        <ul>
+                            <li>Update Radix UI packages (1.1.7→1.1.8, 1.2.3→1.2.4) - patch releases</li>
+                            <li>Update lucide-react (0.294→0.552) - new icons and improvements</li>
+                            <li>Update next-themes (0.2.1→0.4.6) - bug fixes and features</li>
+                        </ul>
+                    </li>
+                    <li><strong>Long-term Planning:</strong>
+                        <ul>
+                            <li>React 19 upgrade (breaking changes in new hooks, server components)</li>
+                            <li>Tailwind CSS 4 migration (new engine, config changes)</li>
+                            <li>ESLint 9 upgrade (flat config system)</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- Supply Chain Security -->
+        <div class="section">
+            <h2>4. Supply Chain Security</h2>
+            
+            <h3>Dependency Tree Analysis</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                        <th>Assessment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Direct Dependencies</td>
+                        <td>29 packages</td>
+                        <td><span class="badge success">Excellent</span> - Minimal direct deps</td>
+                    </tr>
+                    <tr>
+                        <td>Total Dependencies</td>
+                        <td>466 packages</td>
+                        <td><span class="badge info">Good</span> - Moderate transitive depth</td>
+                    </tr>
+                    <tr>
+                        <td>Dependency Ratio</td>
+                        <td>16:1</td>
+                        <td><span class="badge info">Acceptable</span> - 16 transitive per direct</td>
+                    </tr>
+                    <tr>
+                        <td>Ecosystem Trust</td>
+                        <td>High</td>
+                        <td><span class="badge success">Excellent</span> - Well-known packages</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Package Maintainer Analysis</h3>
+            <div class="card">
+                <h4>✓ Supply Chain Health: Good</h4>
+                <ul>
+                    <li><strong>React Ecosystem:</strong> Facebook/Meta maintained (react, react-dom) - High trust</li>
+                    <li><strong>Radix UI:</strong> WorkOS maintained (@radix-ui/*) - Active development, well-funded</li>
+                    <li><strong>Tailwind CSS:</strong> Tailwind Labs maintained - Commercial backing</li>
+                    <li><strong>Vite:</strong> Evan You/Vite team - Active, well-established</li>
+                    <li><strong>TypeScript:</strong> Microsoft maintained - Enterprise support</li>
+                </ul>
+            </div>
+
+            <h3>Risk Factors</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Risk Factor</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="success">
+                        <td>Single Maintainer Packages</td>
+                        <td>Low Risk</td>
+                        <td>Most packages have organizational backing</td>
+                    </tr>
+                    <tr class="success">
+                        <td>Recent Ownership Transfers</td>
+                        <td>None Detected</td>
+                        <td>No suspicious package transfers</td>
+                    </tr>
+                    <tr class="success">
+                        <td>Download Counts</td>
+                        <td>High</td>
+                        <td>All direct dependencies have millions of downloads</td>
+                    </tr>
+                    <tr class="success">
+                        <td>Deprecated Packages</td>
+                        <td>None</td>
+                        <td>All packages actively maintained</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Recommendations</h3>
+            <ol>
+                <li><strong>Continue current practices:</strong> Well-chosen, trustworthy dependencies</li>
+                <li><strong>Monitor for updates:</strong> Set up Dependabot or Renovate for automated PRs</li>
+                <li><strong>Lock file integrity:</strong> Ensure package-lock.json is committed and reviewed</li>
+                <li><strong>Regular audits:</strong> Run <code>npm audit</code> monthly</li>
+            </ol>
+        </div>
+
+        <!-- Dependency Bloat -->
+        <div class="section">
+            <h2>5. Dependency Bloat Analysis</h2>
+            
+            <h3>Bundle Impact Metrics</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Metric</th>
+                        <th>Value</th>
+                        <th>Assessment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>node_modules Size</td>
+                        <td>462 MB</td>
+                        <td><span class="badge warning">Moderate</span> - Typical for React + Tailwind</td>
+                    </tr>
+                    <tr>
+                        <td>node_modules Directories</td>
+                        <td>657 folders</td>
+                        <td><span class="badge info">Normal</span> - Expected for 466 packages</td>
+                    </tr>
+                    <tr>
+                        <td>Production Bundle</td>
+                        <td>~142 KB gzipped</td>
+                        <td><span class="badge success">Excellent</span> - Highly optimized</td>
+                    </tr>
+                    <tr>
+                        <td>Dev Dependencies</td>
+                        <td>192 packages</td>
+                        <td><span class="badge success">Good</span> - Not included in production</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Largest Dependencies (Development)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Package</th>
+                        <th>Purpose</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@babel/*</td>
+                        <td>TypeScript/JSX compilation</td>
+                        <td>Dev only - No production impact</td>
+                    </tr>
+                    <tr>
+                        <td>esbuild</td>
+                        <td>Vite bundler</td>
+                        <td>Dev only - Fast builds</td>
+                    </tr>
+                    <tr>
+                        <td>typescript</td>
+                        <td>Type checking</td>
+                        <td>Dev only - No runtime cost</td>
+                    </tr>
+                    <tr>
+                        <td>eslint</td>
+                        <td>Linting</td>
+                        <td>Dev only - No production impact</td>
+                    </tr>
+                    <tr>
+                        <td>tailwindcss</td>
+                        <td>CSS generation</td>
+                        <td>Dev only - Generates optimized CSS</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Bundle Size Optimization</h3>
+            <div class="card">
+                <h4>✓ Production Bundle: Highly Optimized</h4>
+                <ul>
+                    <li><strong>Tree Shaking:</strong> Vite automatically removes unused code</li>
+                    <li><strong>Code Splitting:</strong> React Router enables route-based splitting</li>
+                    <li><strong>Compression:</strong> 142KB gzipped from ~450KB uncompressed</li>
+                    <li><strong>CSS Purging:</strong> Tailwind removes unused CSS classes</li>
+                    <li><strong>No bloat detected:</strong> All production dependencies are utilized</li>
+                </ul>
+            </div>
+
+            <h3>Potential Optimizations</h3>
+            <ol>
+                <li><strong>Icon Tree Shaking:</strong> lucide-react already supports tree-shaking (✓ Implemented)</li>
+                <li><strong>Markdown Optimization:</strong> Consider lazy-loading react-markdown for case studies</li>
+                <li><strong>Syntax Highlighting:</strong> highlight.js could be code-split per language</li>
+                <li><strong>Monitor bundle size:</strong> Add bundlesize or size-limit to CI/CD</li>
+            </ol>
+        </div>
+
+        <!-- Summary -->
+        <div class="section">
+            <h2>6. Summary and Recommendations</h2>
+            
+            <h3>Immediate Actions (This Week)</h3>
+            <ol>
+                <li><strong>Upgrade Vite:</strong> Update to 7.2.2 to address CVE-GHSA-67mh-4wv8-2f99
+                    <ul>
+                        <li>Test development server functionality</li>
+                        <li>Verify production builds</li>
+                        <li>Document any breaking changes</li>
+                    </ul>
+                </li>
+                <li><strong>Patch Updates:</strong> Update Radix UI packages (1.1.7→1.1.8, 1.2.3→1.2.4)
+                    <ul>
+                        <li>Run <code>npm update @radix-ui/react-separator @radix-ui/react-slot</code></li>
+                        <li>Test separator and slot components</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Short-term Improvements (This Month)</h3>
+            <ol>
+                <li><strong>Minor Updates:</strong> Update lucide-react and next-themes
+                    <ul>
+                        <li>lucide-react: 0.294→0.552 (new icons, bug fixes)</li>
+                        <li>next-themes: 0.2.1→0.4.6 (improved theme switching)</li>
+                    </ul>
+                </li>
+                <li><strong>License Review:</strong> Identify and review the LGPL-3.0 package
+                    <ul>
+                        <li>Confirm it's dynamically linked (acceptable for web apps)</li>
+                        <li>Document license compliance in project README</li>
+                    </ul>
+                </li>
+                <li><strong>Automation Setup:</strong> Configure Dependabot or Renovate
+                    <ul>
+                        <li>Automated dependency update PRs</li>
+                        <li>Security vulnerability notifications</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Long-term Planning (Next Quarter)</h3>
+            <ol>
+                <li><strong>React 19 Migration:</strong>
+                    <ul>
+                        <li>Review breaking changes documentation</li>
+                        <li>Test compatibility with Radix UI and other dependencies</li>
+                        <li>Update TypeScript types (@types/react@19)</li>
+                        <li>Migrate to new hooks (useTransition, useOptimistic, etc.)</li>
+                    </ul>
+                </li>
+                <li><strong>Tailwind CSS 4:</strong>
+                    <ul>
+                        <li>Evaluate new features (native cascade layers, container queries)</li>
+                        <li>Plan migration from v3 config format</li>
+                        <li>Test with existing design system</li>
+                    </ul>
+                </li>
+                <li><strong>ESLint 9:</strong>
+                    <ul>
+                        <li>Migrate to flat config format</li>
+                        <li>Update TypeScript ESLint plugins to v8</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Process Improvements</h3>
+            <ol>
+                <li><strong>Regular Security Audits:</strong> Run <code>npm audit</code> weekly</li>
+                <li><strong>Bundle Size Monitoring:</strong> Add size-limit to prevent regressions</li>
+                <li><strong>Dependency Review:</strong> Quarterly review of all dependencies</li>
+                <li><strong>Update Policy:</strong> Establish guidelines for major version upgrades</li>
+            </ol>
+
+            <div class="card" style="background: #dcfce7; border-color: #10b981;">
+                <h4>✓ Overall Assessment: Good Security Posture</h4>
+                <p>Your portfolio website has a solid dependency security foundation with:</p>
+                <ul>
+                    <li>No critical or high severity vulnerabilities</li>
+                    <li>Well-maintained, trustworthy dependencies</li>
+                    <li>Highly optimized production bundle (142KB gzipped)</li>
+                    <li>Compatible licenses with no GPL conflicts</li>
+                    <li>Minimal technical debt</li>
+                </ul>
+                <p><strong>Priority:</strong> Address the moderate Vite/esbuild CVE in the next update cycle. All other findings are maintenance items that can be addressed incrementally.</p>
+            </div>
+        </div>
+
+        <footer>
+            <p><strong>Dependency Security Audit Report</strong></p>
+            <p>Generated by dependency-audit-agent | tkr-portfolio-v2 | 2025-11-06</p>
+        </footer>
+    </div>
+</body>
+</html>

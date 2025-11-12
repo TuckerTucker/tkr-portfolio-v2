@@ -1,0 +1,356 @@
+{
+  "metadata": {
+    "project": "tkr-portfolio-v2",
+    "domain": "tucker.sh",
+    "generated": "2025-11-07",
+    "agent": "test-coverage-agent",
+    "version": "3.6.0",
+    "totalFiles": 46,
+    "totalLines": 3439,
+    "overallCoverage": 0,
+    "testFramework": "none"
+  },
+  "summary": {
+    "testCoverage": {
+      "line": 0,
+      "branch": 0,
+      "function": 0,
+      "statement": 0
+    },
+    "testCounts": {
+      "unit": 0,
+      "integration": 0,
+      "e2e": 0,
+      "total": 0
+    },
+    "qualityScore": 0,
+    "riskLevel": "critical"
+  },
+  "components": [
+    {
+      "path": "src/components/ui/Carousel.tsx",
+      "type": "interactive-component",
+      "lines": 225,
+      "complexity": "high",
+      "riskLevel": "critical",
+      "priority": 1,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Touch gesture handling (swipe detection)",
+        "Keyboard navigation (ArrowLeft, ArrowRight)",
+        "Auto-play timer management (5000ms default)",
+        "Accessibility (ARIA roles, screen reader support)",
+        "Reduced motion detection (prefers-reduced-motion)",
+        "State management (currentIndex, isPaused, touch state)"
+      ],
+      "testStrategy": {
+        "unit": [
+          "Test navigation functions (goToNext, goToPrevious, goToSlide)",
+          "Test touch event handlers with mocked events",
+          "Test keyboard event handlers",
+          "Test auto-play with fake timers",
+          "Test reduced motion preference"
+        ],
+        "integration": [
+          "Test with multiple slides",
+          "Test carousel with WorkHistory content"
+        ],
+        "mocks": [
+          "vi.useFakeTimers() for auto-play",
+          "window.matchMedia for prefers-reduced-motion",
+          "Touch events"
+        ]
+      },
+      "estimatedTestCount": 12,
+      "estimatedEffort": "8 hours"
+    },
+    {
+      "path": "src/components/ui/ImageLightbox.tsx",
+      "type": "interactive-component",
+      "complexity": "medium-high",
+      "riskLevel": "critical",
+      "priority": 2,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Modal state management",
+        "Keyboard event handling (Escape key)",
+        "Click-outside detection",
+        "Image loading states"
+      ],
+      "testStrategy": {
+        "unit": [
+          "Test modal opening/closing",
+          "Test Escape key handler",
+          "Test click-outside behavior",
+          "Test with different image sources"
+        ]
+      },
+      "estimatedTestCount": 6,
+      "estimatedEffort": "3 hours"
+    },
+    {
+      "path": "src/lib/utils.ts",
+      "type": "utility",
+      "lines": 6,
+      "complexity": "low",
+      "riskLevel": "high",
+      "priority": 1,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Core utility used throughout entire project",
+        "className merging logic (clsx + tailwind-merge)"
+      ],
+      "testStrategy": {
+        "unit": [
+          "Test cn() with single className",
+          "Test cn() with multiple classNames",
+          "Test cn() with conditional classes",
+          "Test cn() with Tailwind class conflicts",
+          "Test cn() with undefined/null values"
+        ]
+      },
+      "estimatedTestCount": 8,
+      "estimatedEffort": "1 hour",
+      "notes": "Ideal first test - simple, high impact, low complexity"
+    },
+    {
+      "path": "src/components/ui/button.tsx",
+      "type": "ui-component",
+      "lines": 58,
+      "complexity": "medium",
+      "riskLevel": "high",
+      "priority": 2,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Multiple variants (default, destructive, outline, secondary, ghost, link)",
+        "Multiple sizes (default, sm, lg, icon)",
+        "asChild prop (Slot component)",
+        "Ref forwarding"
+      ],
+      "testStrategy": {
+        "unit": [
+          "Test all variants render correctly",
+          "Test all sizes render correctly",
+          "Test asChild prop uses Slot component",
+          "Test ref forwarding",
+          "Test custom className merging",
+          "Test disabled state",
+          "Test onClick handler"
+        ]
+      },
+      "estimatedTestCount": 10,
+      "estimatedEffort": "2 hours"
+    },
+    {
+      "path": "src/App.tsx",
+      "type": "root-component",
+      "lines": 36,
+      "complexity": "medium",
+      "riskLevel": "critical",
+      "priority": 3,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Router configuration (6 routes)",
+        "Theme provider setup",
+        "Layout structure"
+      ],
+      "testStrategy": {
+        "integration": [
+          "Test all routes render correct components",
+          "Test navigation between routes",
+          "Test theme provider wraps correctly",
+          "Test Header/Footer present on all routes"
+        ],
+        "mocks": [
+          "Use MemoryRouter for route testing"
+        ]
+      },
+      "estimatedTestCount": 6,
+      "estimatedEffort": "2 hours"
+    },
+    {
+      "path": "src/components/layout/Header.tsx",
+      "type": "layout-component",
+      "complexity": "medium",
+      "riskLevel": "high",
+      "priority": 3,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Navigation links",
+        "Active route highlighting",
+        "Responsive menu (mobile vs desktop)"
+      ],
+      "testStrategy": {
+        "unit": [
+          "Test navigation links render",
+          "Test active link styling"
+        ],
+        "integration": [
+          "Test navigation between pages",
+          "Test mobile menu toggle"
+        ]
+      },
+      "estimatedTestCount": 5,
+      "estimatedEffort": "2 hours"
+    },
+    {
+      "path": "src/components/layout/ThemeToggle.tsx",
+      "type": "interactive-component",
+      "complexity": "medium",
+      "riskLevel": "high",
+      "priority": 2,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Theme switching (light/dark/system)",
+        "Theme persistence",
+        "System preference detection"
+      ],
+      "testStrategy": {
+        "unit": [
+          "Test theme toggle changes theme",
+          "Test all theme options available",
+          "Test theme persists to localStorage"
+        ],
+        "mocks": [
+          "Mock next-themes useTheme hook"
+        ]
+      },
+      "estimatedTestCount": 5,
+      "estimatedEffort": "2 hours"
+    },
+    {
+      "path": "src/components/sections/Hero.tsx",
+      "type": "section-component",
+      "lines": 18,
+      "complexity": "low",
+      "riskLevel": "medium",
+      "priority": 4,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Content rendering",
+        "Responsive typography"
+      ],
+      "testStrategy": {
+        "unit": [
+          "Test component renders",
+          "Test heading text present",
+          "Test description text present"
+        ]
+      },
+      "estimatedTestCount": 3,
+      "estimatedEffort": "0.5 hours"
+    },
+    {
+      "path": "src/components/sections/WorkHistoryCarousel.tsx",
+      "type": "composite-component",
+      "complexity": "medium-high",
+      "riskLevel": "high",
+      "priority": 3,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Carousel wrapper logic",
+        "Company data integration",
+        "Slide rendering"
+      ],
+      "testStrategy": {
+        "integration": [
+          "Test with work history data",
+          "Test carousel navigation with company slides",
+          "Test company information displays correctly"
+        ]
+      },
+      "estimatedTestCount": 5,
+      "estimatedEffort": "3 hours"
+    },
+    {
+      "path": "src/content/projects.ts",
+      "type": "data-module",
+      "lines": 90,
+      "complexity": "low",
+      "riskLevel": "medium",
+      "priority": 4,
+      "coverage": 0,
+      "testable": true,
+      "concerns": [
+        "Data structure validation",
+        "Type conformance"
+      ],
+      "testStrategy": {
+        "unit": [
+          "Test projects array exports correctly",
+          "Test each project has required fields",
+          "Test project URLs are valid",
+          "Test project priorities are valid"
+        ]
+      },
+      "estimatedTestCount": 4,
+      "estimatedEffort": "1 hour"
+    }
+  ],
+  "testingInfrastructure": {
+    "required": {
+      "framework": "vitest",
+      "utilities": "@testing-library/react",
+      "helpers": "@testing-library/user-event",
+      "environment": "happy-dom",
+      "coverage": "@vitest/coverage-v8",
+      "e2e": "@playwright/test"
+    },
+    "configuration": {
+      "coverageThresholds": {
+        "lines": 80,
+        "branches": 80,
+        "functions": 80,
+        "statements": 80
+      }
+    }
+  },
+  "recommendations": [
+    {
+      "priority": "critical",
+      "action": "Install Vitest and React Testing Library",
+      "effort": "4 hours",
+      "impact": "Enables all testing"
+    },
+    {
+      "priority": "high",
+      "action": "Write tests for lib/utils.ts",
+      "effort": "1 hour",
+      "impact": "Quick win, high usage utility"
+    },
+    {
+      "priority": "high",
+      "action": "Write tests for ui/button.tsx",
+      "effort": "2 hours",
+      "impact": "Core UI component used throughout"
+    },
+    {
+      "priority": "critical",
+      "action": "Write tests for Carousel.tsx",
+      "effort": "8 hours",
+      "impact": "Highest risk component, complex interactions"
+    },
+    {
+      "priority": "high",
+      "action": "Setup E2E testing with Playwright",
+      "effort": "4 hours",
+      "impact": "Critical user journey validation"
+    }
+  ],
+  "estimatedTotalEffort": {
+    "unit": "80 hours",
+    "integration": "20 hours",
+    "e2e": "10 hours",
+    "total": "110 hours",
+    "timeline": "3-4 weeks (part-time)"
+  }
+}

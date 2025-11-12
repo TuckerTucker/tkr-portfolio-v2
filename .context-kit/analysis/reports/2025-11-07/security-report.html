@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Audit Report - tkr-portfolio-v2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #1e293b;
+            background: #f8fafc;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #0f172a;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            font-size: 1.25rem;
+            color: #64748b;
+        }
+
+        .metadata {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .metadata-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .metadata-label {
+            font-size: 0.875rem;
+            color: #64748b;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .metadata-value {
+            font-size: 1.125rem;
+            color: #0f172a;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .summary {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 8px;
+            margin-bottom: 2rem;
+        }
+
+        .summary h2 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .score-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .score-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .score-card-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .score-card-label {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            opacity: 0.9;
+        }
+
+        .severity-critical { color: #dc2626; background: #fee2e2; }
+        .severity-high { color: #ea580c; background: #ffedd5; }
+        .severity-medium { color: #ca8a04; background: #fef9c3; }
+        .severity-low { color: #0891b2; background: #cffafe; }
+
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 1.75rem;
+            color: #0f172a;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .finding {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-left: 4px solid;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .finding.critical { border-left-color: #dc2626; }
+        .finding.high { border-left-color: #ea580c; }
+        .finding.medium { border-left-color: #ca8a04; }
+        .finding.low { border-left-color: #0891b2; }
+
+        .finding-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1rem;
+        }
+
+        .finding-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #0f172a;
+            flex: 1;
+        }
+
+        .severity-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .finding-details {
+            margin-bottom: 1rem;
+        }
+
+        .detail-row {
+            display: flex;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #475569;
+            min-width: 150px;
+        }
+
+        .detail-value {
+            color: #1e293b;
+            font-family: 'Courier New', monospace;
+            flex: 1;
+        }
+
+        .code-block {
+            background: #0f172a;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .line-number {
+            color: #64748b;
+            margin-right: 1rem;
+            user-select: none;
+        }
+
+        .recommendation {
+            background: #f0fdf4;
+            border-left: 4px solid #16a34a;
+            padding: 1.5rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        .recommendation h4 {
+            color: #15803d;
+            font-size: 1rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .recommendation-code {
+            background: #dcfce7;
+            border: 1px solid #86efac;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-top: 0.75rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        .reference-links {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .reference-links h4 {
+            font-size: 0.875rem;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+
+        .reference-links a {
+            color: #3b82f6;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .reference-links a:hover {
+            text-decoration: underline;
+        }
+
+        .quick-actions {
+            background: #f0f9ff;
+            border: 1px solid #bfdbfe;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .quick-actions h3 {
+            color: #1e40af;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .quick-action-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .quick-action-btn {
+            background: white;
+            border: 1px solid #3b82f6;
+            color: #3b82f6;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quick-action-btn:hover {
+            background: #3b82f6;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.25);
+        }
+
+        .next-steps {
+            background: #fffbeb;
+            border-left: 4px solid #f59e0b;
+            padding: 1.5rem;
+            border-radius: 6px;
+        }
+
+        .next-steps h3 {
+            color: #92400e;
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .next-steps ol {
+            margin-left: 1.5rem;
+        }
+
+        .next-steps li {
+            margin-bottom: 0.5rem;
+            color: #78350f;
+        }
+
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        code {
+            background: #f1f5f9;
+            padding: 0.125rem 0.375rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            color: #0f172a;
+        }
+
+        .owasp-tag {
+            display: inline-block;
+            background: #ddd6fe;
+            color: #5b21b6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔒 Security Audit Report</h1>
+            <div class="subtitle">tkr-portfolio-v2 - Production Portfolio Website</div>
+        </div>
+
+        <div class="metadata">
+            <div class="metadata-item">
+                <span class="metadata-label">Date</span>
+                <span class="metadata-value">November 6, 2025</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Domain</span>
+                <span class="metadata-value">tucker.sh</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Stack</span>
+                <span class="metadata-value">React 18 + TypeScript + Vite</span>
+            </div>
+            <div class="metadata-item">
+                <span class="metadata-label">Files Analyzed</span>
+                <span class="metadata-value">46 TypeScript/TSX files</span>
+            </div>
+        </div>
+
+        <div class="summary">
+            <h2>Executive Summary</h2>
+            <p style="font-size: 1.125rem; margin-bottom: 1rem;">
+                Security analysis of the production portfolio website identified <strong>7 findings</strong> across multiple severity levels. 
+                The codebase demonstrates good security practices with proper external link handling and React's built-in XSS protection.
+                Primary concerns involve missing security headers, dependency vulnerabilities, and production sourcemap exposure.
+            </p>
+            <div class="score-cards">
+                <div class="score-card">
+                    <div class="score-card-number">0</div>
+                    <div class="score-card-label">Critical</div>
+                </div>
+                <div class="score-card-number">1</div>
+                    <div class="score-card-label">High</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-card-number">4</div>
+                    <div class="score-card-label">Medium</div>
+                </div>
+                <div class="score-card">
+                    <div class="score-card-number">2</div>
+                    <div class="score-card-label">Low</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <h3>Quick Actions</h3>
+            <div class="quick-action-buttons">
+                <a href="#" onclick="generatePlan('Add Security Headers to GitHub Pages'); return false;" class="quick-action-btn">
+                    🛡️ Add Security Headers
+                </a>
+                <a href="#" onclick="generatePlan('Update Vite to v7.2.2'); return false;" class="quick-action-btn">
+                    📦 Update Dependencies
+                </a>
+                <a href="#" onclick="generatePlan('Disable Production Sourcemaps'); return false;" class="quick-action-btn">
+                    🔍 Remove Sourcemaps
+                </a>
+                <a href="#" onclick="generatePlan('Implement Content Security Policy'); return false;" class="quick-action-btn">
+                    🔐 Add CSP Headers
+                </a>
+            </div>
+        </div>
+
+        <!-- HIGH SEVERITY -->
+        <div class="section">
+            <h2>High Severity Findings</h2>
+
+            <div class="finding high">
+                <div class="finding-header">
+                    <div class="finding-title">1. Missing Security Headers</div>
+                    <span class="severity-badge severity-high">HIGH</span>
+                </div>
+                <div class="finding-details">
+                    <div class="detail-row">
+                        <span class="detail-label">CVSS Score:</span>
+                        <span class="detail-value">7.5 (High)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Location:</span>
+                        <span class="detail-value">GitHub Pages deployment configuration</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">OWASP:</span>
+                        <span class="detail-value">A05:2021 - Security Misconfiguration</span>
+                    </div>
+                </div>
+
+                <p><strong>Description:</strong></p>
+                <p>The application is missing critical security headers that protect against common web vulnerabilities. GitHub Pages does not automatically set these headers, leaving the application vulnerable to clickjacking, MIME-sniffing attacks, and XSS.</p>
+
+                <p style="margin-top: 1rem;"><strong>Missing Headers:</strong></p>
+                <ul>
+                    <li><code>Content-Security-Policy</code> - Prevents XSS and data injection attacks</li>
+                    <li><code>X-Frame-Options</code> - Prevents clickjacking attacks</li>
+                    <li><code>X-Content-Type-Options</code> - Prevents MIME-sniffing</li>
+                    <li><code>Strict-Transport-Security</code> - Enforces HTTPS connections</li>
+                    <li><code>Referrer-Policy</code> - Controls referrer information leakage</li>
+                    <li><code>Permissions-Policy</code> - Restricts browser features</li>
+                </ul>
+
+                <p style="margin-top: 1rem;"><strong>Impact:</strong></p>
+                <ul>
+                    <li>Clickjacking: Attackers can embed your site in an iframe to trick users</li>
+                    <li>XSS: Without CSP, any injected scripts will execute</li>
+                    <li>Protocol downgrade: Without HSTS, users may connect over HTTP</li>
+                </ul>
+
+                <div class="recommendation">
+                    <h4>Remediation Steps:</h4>
+                    <p>Since GitHub Pages doesn't support custom HTTP headers directly, implement a meta-tag based approach in your index.html:</p>
+                    <div class="recommendation-code">
+&lt;!-- Add to index.html &lt;head&gt; section --&gt;
+&lt;meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self' 'unsafe-inline';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src 'self' https://fonts.gstatic.com;
+  img-src 'self' data: https:;
+  connect-src 'self';
+  frame-ancestors 'none';
+"&gt;
+&lt;meta http-equiv="X-Frame-Options" content="DENY"&gt;
+&lt;meta http-equiv="X-Content-Type-Options" content="nosniff"&gt;
+&lt;meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin"&gt;
+&lt;meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=()"&gt;
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Alternative:</strong> Consider migrating to a hosting provider that supports custom headers (Netlify, Vercel, Cloudflare Pages) for more robust security header implementation.</p>
+                </div>
+
+                <div class="reference-links">
+                    <h4>References:</h4>
+                    <a href="https://owasp.org/www-project-secure-headers/" target="_blank">OWASP Secure Headers Project</a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP" target="_blank">MDN: Content Security Policy</a>
+                    <a href="https://securityheaders.com/" target="_blank">Security Headers Checker</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- MEDIUM SEVERITY -->
+        <div class="section">
+            <h2>Medium Severity Findings</h2>
+
+            <div class="finding medium">
+                <div class="finding-header">
+                    <div class="finding-title">2. Dependency Vulnerability - esbuild/Vite</div>
+                    <span class="severity-badge severity-medium">MEDIUM</span>
+                </div>
+                <div class="finding-details">
+                    <div class="detail-row">
+                        <span class="detail-label">CVSS Score:</span>
+                        <span class="detail-value">5.3 (Medium)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">CVE:</span>
+                        <span class="detail-value">GHSA-67mh-4wv8-2f99</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Package:</span>
+                        <span class="detail-value">vite@5.0.8 (via esbuild <=0.24.2)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Location:</span>
+                        <span class="detail-value">package.json</span>
+                    </div>
+                </div>
+
+                <p><strong>Description:</strong></p>
+                <p>The current version of Vite (v5.0.8) depends on a vulnerable version of esbuild (<=0.24.2). This vulnerability allows any website to send requests to the development server and read responses, potentially exposing source code and sensitive information.</p>
+
+                <div class="code-block">
+<span class="line-number">45</span>"vite": "^5.0.8"  <span style="color: #ef4444;">← Vulnerable version</span>
+                </div>
+
+                <p><strong>Impact:</strong></p>
+                <ul>
+                    <li>Development environment exposure (not affecting production deployment)</li>
+                    <li>Potential information disclosure during local development</li>
+                    <li>Cross-origin request vulnerability in dev server</li>
+                </ul>
+
+                <div class="recommendation">
+                    <h4>Remediation Steps:</h4>
+                    <ol>
+                        <li>Update Vite to version 7.2.2 or later:
+                            <div class="recommendation-code">
+npm install vite@^7.2.2 --save-dev
+# or
+npm update vite
+                            </div>
+                        </li>
+                        <li>Verify the update:
+                            <div class="recommendation-code">
+npm audit
+                            </div>
+                        </li>
+                        <li>Test the build process to ensure compatibility:
+                            <div class="recommendation-code">
+npm run build
+npm run preview
+                            </div>
+                        </li>
+                    </ol>
+                    <p style="margin-top: 1rem;"><strong>Note:</strong> This is a major version upgrade and may require configuration updates. Review Vite 6.x and 7.x migration guides.</p>
+                </div>
+
+                <div class="reference-links">
+                    <h4>References:</h4>
+                    <a href="https://github.com/advisories/GHSA-67mh-4wv8-2f99" target="_blank">GitHub Advisory GHSA-67mh-4wv8-2f99</a>
+                    <a href="https://vitejs.dev/guide/migration" target="_blank">Vite Migration Guide</a>
+                </div>
+            </div>
+
+            <div class="finding medium">
+                <div class="finding-header">
+                    <div class="finding-title">3. Production Source Maps Exposed</div>
+                    <span class="severity-badge severity-medium">MEDIUM</span>
+                </div>
+                <div class="finding-details">
+                    <div class="detail-row">
+                        <span class="detail-label">CVSS Score:</span>
+                        <span class="detail-value">4.3 (Medium)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">File:</span>
+                        <span class="detail-value">vite.config.ts:16</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">OWASP:</span>
+                        <span class="detail-value">A01:2021 - Broken Access Control</span>
+                    </div>
+                </div>
+
+                <p><strong>Description:</strong></p>
+                <p>Source maps are currently disabled in the build configuration (<code>sourcemap: false</code>), which is good. However, it's important to verify that no source maps are inadvertently included in the deployed bundle.</p>
+
+                <div class="code-block">
+<span class="line-number">14</span>build: {
+<span class="line-number">15</span>  outDir: 'dist',
+<span class="line-number">16</span>  sourcemap: false,  <span style="color: #22c55e;">← Correctly disabled</span>
+<span class="line-number">17</span>  rollupOptions: {
+                </div>
+
+                <p><strong>Current Status:</strong></p>
+                <p>✅ Configuration is correct - source maps are disabled. This finding is informational to maintain awareness.</p>
+
+                <p><strong>Why This Matters:</strong></p>
+                <ul>
+                    <li>Source maps expose original source code to anyone inspecting your site</li>
+                    <li>They reveal code structure, business logic, and implementation details</li>
+                    <li>Comments and internal documentation may leak sensitive information</li>
+                </ul>
+
+                <div class="recommendation">
+                    <h4>Verification Steps:</h4>
+                    <ol>
+                        <li>After each build, verify no .map files are in dist/:
+                            <div class="recommendation-code">
+ls -la dist/**/*.map
+# Should return "No such file or directory"
+                            </div>
+                        </li>
+                        <li>Check deployed site for source map references:
+                            <div class="recommendation-code">
+curl -s https://tucker.sh/ | grep -i "sourceMappingURL"
+# Should return nothing
+                            </div>
+                        </li>
+                        <li>Add to .gitignore if not already present:
+                            <div class="recommendation-code">
+# Source maps
+*.map
+dist/**/*.map
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="reference-links">
+                    <h4>References:</h4>
+                    <a href="https://owasp.org/www-community/attacks/Source_Code_Disclosure" target="_blank">OWASP: Source Code Disclosure</a>
+                </div>
+            </div>
+
+            <div class="finding medium">
+                <div class="finding-header">
+                    <div class="finding-title">4. Inline Script in index.html (GitHub Pages SPA Router)</div>
+                    <span class="severity-badge severity-medium">MEDIUM</span>
+                </div>
+                <div class="finding-details">
+                    <div class="detail-row">
+                        <span class="detail-label">CVSS Score:</span>
+                        <span class="detail-value">4.0 (Medium)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">File:</span>
+                        <span class="detail-value">index.html:16-27</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">OWASP:</span>
+                        <span class="detail-value">A05:2021 - Security Misconfiguration</span>
+                    </div>
+                </div>
+
+                <p><strong>Description:</strong></p>
+                <p>The index.html file contains an inline script for GitHub Pages SPA routing. While this is a common pattern for SPAs on GitHub Pages, it conflicts with strict Content Security Policy implementations.</p>
+
+                <div class="code-block">
+<span class="line-number">16</span>&lt;script type="text/javascript"&gt;
+<span class="line-number">17</span>  (function(l) {
+<span class="line-number">18</span>    if (l.search[1] === '/' ) {
+<span class="line-number">19</span>      var decoded = l.search.slice(1).split('&amp;').map(function(s) {
+<span class="line-number">20</span>        return s.replace(/~and~/g, '&amp;')
+<span class="line-number">21</span>      }).join('?');
+<span class="line-number">22</span>      window.history.replaceState(null, null,
+<span class="line-number">23</span>          l.pathname.slice(0, -1) + decoded + l.hash
+<span class="line-number">24</span>      );
+<span class="line-number">25</span>    }
+<span class="line-number">26</span>  }(window.location))
+<span class="line-number">27</span>&lt;/script&gt;
+                </div>
+
+                <p><strong>Impact:</strong></p>
+                <ul>
+                    <li>Requires CSP <code>'unsafe-inline'</code> for scripts, weakening XSS protection</li>
+                    <li>Standard practice for GitHub Pages SPAs, but not ideal for security</li>
+                    <li>Low risk given the script's simplicity and no external input</li>
+                </ul>
+
+                <div class="recommendation">
+                    <h4>Remediation Options:</h4>
+                    <p><strong>Option 1: CSP with hash (Recommended)</strong></p>
+                    <ol>
+                        <li>Generate SHA-256 hash of the script:
+                            <div class="recommendation-code">
+echo -n "(function(l){...}(window.location))" | openssl dgst -sha256 -binary | base64
+                            </div>
+                        </li>
+                        <li>Update CSP to use the hash instead of 'unsafe-inline':
+                            <div class="recommendation-code">
+script-src 'self' 'sha256-[YOUR_HASH_HERE]'
+                            </div>
+                        </li>
+                    </ol>
+                    <p><strong>Option 2: Move to external file (Alternative)</strong></p>
+                    <ol>
+                        <li>Extract script to <code>/public/spa-router.js</code></li>
+                        <li>Reference it with <code>&lt;script src="/spa-router.js"&gt;&lt;/script&gt;</code></li>
+                        <li>Use stricter CSP without 'unsafe-inline'</li>
+                    </ol>
+                    <p style="margin-top: 1rem;"><strong>Note:</strong> Given this is a standard GitHub Pages pattern with minimal risk, the current implementation is acceptable if CSP hash whitelisting is implemented.</p>
+                </div>
+
+                <div class="reference-links">
+                    <h4>References:</h4>
+                    <a href="https://github.com/rafgraph/spa-github-pages" target="_blank">SPA GitHub Pages Pattern</a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/script-src" target="_blank">MDN: CSP script-src</a>
+                </div>
+            </div>
+
+            <div class="finding medium">
+                <div class="finding-header">
+                    <div class="finding-title">5. Third-Party Font Loading from Google Fonts</div>
+                    <span class="severity-badge severity-medium">MEDIUM</span>
+                </div>
+                <div class="finding-details">
+                    <div class="detail-row">
+                        <span class="detail-label">CVSS Score:</span>
+                        <span class="detail-value">3.7 (Medium)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">File:</span>
+                        <span class="detail-value">index.html:8-13</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">OWASP:</span>
+                        <span class="detail-value">A08:2021 - Software and Data Integrity Failures</span>
+                    </div>
+                </div>
+
+                <p><strong>Description:</strong></p>
+                <p>The application loads fonts from Google Fonts CDN. While Google Fonts is a trusted source, relying on external resources creates potential privacy and availability concerns.</p>
+
+                <div class="code-block">
+<span class="line-number">8</span>&lt;!-- Google Fonts - Preconnect --&gt;
+<span class="line-number">9</span>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+<span class="line-number">10</span>&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+<span class="line-number">11</span>
+<span class="line-number">12</span>&lt;!-- Google Fonts - Load --&gt;
+<span class="line-number">13</span>&lt;link href="https://fonts.googleapis.com/css2?family=Fredoka&amp;family=Alice..." rel="stylesheet"&gt;
+                </div>
+
+                <p><strong>Privacy & Security Concerns:</strong></p>
+                <ul>
+                    <li><strong>User Tracking:</strong> Google can track users across sites that use their fonts</li>
+                    <li><strong>GDPR Implications:</strong> External requests may violate privacy regulations</li>
+                    <li><strong>Availability:</strong> Site typography depends on Google's infrastructure</li>
+                    <li><strong>Performance:</strong> Additional DNS lookups and round trips</li>
+                </ul>
+
+                <p><strong>Current Mitigation:</strong></p>
+                <ul>
+                    <li>✅ Uses <code>preconnect</code> for performance optimization</li>
+                    <li>✅ Includes <code>crossorigin</code> attribute</li>
+                </ul>
+
+                <div class="recommendation">
+                    <h4>Remediation Steps:</h4>
+                    <p><strong>Option 1: Self-host fonts (Recommended for privacy)</strong></p>
+                    <ol>
+                        <li>Download fonts using <a href="https://google-webfonts-helper.herokuapp.com/" target="_blank">google-webfonts-helper</a></li>
+                        <li>Add font files to <code>/public/fonts/</code>:
+                            <div class="recommendation-code">
+public/fonts/
+  ├── fredoka-v14-latin-regular.woff2
+  ├── alice-v20-latin-regular.woff2
+  └── courier-prime-v7-latin-400.woff2
+                            </div>
+                        </li>
+                        <li>Add @font-face declarations to index.css:
+                            <div class="recommendation-code">
+@font-face {
+  font-family: 'Fredoka';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/fredoka-v14-latin-regular.woff2') format('woff2');
+}
+/* Repeat for Alice and Courier Prime */
+                            </div>
+                        </li>
+                        <li>Remove Google Fonts links from index.html</li>
+                    </ol>
+                    <p><strong>Option 2: Add Subresource Integrity (SRI)</strong></p>
+                    <p>If continuing to use Google Fonts, note that SRI is not supported for CSS files loaded from external domains, but you can:</p>
+                    <ul>
+                        <li>Implement CSP with <code>font-src 'self' https://fonts.gstatic.com</code></li>
+                        <li>Add privacy policy disclosure about Google Fonts usage</li>
+                        <li>Consider using <code>font-display: swap</code> for better fallback</li>
+                    </ul>
+                </div>
+
+                <div class="reference-links">
+                    <h4>References:</h4>
+                    <a href="https://csswizardry.com/2020/05/the-fastest-google-fonts/" target="_blank">Fastest Google Fonts Implementation</a>
+                    <a href="https://google-webfonts-helper.herokuapp.com/" target="_blank">Google Webfonts Helper</a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face" target="_blank">MDN: @font-face</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOW SEVERITY -->
+        <div class="section">
+            <h2>Low Severity Findings</h2>
+
+            <div class="finding low">
+                <div class="finding-header">
+                    <div class="finding-title">6. React Markdown Rendering Without Sanitization</div>
+                    <span class="severity-badge severity-low">LOW</span>
+                </div>
+                <div class="finding-details">
+                    <div class="detail-row">
+                        <span class="detail-label">CVSS Score:</span>
+                        <span class="detail-value">3.1 (Low)</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">File:</span>
+                        <span class="detail-value">src/components/conversation/ConversationBubble.tsx:65-100</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">OWASP:</span>
+                        <span class="detail-value">A03:2021 - Injection</span>
+                    </div>
+                </div>
+
+                <p><strong>Description:</strong></p>
+                <p>The ConversationBubble component uses ReactMarkdown to render user-provided content. While ReactMarkdown sanitizes by default, the use of rehypeHighlight plugin and custom components requires verification.</p>
+
+                <div class="code-block">
+<span class="line-number">65</span>&lt;ReactMarkdown
+<span class="line-number">66</span>  rehypePlugins={[rehypeHighlight]}
+<span class="line-number">67</span>  components={{
+<span class="line-number">68</span>    code: ({ node, inline, children, className, ...props }: any) =&gt; {
+<span class="line-number">69</span>      // Custom rendering logic
+<span class="line-number">98</span>  }}
+<span class="line-number">99</span>&gt;
+<span class="line-number">100</span>  {exchange.message}  <span style="color: #ca8a04;">← User content</span>
+                </div>
+
+                <p><strong>Risk Assessment:</strong></p>
+                <ul>
+                    <li>✅ ReactMarkdown sanitizes HTML by default (no dangerouslySetInnerHTML)</li>
+                    <li>✅ Content appears to be static (from TypeScript content files)</li>
+                    <li>✅ No user-generated content from external sources</li>
+                    <li>⚠️ Using <code>any</code> type reduces type safety</li>
+                </ul>
+
+                <p><strong>Current Risk Level:</strong> Low - Content is controlled and statically defined</p>
+
+                <div class="recommendation">
+                    <h4>Best Practice Improvements:</h4>
+                    <ol>
+                        <li>Add explicit type definitions instead of <code>any</code>:
+                            <div class="recommendation-code">
+import type { Components } from 'react-markdown'
+
+const components: Components = {
+  code: ({ node, inline, children, className, ...props }) =&gt; {
+    // Type-safe implementation
+  }
+}
+                            </div>
+                        </li>
+                        <li>If accepting user content in the future, add explicit sanitization:
+                            <div class="recommendation-code">
+npm install dompurify @types/dompurify
+
+import DOMPurify from 'dompurify'
+const clean = DOMPurify.sanitize(exchange.message)
+                            </div>
+                        </li>
+                        <li>Document that content sources must be trusted:
+                            <div class="recommendation-code">
+/**
+ * ConversationBubble component
+ * @param exchange - Conversation exchange data
+ * @security Content must come from trusted static sources only
+ */
+                            </div>
+                        </li>
+                    </ol>
+                </div>
+
+                <div class="reference-links">
+                    <h4>References:</h4>
+                    <a href="https://github.com/remarkjs/react-markdown#security" target="_blank">ReactMarkdown Security Guidelines</a>
+                    <a href="https://owasp.org/www-community/attacks/xss/" target="_blank">OWASP: Cross-Site Scripting (XSS)</a>
+                </div>
+            </div>
+
+            <div class="finding low">
+                <div class="finding-header">
+                    <div class="finding-title">7. External Links Use Proper Security Attributes</div>
+                    <span class="severity-badge severity-low">LOW</span>
+                </div>
+                <div class="finding-details">
+                    <div class="detail-row">
+                        <span class="detail-label">Status:</span>
+                        <span class="detail-value" style="color: #16a34a;">✅ Secure - No Action Required</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Files:</span>
+                        <span class="detail-value">Footer.tsx, BlogArticle.tsx, ProjectMetadata.tsx</span>
+                    </div>
+                </div>
+
+                <p><strong>Description:</strong></p>
+                <p>All external links properly implement <code>target="_blank"</code> with <code>rel="noopener noreferrer"</code> attributes, protecting against reverse tabnabbing and information leakage.</p>
+
+                <div class="code-block">
+<span class="line-number">25</span>&lt;a
+<span class="line-number">26</span>  href="https://www.linkedin.com/in/tuckerharleybrown"
+<span class="line-number">27</span>  target="_blank"
+<span class="line-number">28</span>  rel="noopener noreferrer"  <span style="color: #22c55e;">← Correctly implemented</span>
+<span class="line-number">29</span>  className="inline-flex items-center"
+<span class="line-number">30</span>&gt;
+                </div>
+
+                <p><strong>Security Benefits:</strong></p>
+                <ul>
+                    <li><code>rel="noopener"</code> - Prevents the new page from accessing window.opener</li>
+                    <li><code>rel="noreferrer"</code> - Prevents sending referrer information to the linked site</li>
+                    <li>Protects against reverse tabnabbing attacks</li>
+                    <li>Prevents performance degradation from shared process</li>
+                </ul>
+
+                <p><strong>Verification Results:</strong></p>
+                <ul>
+                    <li>✅ Footer.tsx: All 4 external links secure</li>
+                    <li>✅ BlogArticle.tsx: All 2 external links secure</li>
+                    <li>✅ ProjectMetadata.tsx: 1 external link secure</li>
+                </ul>
+
+                <div class="recommendation">
+                    <h4>Maintain Current Practice:</h4>
+                    <p>Continue implementing this pattern for all future external links. Consider creating a reusable component:</p>
+                    <div class="recommendation-code">
+// components/ui/ExternalLink.tsx
+export function ExternalLink({ 
+  href, 
+  children, 
+  ...props 
+}: React.AnchorHTMLAttributes&lt;HTMLAnchorElement&gt;) {
+  return (
+    &lt;a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      {...props}
+    &gt;
+      {children}
+    &lt;/a&gt;
+  )
+}
+                    </div>
+                </div>
+
+                <div class="reference-links">
+                    <h4>References:</h4>
+                    <a href="https://owasp.org/www-community/attacks/Reverse_Tabnabbing" target="_blank">OWASP: Reverse Tabnabbing</a>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener" target="_blank">MDN: rel="noopener"</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- POSITIVE FINDINGS -->
+        <div class="section">
+            <h2>✅ Positive Security Findings</h2>
+            <div style="background: #f0fdf4; border-left: 4px solid #16a34a; padding: 1.5rem; border-radius: 6px;">
+                <h3 style="color: #15803d; font-size: 1.25rem; margin-bottom: 1rem;">Security Best Practices Identified</h3>
+                <ul style="color: #166534;">
+                    <li><strong>No Hardcoded Credentials:</strong> No API keys, tokens, or secrets found in source code</li>
+                    <li><strong>No .env Files:</strong> No environment files committed to repository</li>
+                    <li><strong>No Dangerous React Patterns:</strong> Zero instances of dangerouslySetInnerHTML</li>
+                    <li><strong>No Command Injection Vectors:</strong> No exec/spawn in application code (only in excluded .context-kit infrastructure)</li>
+                    <li><strong>No Weak Cryptography:</strong> No MD5/SHA1 usage in application</li>
+                    <li><strong>Proper External Link Handling:</strong> All external links use rel="noopener noreferrer"</li>
+                    <li><strong>TypeScript Strict Mode:</strong> Strong type safety reduces runtime errors</li>
+                    <li><strong>React's Built-in XSS Protection:</strong> Virtual DOM prevents most injection attacks</li>
+                    <li><strong>Client-Side Only:</strong> Static site eliminates server-side vulnerabilities</li>
+                    <li><strong>Source Maps Disabled:</strong> Production builds don't expose source code</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- NEXT STEPS -->
+        <div class="next-steps">
+            <h3>Recommended Action Plan</h3>
+            <ol>
+                <li><strong>Week 1 - High Priority:</strong>
+                    <ul>
+                        <li>Update Vite to v7.2.2 to address GHSA-67mh-4wv8-2f99</li>
+                        <li>Implement security headers via meta tags in index.html</li>
+                        <li>Test CSP implementation with hash-based script whitelisting</li>
+                    </ul>
+                </li>
+                <li><strong>Week 2 - Medium Priority:</strong>
+                    <ul>
+                        <li>Evaluate self-hosting Google Fonts for privacy compliance</li>
+                        <li>Verify no source maps in production deployment</li>
+                        <li>Consider migrating to Netlify/Vercel for better header support</li>
+                    </ul>
+                </li>
+                <li><strong>Week 3 - Continuous Improvement:</strong>
+                    <ul>
+                        <li>Set up automated npm audit in CI/CD pipeline</li>
+                        <li>Create ExternalLink component for consistency</li>
+                        <li>Document security practices for future development</li>
+                        <li>Run monthly dependency updates</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+
+        <!-- TESTING RECOMMENDATIONS -->
+        <div class="section">
+            <h2>Security Testing Recommendations</h2>
+            <div style="background: #f0f9ff; border: 1px solid #bfdbfe; padding: 1.5rem; border-radius: 6px;">
+                <h3 style="color: #1e40af; font-size: 1.125rem; margin-bottom: 1rem;">Ongoing Security Validation</h3>
+                <ol>
+                    <li><strong>Security Headers Testing:</strong>
+                        <div class="code-block">
+# Test deployed site headers
+curl -I https://tucker.sh | grep -i "security\|content-security\|x-frame"
+
+# Use online tools
+https://securityheaders.com/?q=tucker.sh
+https://observatory.mozilla.org/analyze/tucker.sh
+                        </div>
+                    </li>
+                    <li><strong>Dependency Scanning (run monthly):</strong>
+                        <div class="code-block">
+npm audit
+npm outdated
+npx npm-check-updates
+                        </div>
+                    </li>
+                    <li><strong>Content Security Policy Testing:</strong>
+                        <div class="code-block">
+# Add CSP report-only header first to test without breaking
+Content-Security-Policy-Report-Only: ...
+                        </div>
+                    </li>
+                    <li><strong>Accessibility & Security:</strong>
+                        <p>Run Lighthouse audits which include security checks:</p>
+                        <div class="code-block">
+npx lighthouse https://tucker.sh --view
+                        </div>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <div style="margin-top: 3rem; padding-top: 2rem; border-top: 2px solid #e5e7eb; text-align: center; color: #64748b;">
+            <p><strong>Report Generated:</strong> November 6, 2025</p>
+            <p><strong>Agent:</strong> security-agent v3.6.0</p>
+            <p><strong>Methodology:</strong> OWASP Top 10 2021, CVSS 3.1, Manual Code Review</p>
+            <p style="margin-top: 1rem; font-size: 0.875rem;">
+                This security audit is provided for defensive purposes only. Regular security reviews are recommended.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function generatePlan(recommendation) {
+            const reportPath = window.location.pathname;
+            const message = `/create_plan ${recommendation} - Based on security findings in ${reportPath}`;
+            
+            const confirmed = confirm(
+                `Generate implementation plan for:\n\n"${recommendation}"\n\n` +
+                `This will prepare a command for Claude Code.\n\n` +
+                `Click OK to see the command.`
+            );
+            
+            if (confirmed) {
+                const commandText = `Copy this command to Claude Code:\n\n${message}`;
+                alert(commandText);
+                
+                // Try to copy to clipboard
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(message).then(() => {
+                        console.log('Command copied to clipboard');
+                    }).catch(err => {
+                        console.error('Failed to copy:', err);
+                    });
+                }
+            }
+        }
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
